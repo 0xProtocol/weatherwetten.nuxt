@@ -23,7 +23,7 @@
       >
         <v-list-item-group
           v-model="group"
-          active-class="deep-purple--text text--accent-4"
+          active-class="deep-purple--text text--accent-5"
         >
           <v-list-item>
             <v-list-item-icon>

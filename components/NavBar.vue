@@ -4,6 +4,12 @@
     <v-app-bar app color="black">
       <v-toolbar color="black">
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <div class="pb-2">
+        <v-img
+          max-height="60"
+          max-width="60"
+          :src="require('../assets/img/icon.png')"></v-img>
+        </div>
         <v-toolbar-title>WEATHER WETTEN</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">

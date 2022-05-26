@@ -1,56 +1,41 @@
 <template>
-  <v-card
-    class="mx-auto overflow-hidden"
-    height="400"
-  >
-    <v-app-bar
-      color="red"
-      dark
-    >
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+  <v-app>
 
-      <v-toolbar-title>Title</v-toolbar-title>
+    <v-app-bar app color="black">
+      <v-toolbar color="black">
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-toolbar-title>WEATHER WETTEN</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn color="black" ><nuxt-link to="/profile" tag="a">PROFILE</nuxt-link></v-btn>
+          <v-btn color="black" ><nuxt-link to="/bet" tag="a">BET</nuxt-link></v-btn>
+          <v-btn color="black"  ><nuxt-link to="/leaderboards" tag="a">LEADERBOARDS</nuxt-link></v-btn>
+          <v-btn color="black" ><nuxt-link to="/weathercoin" tag="a">WEATHERCOIN</nuxt-link></v-btn>
+          <v-btn  color="black" ><nuxt-link to="/aboutus" tag="a">ABOUT US</nuxt-link></v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-5"
-        >
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
+    <!-- Sizes your content based upon application components -->
+    <v-main color="white">
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+    </v-main>
+
+    <v-footer app>
+      <!-- -->
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
-}
+export default {}
 </script>
-<style scoped>
+
+<style>
+.nuxt-link-active {
+  font-weight: bold;
+}
+.nuxt-link-active {
+  color: red;
+}
 </style>

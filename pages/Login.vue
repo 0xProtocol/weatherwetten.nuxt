@@ -66,6 +66,15 @@ export default {
     },
 
     changePassword(){
+      let that = this
+      this.$fire.auth.sendPasswordResetEmail(this.auth.email)
+      .then(function (){
+        alert('Reset link was sent to: ' + that.auth.email)
+      })
+      .catch(function (error){
+        alert(error.message)
+      })
+
 
     }
 

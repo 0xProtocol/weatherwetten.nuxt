@@ -15,7 +15,7 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-btn color="blue">Login</v-btn>
-        <v-btn color="green">New here?</v-btn>
+        <v-btn color="green" @click="routeToSignUp">New here?</v-btn>
       </v-card-actions>
     </v-card>
   </v-content>
@@ -29,6 +29,7 @@
 
 <script>
 import NavBar from "@/components/NavBar";
+import SignUp from "@/pages/SignUp";
 export default {
   data(){
     return{
@@ -41,6 +42,12 @@ export default {
   components: {
     NavBar
 
+  },
+
+  methods:{
+    routeToSignUp(){
+      this.$router.push(SignUp)
+    }
   }
 }
 </script>

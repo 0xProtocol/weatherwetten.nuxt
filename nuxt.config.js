@@ -41,6 +41,30 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyCC5C4C57eUS6EXEfFx8yeWWBqBQ23OO3s",
+          authDomain: "weatherwetten-4ad9c.firebaseapp.com",
+          projectId: "weatherwetten-4ad9c",
+          storageBucket: "weatherwetten-4ad9c.appspot.com",
+          messagingSenderId: "426562372824",
+          appId: "1:426562372824:web:fa152b660cf973cfd683ad"
+        },
+        services: {
+          auth: {
+            persistence: 'session',
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+            ssr: false // default
+
+          }
+        }
+      }
+    ]
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

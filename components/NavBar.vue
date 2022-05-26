@@ -60,18 +60,15 @@
     </v-navigation-drawer>
 
     <v-main color="white">
-      <v-card    class="d-flex flex-row mb-6"
-                 color="blue"
-                 flat
-                 tile>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      <v-img max-height="100" max-width="100" :src="require('../assets/img/icon.png')"></v-img>
-      </v-card>
+      <span class="hero"></span>
+            <!-- <iframe
+              width="560"
+              height="315"
+              :src="require('../assets/img/video.mp4')"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe> -->
     </v-main>
 
     <v-footer app>
@@ -99,7 +96,14 @@ export default {
 </script>
 
 <style>
-.v-navigation-drawer {
-  z-index: 999999 !important;
+.hero {
+  background: url('../assets/img/hero.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1.03); /*to scale img right to main element (not really a good way but working)*/
 }
 </style>

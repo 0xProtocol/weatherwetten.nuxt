@@ -59,7 +59,7 @@ export default {
       let that = this
       this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
       .catch(function (error){
-            alert(error.code)
+            alert(error.message)
       }).then((user) => {
         that.$router.push("/")
       })

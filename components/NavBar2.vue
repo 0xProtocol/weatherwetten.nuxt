@@ -29,8 +29,37 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
+    <!-- NAVBAR DRAWER -->
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      color="black"
+      height="250"
+      width="200"
+      class="my-14"
+    >
 
+      <v-list dense>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>
+              <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}">{{ item.title }}</nuxt-link>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     </v-app-bar>
+
 </template>
 
 <script>

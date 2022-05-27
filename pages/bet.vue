@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <nav-bar/>
     <h1>{{ msg }}</h1>
     <p>
       PROFILE,PROFILEPROFILEPROFILEPROFILE<br />
@@ -103,11 +104,15 @@
 </template>
 
 <script>
+import NavBar from "@/components/NavBar";
+
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
-  },
+  },components: {
+    NavBar
+  }
 };
 </script>
 

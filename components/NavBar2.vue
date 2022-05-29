@@ -81,9 +81,6 @@ export default {
 </script>
 
 <style>
-.nuxt-link-exact-active {
-  font-weight: bold;
-}
 .nuxt-link-active {
   font-weight: bold;
   color: green;

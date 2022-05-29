@@ -1,6 +1,7 @@
 <template>
-  <div class="hello">
-    <nav-bar/>
+  <v-app>
+    <!-- <nav-bar/> -->
+    <nav-bar2/>
     <h1>{{ msg }}</h1>
     <p>
       PROFILE,PROFILEPROFILEPROFILEPROFILE<br />
@@ -100,7 +101,7 @@
         >
       </li>
     </ul>
-  </div>
+</v-app>
 </template>
 
 <script>

@@ -13,7 +13,6 @@
 
 
 <script>
-import NavBar from "../components/NavBar";
 import NavBar2 from "../components/NavBar2";
 import HelloWorld from "@/pages/profile";
 import Hero from "@/components/Hero";
@@ -22,7 +21,7 @@ export default {
   name: 'App',
   components: {
     HelloWorld,
-    NavBar,
+    NavBar2,
     Hero
   }
 }

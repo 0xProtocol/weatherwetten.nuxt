@@ -1,4 +1,6 @@
 <template>
+  <v-app>
+  <nav-bar2/>
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
@@ -100,11 +102,20 @@
       </li>
     </ul>
   </div>
+  </v-app>
 </template>
-
 <script>
+import HelloWorld from "@/pages/profile";
+import NavBar2 from "@/components/NavBar2";
+import Hero from "@/components/Hero";
+
 export default {
   name: "HelloWorld",
+  components: {
+    HelloWorld,
+    NavBar2,
+    Hero
+  },
   props: {
     msg: String,
   },

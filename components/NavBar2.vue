@@ -13,9 +13,6 @@
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="black">
-            <nuxt-link to="/profile" tag="a">PROFILE</nuxt-link>
-          </v-btn>
-          <v-btn color="black">
             <nuxt-link to="/bet" tag="a">BET</nuxt-link>
           </v-btn>
           <v-btn color="black">
@@ -26,6 +23,9 @@
           </v-btn>
           <v-btn color="black">
             <nuxt-link to="/aboutus" tag="a">ABOUT US</nuxt-link>
+          </v-btn>
+          <v-btn color="black">
+            <nuxt-link to="/Login" tag="a">LOG IN</nuxt-link>
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -68,11 +68,11 @@ export default {
     return {
       drawer: null,
       items: [
-        {title: 'PROFILE', icon: 'mdi-view-dashboard', link: 'profile'},
         {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
         {title: 'LEADERBOARD', icon: 'mdi-view-dashboard', link: 'leaderboards'},
         {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
         {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+        {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'}
       ],
     }
   }

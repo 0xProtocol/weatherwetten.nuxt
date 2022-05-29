@@ -16,6 +16,8 @@
       </v-card-actions>
     </v-card>
 
+
+
   </v-content>
 
 <!--</v-app>-->
@@ -34,7 +36,7 @@ export default {
         email: "",
         password: "",
         passwordRepeat: "",
-      }
+      },
     }
   },
 
@@ -50,7 +52,20 @@ export default {
       } else {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
         .catch(function (e){
-          alert(e.message)
+          switch (e.code){
+            case "auth/email-already-in-use":
+              alert("Email already in use!")
+              break;
+            case "auth/invalid-email":
+              alert("Invalid email")
+              break;
+            case "auth/weak-password":
+              alert("You chose a weak password!")
+              break;
+            default:
+              alert(e.message);
+              break;
+          }
         })
 
       }

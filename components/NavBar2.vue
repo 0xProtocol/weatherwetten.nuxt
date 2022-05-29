@@ -13,19 +13,19 @@
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="black">
-            <nuxt-link to="/bet" tag="a">BET</nuxt-link>
+            <NuxtLink to="/bet"  class="nuxt-link-active">BET</NuxtLink>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/leaderboards" tag="a">LEADERBOARDS</nuxt-link>
+            <nuxt-link to="/leaderboards" class="nuxt-link-active">LEADERBOARDS</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/weathercoin" tag="a">WEATHERCOIN</nuxt-link>
+            <nuxt-link to="/weathercoin" class="nuxt-link-active">WEATHERCOIN</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/aboutus" tag="a">ABOUT US</nuxt-link>
+            <nuxt-link to="/aboutus" class="nuxt-link-active" >ABOUT US</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/Login" tag="a">LOG IN</nuxt-link>
+            <nuxt-link to="/Login"class="nuxt-link-active" >LOG IN</nuxt-link>
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -52,7 +52,7 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}">{{ item.title }}</nuxt-link>
+              <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}" class="nuxt-link-active" >{{ item.title }} </nuxt-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -81,19 +81,17 @@ export default {
 </script>
 
 <style>
-.hero {
-  background: url('../assets/img/hero.jpg');
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: scale(1.03); /*to scale img right to main element (not really a good way but working)*/
+.nuxt-link-exact-active {
+  font-weight: bold;
 }
-.overlay{
-  justify-content: center;
-  align-items: center;
-  transform: scale(1.03);
+.nuxt-link-active {
+  font-weight: bold;
+  color: green;
+  text-decoration: none;
+}
+.nuxt-link-active:hover {
+  font-weight: bold;
+  color: green;
+  text-decoration: none;
 }
 </style>

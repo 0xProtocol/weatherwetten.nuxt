@@ -9,7 +9,7 @@
             max-width="60"
             :src="require('../assets/img/icon.png')"></v-img>
         </div>
-        <v-toolbar-title>WEATHER WETTEN</v-toolbar-title>
+        <v-toolbar-title>  <NuxtLink to="/"  class="nuxt-link-active">WEATHER WETTEN</NuxtLink></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="black">

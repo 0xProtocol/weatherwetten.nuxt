@@ -20,9 +20,6 @@
 ></iframe> -->
 </v-main>
 
-<v-footer app>
-<!-- -->
-</v-footer>
 </v-app>
 </template>
 

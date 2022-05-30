@@ -1,4 +1,3 @@
-alert("JS");
 /*
 // Contains the current API Key
 class Key {

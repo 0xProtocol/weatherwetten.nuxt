@@ -1,6 +1,6 @@
 class Weather_widget {
 
-
+// does right now only show vienna
   getWeatherWidget(city) {
     let widget = document.createElement("img");
     widget.src = '//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'

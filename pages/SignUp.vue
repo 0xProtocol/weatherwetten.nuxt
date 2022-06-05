@@ -1,6 +1,7 @@
 <template>
 
-<!--<v-app>-->
+<v-app>
+  <NavBar2/>
   <v-content>
     <v-card  width="550" id="signUp">
       <v-card-title>Start betting on the weather today!</v-card-title>
@@ -13,6 +14,7 @@
 
       <v-card-actions>
         <v-btn color="blue" @click="signUp">Create my account</v-btn>
+        <v-btn @click="routeToLogin" >Already have an account?</v-btn>
       </v-card-actions>
     </v-card>
 
@@ -20,12 +22,14 @@
 
   </v-content>
 
-<!--</v-app>-->
+</v-app>
 
 
 </template>
 
 <script>
+import Login from "@/pages/Login";
+
 export default {
   name: "SignUp",
 
@@ -70,6 +74,9 @@ export default {
 
       }
 
+    },
+    routeToLogin() {
+      this.$router.push(Login)
     }
   }
 }

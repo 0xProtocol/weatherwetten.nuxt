@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar2/>
-    <HelloWorld/>
+
     <Footer/>
   </v-app>
 </template>

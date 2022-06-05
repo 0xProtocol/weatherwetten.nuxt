@@ -1,5 +1,6 @@
 <template>
-<!--<v-app>-->
+<v-app>
+  <NavBar2/>
   <v-main>
     <v-card  width="550" id="login">
       <v-card-title>Login to WeatherWetten!</v-card-title>
@@ -21,7 +22,7 @@
       </v-card-actions>
     </v-card>
   </v-main>
-<!--</v-app>-->
+</v-app>
 
 
 
@@ -32,6 +33,8 @@
 <script>
 import NavBar from "@/components/NavBar";
 import SignUp from "@/pages/SignUp";
+import forgotPassword from "@/pages/forgotPassword";
+
 export default {
   data(){
     return{
@@ -65,7 +68,8 @@ export default {
       })
     },
 
-    changePassword(){
+
+    /*changePassword(){
       let that = this
       this.$fire.auth.sendPasswordResetEmail(this.auth.email)
       .then(function (){
@@ -74,9 +78,12 @@ export default {
       .catch(function (error){
         alert(error.message)
       })
+    }*/
 
-
+    changePassword(){
+      this.$router.push(forgotPassword)
     }
+
 
   }
 }

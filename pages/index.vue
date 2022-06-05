@@ -1,13 +1,8 @@
 <template>
     <v-app>
-    <!-- <nav-bar/> -->
     <nav-bar2/>
     <hero/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
+
       <Footer/>
     </v-app>
 </template>

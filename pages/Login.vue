@@ -2,11 +2,11 @@
 <v-app>
   <NavBar2/>
   <v-main>
-    <v-card  width="550" id="login">
-      <v-card-title>Login to WeatherWetten!</v-card-title>
+    <v-card  width="550" id="loginCard">
+      <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
       <v-card-text>
-        <v-text-field v-model = "auth.email" label="E-Mail" />
-        <v-text-field
+        <v-text-field v-model = "auth.email" label="E-Mail" outlined />
+        <v-text-field outlined
           v-model="auth.password"
           label="Password"
           :type="showPassword ? 'text' : 'password'"
@@ -14,11 +14,13 @@
           @click:append="showPassword = !showPassword"/>
       </v-card-text>
 
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="blue" @click="login">Login</v-btn>
-        <v-btn color="green" @click="routeToSignUp">New here?</v-btn>
-        <v-btn @click="changePassword" >Forgot your password?</v-btn>
+
+      <v-card-actions class="justify-center">
+        <v-btn id="loginButton" @click="login">Login</v-btn>
+        <v-btn id="newHereButton" @click="routeToSignUp">New here?</v-btn>
+      </v-card-actions>
+      <v-card-actions class="justify-center">
+        <v-btn id="forgotButton"  @click="routeToForgotPassword" >Forgot your password?</v-btn>
       </v-card-actions>
     </v-card>
   </v-main>
@@ -69,18 +71,7 @@ export default {
     },
 
 
-    /*changePassword(){
-      let that = this
-      this.$fire.auth.sendPasswordResetEmail(this.auth.email)
-      .then(function (){
-        alert('Reset link was sent to: ' + that.auth.email)
-      })
-      .catch(function (error){
-        alert(error.message)
-      })
-    }*/
-
-    changePassword(){
+    routeToForgotPassword(){
       this.$router.push('forgotPassword')
     }
 
@@ -92,13 +83,25 @@ export default {
 <style scoped>
 
 
-#login{
+#loginCard{
   position: fixed;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 10px;
+  border-radius: 5px;
 
+}
+
+#loginButton{
+  color: forestgreen;
+}
+
+#newHereButton{
+  color: forestgreen;
+}
+
+#forgotButton{
+  color: orange;
 }
 
 

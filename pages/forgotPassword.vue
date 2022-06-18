@@ -1,18 +1,19 @@
 <template>
   <v-app>
 
+    <NavBar2/>
+
 
     <v-main>
       <v-card id="cardArea" width="600px" height="280">
         <v-card-title class="justify-center" id="header">
-          Get a new password!
+          Reset your password here!
         </v-card-title>
 
 
         <v-form>
         <div style=" padding: 10px">
           <v-text-field
-            type="email"
             label="E-Mail"
             required
             v-model="userEmailAddress"
@@ -54,12 +55,12 @@ export default {
   name: "forgotPassword",
 
   data: () =>{
-    let userEmailAddress;
+    let userEmailAddress = "";
     return{
       userEmailAddress,
       snackbarVisible: false,
       OkSnackbarVisible: false,
-      msgToUser: "",
+      msgToUser: ""
 
     }
 
@@ -83,8 +84,23 @@ export default {
         }
       )
         .catch((error) => {
-          this.snackbarVisible = true;
-          this.msgToUser = error.message;
+          switch (error.code){
+            case "auth/user-not-found":
+              this.snackbarVisible = true;
+              this.msgToUser = "No account with that email found!";
+              break;
+            case "auth/invalid-email":
+              this.snackbarVisible = true;
+              this.msgToUser = "Please enter a valid email!";
+              break;
+            case "auth/missing-email":
+              this.snackbarVisible = true;
+              this.msgToUser = "Please enter your email!";
+              break;
+            default:
+              this.snackbarVisible = true;
+              this.msgToUser = error.message;
+          }
         })
 
     }

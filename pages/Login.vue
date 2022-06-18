@@ -81,7 +81,7 @@ export default {
     }*/
 
     changePassword(){
-      this.$router.push(forgotPassword)
+      this.$router.push('forgotPassword')
     }
 
 

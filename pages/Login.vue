@@ -57,7 +57,7 @@ export default {
   },
   methods:{
     routeToSignUp(){
-      this.$router.push(SignUp)
+      this.$router.push('SignUp')
     },
 
     login(){

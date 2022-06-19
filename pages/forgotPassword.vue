@@ -29,15 +29,23 @@
         <v-btn @click="routeToLogin" id="return" class="buttons">Return to Login</v-btn>
       </v-card>
 
-      <v-snackbar id="errorSnackBar" v-model="snackbarVisible" color="error">
+      <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="info">
         {{ msgToUser }}
+        <template v-slot:action="{ attrs }">
+          <v-btn dark text v-bind="attrs" @click="snackbarVisible = false">
+            Close
+          </v-btn>
+        </template>
       </v-snackbar>
 
-      <v-snackbar id="okSnackBar" v-model="OkSnackbarVisible" color="green">
+      <v-snackbar timeout="10000" id="okSnackBar" v-model="OkSnackbarVisible" color="green">
         {{ msgToUser }}
+        <template v-slot:action="{ attrs }">
+          <v-btn dark text v-bind="attrs" @click="OkSnackbarVisible = false">
+            Close
+          </v-btn>
+        </template>
       </v-snackbar>
-
-
 
     </v-main>
 
@@ -74,7 +82,6 @@ export default {
 
     sendEmailToUser: function () {
       console.log("reset password");
-      let header = document.getElementById("header");
 
       this.$fire.auth.sendPasswordResetEmail(this.userEmailAddress).then(
         () => {

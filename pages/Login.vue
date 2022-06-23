@@ -5,13 +5,15 @@
     <v-card  width="550" id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
       <v-card-text>
-        <v-text-field v-model = "auth.email" label="E-Mail" outlined />
+        <v-text-field color="info" v-model="auth.email" label="E-Mail" outlined/>
         <v-text-field outlined
-          v-model="auth.password"
-          label="Password"
-          :type="showPassword ? 'text' : 'password'"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="showPassword = !showPassword"/>
+                      color="info"
+                      v-model="auth.password"
+                      label="Password"
+                      :rules="validatePassword"
+                      :type="showPassword ? 'text' : 'password'"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword"/>
       </v-card-text>
 
 
@@ -20,9 +22,18 @@
         <v-btn id="newHereButton" @click="routeToSignUp">New here?</v-btn>
       </v-card-actions>
       <v-card-actions class="justify-center">
-        <v-btn id="forgotButton"  @click="routeToForgotPassword" >Forgot your password?</v-btn>
+        <v-btn id="forgotButton" @click="routeToForgotPassword">Forgot your password?</v-btn>
       </v-card-actions>
     </v-card>
+
+    <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="info">
+      {{ userMsg }}
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="showSnackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-main>
 </v-app>
 
@@ -39,13 +50,20 @@ import forgotPassword from "@/pages/forgotPassword";
 
 export default {
   data(){
-    return{
-      showPassword:false,
+    return {
+      showPassword: false,
+      showSnackbar: false,
+      userMsg: "",
 
       auth: {
         email: "",
         password: ""
-      }
+      },
+
+      validatePassword: [
+        (v) => !!v || "Password is required",
+      ],
+
     }
   },
 
@@ -63,17 +81,34 @@ export default {
     login(){
       let that = this
       this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
-      .catch(function (error){
-            alert(error.message)
+      .catch(function (error) {
+        switch (error.code) {
+          case "auth/wrong-password":
+            that.showSnackbar = true;
+            that.userMsg = "You entered a wrong password";
+            break;
+          case "auth/user-not-found":
+            that.showSnackbar = true;
+            that.userMsg = "No user with the entered email address found";
+            break;
+          case "auth/user-disabled":
+            that.showSnackbar = true;
+            that.userMsg = "Your account has been disabled";
+            break;
+          default:
+            that.showSnackbar = true;
+            that.userMsg = error.message;
+        }
+
       }).then((user) => {
-        that.$router.push("/")
+        // that.$router.push('profile')
       })
     },
 
 
-    routeToForgotPassword(){
+    routeToForgotPassword() {
       this.$router.push('forgotPassword')
-    }
+    },
 
 
   }
@@ -103,11 +138,6 @@ export default {
 #forgotButton{
   color: orange;
 }
-
-
-
-
-
 
 
 </style>

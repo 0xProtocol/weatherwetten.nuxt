@@ -80,7 +80,7 @@ export default {
 
   methods: {
     signUp() {
-      this.saveUsername();
+
       let that = this;
       if (this.auth.password !== this.auth.passwordRepeat) {
         alert("Passwords do not match")
@@ -105,8 +105,12 @@ export default {
                 that.userMsg = e.message;
                 break;
             }
-          })
+            }
+          )
 
+      }
+      if (this.username !== "") {
+        this.saveUsername();
       }
 
     },
@@ -114,7 +118,7 @@ export default {
       this.$router.push('Login')
     },
     async saveUsername() {
-      const ref = this.$fire.firestore.collection('users').doc();
+      const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
 
       const document = {
         username: this.username
@@ -125,8 +129,6 @@ export default {
         console.log(error.message)
       }
     }
-
-
   }
 }
 

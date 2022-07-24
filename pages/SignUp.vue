@@ -7,7 +7,7 @@
         <v-card-title class="justify-center">Start betting on the weather today!</v-card-title>
         <v-card-text>
           <v-text-field :rules="validateEmail" label="E-Mail" outlined color="info" clearable v-model="auth.email"/>
-          <v-text-field label="Username" outlined color="info"></v-text-field>
+          <v-text-field label="Username" outlined color="info" v-model="username"></v-text-field>
           <v-text-field :rules="validatePassword" :type="showPassword ? 'text' : 'password'"
                         color="info" outlined label="Password" v-model="auth.password"/>
           <v-text-field
@@ -56,6 +56,7 @@ export default {
     showSnackbar: false,
     userMsg: "",
     showPassword: false,
+    username: "",
     auth: {
       email: "",
       password: "",
@@ -79,6 +80,7 @@ export default {
 
   methods: {
     signUp() {
+      this.saveUsername();
       let that = this;
       if (this.auth.password !== this.auth.passwordRepeat) {
         alert("Passwords do not match")
@@ -110,7 +112,21 @@ export default {
     },
     routeToLogin() {
       this.$router.push('Login')
+    },
+    async saveUsername() {
+      const ref = this.$fire.firestore.collection('users').doc();
+
+      const document = {
+        username: this.username
+      }
+      try {
+        await ref.set(document)
+      } catch (error) {
+        console.log(error.message)
+      }
     }
+
+
   }
 }
 

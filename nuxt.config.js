@@ -61,7 +61,8 @@ export default {
             },
             ssr: false // default
 
-          }
+          },
+          firestore: true
         }
       }
     ]

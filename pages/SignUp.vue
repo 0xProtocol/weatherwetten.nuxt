@@ -7,7 +7,8 @@
         <v-card-title class="justify-center">Start betting on the weather today!</v-card-title>
         <v-card-text>
           <v-text-field :rules="validateEmail" label="E-Mail" outlined color="info" clearable v-model="auth.email"/>
-          <v-text-field label="Username" outlined color="info" v-model="username"></v-text-field>
+          <v-text-field label="Username" outlined color="info" v-model="username"
+                        :rules="validateUserName"></v-text-field>
           <v-text-field :rules="validatePassword" :type="showPassword ? 'text' : 'password'"
                         color="info" outlined label="Password" v-model="auth.password"/>
           <v-text-field
@@ -73,6 +74,9 @@ export default {
       (v) => !!v || "Required",
       (v) => /.+@.+\..+/.test(v) || "Please enter a valid email", // https://stackoverflow.com/questions/50039793/email-validation-n-vuetify-js
     ],
+    validateUserName: [
+      (v) => !!v || "Required"
+    ]
 
 
   }),

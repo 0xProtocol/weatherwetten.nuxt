@@ -28,9 +28,9 @@ export default {
   }
 }
 </script>
-
+// --------------------------------------------------------------------------------------------------------------
+<!--
 <script>
-console.log("Weather API");
 // Contains the current API Key
 class Key {
   static apiKey = "67c4e15fa55514beb2e8755151915130";
@@ -44,19 +44,18 @@ class GeoAPI {
 
   Request (cityname) {
     let tempUrl = this.geoUrl;
-    tempUrl += ("q=" + cityname+ "&" + "appid=" + Key.apiKey);
+    tempUrl += ("q=" + cityname + "&" + "limit=" + 1 + "&" + "appid=" + Key.apiKey);
     //console.log(tempUrl);
     let request = new XMLHttpRequest();
+    console.log(tempUrl);
     request.open("GET", tempUrl);
     request.send();
     request.onload = () => {
-      response = (JSON.parse(request.response));
+      var response = JSON.parse(request.response);
       console.log(response);
-      let temp = [];
-      //response.forEach(element => temp.push(new GeoResponse())
-
-      let response = [new GeoResponse(JSON.parse(request.response))];
-      console.log(response);
+      console.log(response[0].lat);
+      console.log(response[0].lon);
+      //response = [new GeoResponse(JSON.parse(request.response))];
     }
   }
 }
@@ -82,13 +81,6 @@ class WeatherAPI {
   url = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
 }
 
-/*
-// Doesnt work with vue smh
-document.addEventListener("DOMContentLoaded", function (event) {
-  new GeoAPI().Request("Vienna", "9", "AT");
-})
- */
-
 window.onload = function () {
   console.log("WINDOW ON LOAD");
   new GeoAPI().Request("Vienna", "9", "AT");
@@ -103,3 +95,4 @@ export default {
 };
  */
 </script>
+-->

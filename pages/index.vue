@@ -41,35 +41,40 @@ class Key {
 // which we can then use for the WeatherAPI call
 class GeoAPI {
   geoUrl = "https://api.openweathermap.org/geo/1.0/direct?";
+  geoResponse;
 
   Request (cityname) {
+    console.log("GeoAPI");
     let tempUrl = this.geoUrl;
-    tempUrl += ("q=" + cityname + "&" + "limit=" + 1 + "&" + "appid=" + Key.apiKey);
-    //console.log(tempUrl);
+    tempUrl += ("q=" + cityname + "&" + "appid=" + Key.apiKey + "&limit=1");
     let request = new XMLHttpRequest();
-    console.log(tempUrl);
     request.open("GET", tempUrl);
     request.send();
+    var response;
     request.onload = () => {
-      var response = JSON.parse(request.response);
+      response = JSON.parse(request.response);
       console.log(response);
-      console.log(response[0].lat);
-      console.log(response[0].lon);
-      //response = [new GeoResponse(JSON.parse(request.response))];
+      this.geoResponse = new GeoResponse(response[0].name, response[0].lat, response[0].lon, response[0].country);
+      console.log(this.geoResponse.country);
+      if(this.geoResponse.country == "AT"){
+        console.log("Country is valid.");
+        new WeatherAPI().Request(this.geoResponse.lat, this.geoResponse.lon);
+      }
+      else{
+        console.log("Country is invalid!");
+      }
     }
   }
 }
 
 class GeoResponse {
   name;
-  local_names;
   lat;
   lon;
   country;
 
-  constructor(name, local_names, lat, lon, country) {
+  constructor(name, lat, lon, country) {
     this.name = name;
-    this.local_names = local_names;
     this.lat = lat;
     this.lon = lon;
     this.country = country;
@@ -78,7 +83,22 @@ class GeoResponse {
 
 //
 class WeatherAPI {
-  url = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
+  weatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
+
+  Request (lat, lon) {
+    console.log("WeatherAPI");
+    let tempUrl = this.weatherUrl;
+    tempUrl += ("lat=" + lat + "&" + "lon=" + lon + "&" + "appid=" + Key.apiKey + "&units=metric&lang=en");
+    let request = new XMLHttpRequest();
+    request.open("GET", tempUrl);
+    request.send();
+    var response;
+    request.onload = () => {
+      response = JSON.parse(request.response);
+      console.log(response);
+      console.log("Weather in " + response.name + " is " + response.main.temp + "° C");
+    }
+  }
 }
 
 window.onload = function () {

@@ -29,7 +29,7 @@ export default {
 }
 </script>
 // --------------------------------------------------------------------------------------------------------------
-<!--
+
 <script>
 // Contains the current API Key
 class Key {
@@ -95,4 +95,3 @@ export default {
 };
  */
 </script>
--->

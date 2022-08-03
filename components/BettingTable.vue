@@ -1,31 +1,31 @@
 <template>
   <v-simple-table class="table">
-      <thead>
-      <tr>
-        <th class="text-center">
-          Cities
-        </th>
-        <th class="text-center">
-          Degrees
-        </th>
-        <th class="text-center">
+    <thead>
+    <tr>
+      <th class="text-center">
+        Cities
+      </th>
+      <th class="text-center">
+        Degrees
+      </th>
+      <th class="text-center">
 
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr
-        v-for="item in bets"
-        :key="item.name"
-      >
-        <td class="text-center">{{ item.name }}</td>
-        <td class="text-center">{{ item.degrees }}</td>
-        <td class="text-center"><button class="btn" id="1"> {{ item.action }}  </button>  <div class="space"></div>
-          <button class="btn" id="2"> {{ item.action2 }}  </button> <div class="space"></div>
-          <button class="btn" id="3"> {{ item.action3 }}  </button>
-        </td>
-      </tr>
-      </tbody>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      v-for="item in bets"
+      :key="item.name"
+    >
+      <td class="text-center">{{ item.name }}</td>
+      <td class="text-center">{{ item.degrees }}</td>
+      <td class="text-center"><button class="btn" id="1"> {{ item.action }}  </button>  <div class="space"></div>
+        <button class="btn" id="2"> {{ item.action2 }}  </button> <div class="space"></div>
+        <button class="btn" id="3"> {{ item.action3 }}  </button>
+      </td>
+    </tr>
+    </tbody>
   </v-simple-table>
 </template>
 

@@ -29,7 +29,6 @@ export default {
 }
 </script>
 // --------------------------------------------------------------------------------------------------------------
-
 <script>
 // Contains the current API Key
 class Key {
@@ -81,7 +80,6 @@ class GeoResponse {
   }
 }
 
-//
 class WeatherAPI {
   weatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 
@@ -115,3 +113,4 @@ export default {
 };
  */
 </script>
+// --------------------------------------------------------------------------------------------------------------

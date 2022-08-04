@@ -97,7 +97,7 @@ class WeatherAPI {
 
 window.onload = function () {
   console.log("WINDOW ON LOAD");
-  new GeoAPI().Request("Vienna", "9", "AT");
+  new GeoAPI().Request("Vienna", "AT");
 }
 /*
 export default {

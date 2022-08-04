@@ -1,56 +1,18 @@
 <template>
-  <v-app>
-    <v-main color="white">
-
-      <span class="hero"></span>
-      <!-- Overlay over img-->
-      <v-card flat color="transparent" >
-        <v-card-text class="white--text font-weight-black text-center d-flex flex-column align-center justify-center"
-                     :class="headingClass">BET BET BET BET BET</v-card-text>
-        <v-card-subtitle class="white--text text-center d-flex flex-column align-center justify-center" :class="subtitleClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem blanditiis, commodi cum dignissimos dolor dolore enim eum id illum in iusto, nemo omnis placeat, quis quisquam<br> sed sequi veritatis. Minima, quibusdam, quos! Consectetur ducimus eaque et, fuga iure labore maiores modi <br>possimus praesentium quas quisquam quod quos ratione, reiciendis!</v-card-subtitle>
-        <v-container class="fill-height align-center justify-center">
-          <v-btn  class="white--text font-weight-black text-center d-flex flex-column align-center justify-center">
-            <nuxt-link to="/SignUp" class="nuxt-link-active">BET NOW</nuxt-link>
-          </v-btn>
-        </v-container>
-      </v-card>
-
-      <!-- <iframe
-        width="560"
-        height="315"
-        :src="require('../assets/img/video.mp4')"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe> -->
-    </v-main>
-
-  </v-app>
+  <input v-model="textarea" class="input" placeholder="Enter Austrian city name here"></input>
 </template>
 
-<style>
-.hero {
-  background: url('../assets/img/hero.jpg');
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: scale(1.03); /*to scale img right to main element (not really a good way but working)*/
-}
-.nuxt-link-active {
-  font-weight: bold;
-  color: green;
-  text-decoration: none;
-  justify-content: center;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.input {
+  margin-left: calc(50vw - 200px);
+  margin-top: 50px;
+  width: 400px;
+  height: 40px;
+  border-radius: 5px;
+  border-color: white;
+  border-style: solid;
   text-align: center;
-  align-content: center;
-}
-.nuxt-link-active:hover {
-  font-weight: bold;
-  color: green;
-  text-decoration: none;
+  font-size: 20px;
 }
 </style>
-

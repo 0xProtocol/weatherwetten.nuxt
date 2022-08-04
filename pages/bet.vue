@@ -2,6 +2,7 @@
   <v-app>
     <nav-bar2/>
     <v-main>
+      <Betting/>
       <BettingIntro/>
       <BettingTable/>
     </v-main>

@@ -14,5 +14,6 @@
   border-style: solid;
   text-align: center;
   font-size: 20px;
+  color:white;
 }
 </style>

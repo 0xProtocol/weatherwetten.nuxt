@@ -73,13 +73,16 @@ body {
   font-family: 'montserrat', sans-serif;
 }
 #app {
-  /*background-image: url('./assets/cold-bg.jpg');*/
+  background-image: url('../assets/img/dark.jpg'); /*change
+ /* background: url('../assets/img/video.mp4');*/
   background-size: cover;
-  background-position: bottom;
-  transition: 0.4s;
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  left: 0;
 }
 #app.warm {
-  /* background-image: url('./assets/warm-bg.jpg');*/
+  background-image: url('../assets/img/sunny.jpg');
 }
 main {
   min-height: 100vh;

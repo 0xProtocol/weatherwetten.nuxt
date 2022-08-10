@@ -18,7 +18,9 @@
 
         <div class="weather-box">
           <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
-          <div class="weather">{{ weather.weather[0].main }}</div>
+         <div class="weather">{{ weather.weather[0].main }}</div>
+          <div class="weather">{{ weather.wind.speed }} m/s</div>
+          <div class="weather">{{ weather.clouds.all }} % cloudiness</div>
         </div>
       </div>
     </main>
@@ -91,7 +93,7 @@ main {
 }
 .search-box {
   width: 100%;
-  margin-top:50px;
+  margin-top:60px;
 }
 .search-box .search-bar {
   display: block;
@@ -120,6 +122,7 @@ main {
   font-weight: 500;
   text-align: center;
   text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+  margin-top:70px;
 }
 .location-box .date {
   color: #FFF;

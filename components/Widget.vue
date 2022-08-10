@@ -12,15 +12,15 @@
 
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
-          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
-          <div class="date">{{ dateBuilder() }}</div>
+          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>  <!-- country  -->
+          <div class="date">{{ dateBuilder() }}</div>     <!-- date with function -->
         </div>
 
         <div class="weather-box">
-          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
-         <div class="weather">{{ weather.weather[0].main }}</div>
-          <div class="weather">{{ weather.wind.speed }} m/s</div>
-          <div class="weather">{{ weather.clouds.all }} % cloudiness</div>
+          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>  <!-- temperature -->
+         <div class="weather">{{ weather.weather[0].main }}</div>      <!-- main weather  -->
+          <div class="weather">{{ weather.wind.speed }} m/s</div>  <!-- wind speed -->
+          <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
         </div>
       </div>
     </main>
@@ -74,8 +74,7 @@ body {
   font-family: 'montserrat', sans-serif;
 }
 #app {
-  background-image: url('../assets/img/16-.jpg'); /*change
- /* background: url('../assets/img/video.mp4');*/
+  background-image: url('../assets/img/16-.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -87,13 +86,13 @@ body {
   height: 100%;
 }
 main {
-  min-height: 100vh;
-  padding: 25px;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
+  min-height: 100%;
+  padding: 25px; /* distance adjusted*/
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)); /*darker*/
 }
 .search-box {
   width: 100%;
-  margin-top:60px;
+  margin-top:60px; /* distance from top*/
 }
 .search-box .search-bar {
   display: block;

@@ -22,6 +22,7 @@ export default {
     ]
   },
 
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -37,6 +38,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    ['@nuxtjs/html-validator']
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -62,11 +64,40 @@ export default {
             ssr: false // default
 
           },
+
           firestore: true
         }
       }
     ]
+
   ],
+
+
+  htmlValidator: {
+    usePrettier: false,
+    failOnError: true,
+    options: {
+      extends: [
+        'html-validate:document',
+        'html-validate:recommended',
+        'html-validate:standard'
+      ],
+      rules: {
+        'svg-focusable': 'off',
+        'no-unknown-elements': 'error',
+        // Conflicts or not needed as we use prettier formatting
+        'void-style': 'off',
+        'no-trailing-whitespace': 'off',
+        // Conflict with Nuxt defaults
+        'require-sri': 'off',
+        'attribute-boolean-style': 'off',
+        'doctype-style': 'off',
+        // Unreasonable rule
+        'element-permitted-content': 'off',
+        'no-inline-style': 'off'
+      }
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -92,4 +123,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
+
+
 }

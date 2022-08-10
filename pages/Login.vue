@@ -81,6 +81,7 @@ export default {
     login(){
       let that = this
       this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
+        .then((user) => this.$router.push('Profile'))
       .catch(function (error) {
         switch (error.code) {
           case "auth/wrong-password":
@@ -100,8 +101,6 @@ export default {
             that.userMsg = error.message;
         }
 
-      }).then((user) => {
-         that.$router.push('profile')
       })
     },
 

@@ -90,7 +90,7 @@ export default {
         alert("Passwords do not match")
       } else {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
-
+          .then((user) => this.initializeUserData()).then((user) => this.$router.push('Profile'))
           .catch(function (e) {
             switch (e.code) {
               case "auth/email-already-in-use":
@@ -111,8 +111,7 @@ export default {
                 break;
             }
             }
-          ).then(this.initializeUserData)
-        this.$router.push("Profile")
+          )
 
 
       }

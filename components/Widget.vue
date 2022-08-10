@@ -77,11 +77,12 @@ body {
   background-size: cover;
   width: 100%;
   height: 100%;
-  top: 50px;
-  left: 0;
 }
 #app.warm {
   background-image: url('../assets/img/16+.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 main {
   min-height: 100vh;
@@ -90,7 +91,7 @@ main {
 }
 .search-box {
   width: 100%;
-  margin-bottom: 30px;
+  margin-top:50px;
 }
 .search-box .search-bar {
   display: block;

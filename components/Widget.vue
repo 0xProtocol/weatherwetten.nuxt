@@ -7,8 +7,7 @@
           class="search-bar"
           placeholder="Search..."
           v-model="query"
-          @keypress="fetchWeather"
-        />
+          @keypress="fetchWeather" />  <!-- if pressed then call fetchWeather-->
       </div>
 
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
@@ -73,7 +72,7 @@ body {
   font-family: 'montserrat', sans-serif;
 }
 #app {
-  background-image: url('../assets/img/dark.jpg'); /*change
+  background-image: url('../assets/img/16-.jpg'); /*change
  /* background: url('../assets/img/video.mp4');*/
   background-size: cover;
   width: 100%;
@@ -82,7 +81,7 @@ body {
   left: 0;
 }
 #app.warm {
-  background-image: url('../assets/img/sunny.jpg');
+  background-image: url('../assets/img/16+.jpg');
 }
 main {
   min-height: 100vh;

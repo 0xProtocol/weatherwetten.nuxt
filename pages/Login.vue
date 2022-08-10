@@ -101,7 +101,7 @@ export default {
         }
 
       }).then((user) => {
-        // that.$router.push('profile')
+         that.$router.push('profile')
       })
     },
 

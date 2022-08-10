@@ -1,6 +1,14 @@
 <template>
 <v-app>
 
+  <v-main>
+
+    <v-btn @click="logoutUser">
+      Logout
+    </v-btn>
+
+  </v-main>
+
 
 </v-app>
 </template>
@@ -11,7 +19,19 @@ export default {
   props: {
     msg: String,
   },
+
+  methods: {
+
+    async logoutUser() {
+      await this.$fire.auth.signOut()
+      this.$router.push("/")
+    }
+
+
+  }
 };
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

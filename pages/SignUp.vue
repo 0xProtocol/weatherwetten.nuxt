@@ -111,7 +111,7 @@ export default {
                 break;
             }
             }
-          ).then(this.saveUsername)
+          ).then(this.initializeUserData)
 
 
       }
@@ -121,7 +121,7 @@ export default {
     routeToLogin() {
       this.$router.push('Login')
     },
-    async saveUsername() {
+    async initializeUserData() {
       const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
 
       const document = {

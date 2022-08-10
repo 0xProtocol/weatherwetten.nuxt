@@ -1,9 +1,9 @@
 <template>
 <v-app>
-
+<NavBar2/>
   <v-main>
 
-    <v-btn @click="logoutUser">
+    <v-btn @click="logoutUser" id="logoutButton">
       Logout
     </v-btn>
 
@@ -43,11 +43,22 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
+}
+
+#logoutButton {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
 }
 </style>

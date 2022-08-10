@@ -125,7 +125,8 @@ export default {
       const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
 
       const document = {
-        username: this.username
+        username: this.username,
+        weatherCoin: 0
       }
       try {
         await ref.set(document)
@@ -143,7 +144,7 @@ export default {
 
 #signUpCard {
   position: fixed;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;

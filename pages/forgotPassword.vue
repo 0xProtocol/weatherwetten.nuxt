@@ -134,6 +134,7 @@ export default {
   transform: translate(-50%, -50%);
   border: 10px;
   color: #ef9421;
+  border-radius: 10px;
 
 
 }
@@ -144,13 +145,14 @@ export default {
 
 
 
-#return{
+#return {
   position: fixed;
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 10px;
   color: forestgreen;
+  border-radius: 10px;
 
 }
 

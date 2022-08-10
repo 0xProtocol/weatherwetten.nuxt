@@ -22,10 +22,13 @@
             <nuxt-link to="/weathercoin" class="nuxt-link-active">WEATHERCOIN</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/aboutus" class="nuxt-link-active" >ABOUT US</nuxt-link>
+            <nuxt-link to="/aboutus" class="nuxt-link-active">ABOUT US</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/Login"class="nuxt-link-active" >LOG IN</nuxt-link>
+            <nuxt-link to="/Login" class="nuxt-link-active">LOG IN</nuxt-link>
+          </v-btn>
+          <v-btn color="black" v-if="$fire.auth.currentUser != null">
+            <nuxt-link to="/Profile" class="nuxt-link-active">PROFILE</nuxt-link>
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -72,7 +75,8 @@ export default {
         {title: 'LEADERBOARD', icon: 'mdi-view-dashboard', link: 'leaderboards'},
         {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
         {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-        {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'}
+        {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
+        {title: 'PROFILE', icon: "mdi-view-dashboard", link: 'Profile'}
       ],
     }
   }

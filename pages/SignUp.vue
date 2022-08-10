@@ -111,7 +111,8 @@ export default {
                 break;
             }
             }
-          ).then(this.initializeUserData)
+          )
+        this.$router.push("Profile")
 
 
       }
@@ -152,11 +153,12 @@ export default {
 
 #signInButton {
   color: #de962f;
-
+  border-radius: 10px;
 }
 
 #createButton {
   color: forestgreen;
+  border-radius: 10px;
 
 }
 

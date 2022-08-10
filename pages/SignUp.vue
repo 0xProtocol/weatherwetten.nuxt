@@ -111,7 +111,7 @@ export default {
                 break;
             }
             }
-          )
+          ).then(this.initializeUserData)
         this.$router.push("Profile")
 
 

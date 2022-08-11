@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
+  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''"> <!-- change to different levels not just 2-->
     <main>
       <div class="search-box">
         <input
@@ -23,6 +23,7 @@
           <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
         </div>
       </div>
+      <!-- there undefined if nothing found -->
     </main>
   </div>
 </template>

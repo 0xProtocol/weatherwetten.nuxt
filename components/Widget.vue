@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''"> <!-- change to different levels not just 2-->
+  <div id="app" :class="typeof weather.main != 'undefined' && (weather.main.temp > 16 ? 'warm' : '' || weather.main.temp <0 ? 'cold' : '')"> <!-- decide if widget pic should be warm or cold dependending on temperature-->
     <main>
       <div class="search-box">
         <input
@@ -80,8 +80,14 @@ body {
   width: 100%;
   height: 100%;
 }
+#app.cold {
+  background-image: url('../assets/img/cold.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
 #app.warm {
-  background-image: url('../assets/img/16+.jpg');
+  background-image: url('../assets/img/warm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;

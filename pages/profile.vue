@@ -1,22 +1,37 @@
 <template>
-<v-app>
-<NavBar2/>
-  <v-main>
+  <v-app>
+    <div id="app">
+      <NavBar2/>
+      <v-main>
+        <v-card id="profileCard" height="280" width="400" color="transparent" outlined>
+          <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
+          <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }} </h3></v-card-text>
+          <br>
+          <br>
+          <v-card-actions class="justify-center">
+            <v-btn class="buttons" @click="logoutUser" id="logoutButton">
+              Logout
+            </v-btn>
+            <v-btn v-if="!showTextField" class="buttons" @click="changeName">
+              Change username
+            </v-btn>
+          </v-card-actions>
 
-
-    <h3>Hello {{ username }}!</h3>
-
-    <h3>You have {{ weathercoin }} weatherCoin! </h3>
-
-
-    <v-btn @click="logoutUser" id="logoutButton">
-      Logout
-    </v-btn>
-
-  </v-main>
-
-
-</v-app>
+          <br>
+          <v-text-field dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
+                        append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
+        </v-card>
+        <v-snackbar timeout="10000" id="snackbar" v-model="showSnackBar">
+          {{ msg }}
+          <template v-slot:action="{ attrs }">
+            <v-btn dark text v-bind="attrs" @click="showSnackBar = false">
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-main>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -30,6 +45,10 @@ export default {
     return {
       username: "",
       weathercoin: null,
+      showTextField: false,
+      newUsername: "",
+      showSnackBar: false,
+      msg: ""
     }
   },
 
@@ -38,6 +57,25 @@ export default {
     async logoutUser() {
       await this.$fire.auth.signOut()
       this.$router.push("/")
+    },
+
+    changeName() {
+      this.showTextField = true;
+    },
+
+    async saveToDatabase() {
+      if (this.newUsername.length < 5) {
+        this.msg = "Enter a valid username!"
+        this.showSnackBar = true;
+        return;
+      }
+
+      const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
+      const res = await ref.update({username: this.newUsername})
+
+      this.msg = "Username changed successfully"
+      this.showSnackBar = true;
+      location.reload();
     }
 
 
@@ -79,12 +117,39 @@ a {
   color: #42b983;
 }
 
-#logoutButton {
+
+#profileCard {
   position: fixed;
-  top: 80%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  background-color: #3c4242;
 
 }
+
+#weatherCoin {
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+#greetUser {
+  font-size: 25px;
+
+}
+
+.buttons {
+  border-radius: 10px;
+  color: white;
+
+
+}
+
+#app {
+  background-image: url('../assets/img/warm.jpg')
+}
+
+
+
+
 </style>

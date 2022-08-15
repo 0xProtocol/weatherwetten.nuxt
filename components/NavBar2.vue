@@ -9,26 +9,26 @@
             max-width="60"
             :src="require('../assets/img/icon.png')"></v-img>
         </div>
-        <v-toolbar-title>  <NuxtLink to="/"  class="nuxt-link-active">WEATHER WETTEN</NuxtLink></v-toolbar-title>
+        <v-toolbar-title>  <NuxtLink to="/"  class="nuxt-link-active-underline">WEATHER WETTEN</NuxtLink></v-toolbar-title> <!--  or nuxt-link-active -->
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="black" v-if="$fire.auth.currentUser != null">
-            <NuxtLink to="/bet" class="nuxt-link-active">BET</NuxtLink>
+            <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/leaderboards" class="nuxt-link-active">LEADERBOARDS</nuxt-link>
+            <nuxt-link to="/leaderboards" class="nuxt-link-active-underline">LEADERBOARDS</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/weathercoin" class="nuxt-link-active">WEATHERCOIN</nuxt-link>
+            <nuxt-link to="/weathercoin" class="nuxt-link-active-underline">WEATHERCOIN</nuxt-link>
           </v-btn>
           <v-btn color="black">
-            <nuxt-link to="/aboutus" class="nuxt-link-active">ABOUT US</nuxt-link>
+            <nuxt-link to="/aboutus" class="nuxt-link-active-underline">ABOUT US</nuxt-link>
           </v-btn>
           <v-btn color="black" v-if="$fire.auth.currentUser == null">
-            <nuxt-link to="/Login" class="nuxt-link-active">LOG IN</nuxt-link>
+            <nuxt-link to="/Login" class="nuxt-link-active-underline">LOG IN</nuxt-link>
           </v-btn>
           <v-btn color="black" v-if="$fire.auth.currentUser != null">
-            <nuxt-link to="/Profile" class="nuxt-link-active">PROFILE</nuxt-link>
+            <nuxt-link to="/Profile" class="nuxt-link-active-underline">PROFILE</nuxt-link>
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -85,14 +85,35 @@ export default {
 </script>
 
 <style>
-.nuxt-link-active {
+
+.nuxt-link-active:hover{
   font-weight: bold;
-  color: green;
+  color: white;
   text-decoration: none;
 }
-.nuxt-link-active:hover {
+.nuxt-link-active-underline {
   font-weight: bold;
-  color: green;
   text-decoration: none;
+}
+.nuxt-link-active-underline:hover {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nuxt-link-active-underline:after {
+  bottom: -5px;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.nuxt-link-active-underline:hover:after {
+  width: 100%;
+  left: 0;
 }
 </style>

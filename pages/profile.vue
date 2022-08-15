@@ -3,6 +3,12 @@
 <NavBar2/>
   <v-main>
 
+
+    <h3>Hello {{ username }}!</h3>
+
+    <h3>You have {{ weathercoin }} weatherCoin! </h3>
+
+
     <v-btn @click="logoutUser" id="logoutButton">
       Logout
     </v-btn>
@@ -20,6 +26,13 @@ export default {
     msg: String,
   },
 
+  data() {
+    return {
+      username: "",
+      weathercoin: null,
+    }
+  },
+
   methods: {
 
     async logoutUser() {
@@ -28,6 +41,19 @@ export default {
     }
 
 
+  },
+
+  async created() {
+
+    // get user data from document
+
+    console.log(this.$fire.auth.currentUser.uid);
+    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
+    let document = ref.get();
+    this.username = (await document).get("username");
+    this.weathercoin = (await document).get("weatherCoin");
+
+    // console.log(ref);
   }
 };
 

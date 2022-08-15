@@ -12,7 +12,7 @@
         <v-toolbar-title>  <NuxtLink to="/"  class="nuxt-link-active-underline">WEATHER WETTEN</NuxtLink></v-toolbar-title> <!--  or nuxt-link-active -->
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn color="black" v-if="$fire.auth.currentUser != null">
+          <v-btn color="transparent" v-if="$fire.auth.currentUser != null">
             <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink>
           </v-btn>
           <v-btn color="black">
@@ -88,7 +88,6 @@ export default {
 
 .nuxt-link-active:hover{
   font-weight: bold;
-  color: white;
   text-decoration: none;
 }
 .nuxt-link-active-underline {

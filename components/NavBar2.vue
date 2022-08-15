@@ -48,8 +48,9 @@
           v-for="item in items"
           :key="item.title"
           link
+
         >
-          <v-list-item-icon>
+          <v-list-item-icon >
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
@@ -68,26 +69,39 @@
 <script>
 export default {
   data() {
-    return {
-      drawer: null,
-      items: [
-        {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
-        {title: 'LEADERBOARD', icon: 'mdi-view-dashboard', link: 'leaderboards'},
-        {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
-        {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-        {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
-        {title: 'PROFILE', icon: "mdi-view-dashboard", link: 'Profile'}
-      ],
+    if ("$fire.auth.currentUser" == null) {
+      return {
+        drawer: null,
+        items: [
+          {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
+          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
+          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
+          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+          {title: 'PROFILE', icon: "mdi-view-dashboard", link: 'Profile'}
+
+        ],
+      }
+    }
+    if ("$fire.auth.currentUser" != null) {
+      return {
+        drawer: null,
+        items: [
+          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
+          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
+          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+          {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
+        ],
+      }
     }
   }
 }
-
 </script>
 
 <style>
 
 .nuxt-link-active:hover{
   font-weight: bold;
+  color: white;
   text-decoration: none;
 }
 .nuxt-link-active-underline {

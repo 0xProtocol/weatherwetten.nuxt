@@ -48,7 +48,6 @@
           v-for="item in items"
           :key="item.title"
           link
-
         >
           <v-list-item-icon >
             <v-icon>{{ item.icon }}</v-icon>
@@ -69,31 +68,33 @@
 <script>
 export default {
   data() {
-    if ("$fire.auth.currentUser" == null) {
-      return {
-        drawer: null,
-        items: [
-          {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
-          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
-          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
-          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-          {title: 'PROFILE', icon: "mdi-view-dashboard", link: 'Profile'}
+      if (this.$fire.auth.currentUser!=null) {
+        console.log("LOGGED IN");
+        return {
+          drawer: null,
+          items: [
+            {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
+            {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
+            {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
+            {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+            {title: 'PROFILE', icon: "mdi-view-dashboard", link: 'Profile'}
+          ],
+        }
+      } else {
+        console.log("NOT LOGGED IN");
+        return {
 
-        ],
+          drawer: null,
+          items: [
+            {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
+            {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
+            {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+            {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
+          ],
+        }
       }
+    ;
     }
-    if ("$fire.auth.currentUser" != null) {
-      return {
-        drawer: null,
-        items: [
-          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
-          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
-          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-          {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
-        ],
-      }
-    }
-  }
 }
 </script>
 

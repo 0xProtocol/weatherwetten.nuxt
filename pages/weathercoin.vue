@@ -42,10 +42,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #app {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/weathercoin2.jpg');
-  background-size: cover;
-  width: 100%;
-  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../assets/img/weathercoin3.gif'); //change
+  background-size: contain;
+  background-repeat:   no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
 }
 h3 {
   margin: 40px 0 0;
@@ -69,7 +71,6 @@ h1 {
   position: relative;
 }
 h1:after {
-  background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
   display: block;
@@ -87,7 +88,7 @@ h1:hover:after {
 
 .about
 {
-  margin-top: 120px;
+  margin-top: 100px;
   text-align: center;
 }
 

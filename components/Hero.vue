@@ -3,14 +3,14 @@
     <v-main color="white">
 
       <!-- <span class="hero"></span> -->
-      <video class="herovid" playsinline autoplay muted loop>
+     <!-- <video class="herovid" playsinline autoplay muted loop>
         <source :src='require("../assets/img/video.mp4")' type='video/mp4'>
-      </video>
+      </video>-->
       <!-- Overlay over img-->
       <v-card flat color="transparent">
         <v-card-text
           class="white--text font-weight-black text-center d-flex flex-column align-center justify-center headingClass">
-          BET WITH WEATHERCOIN
+          WEATHERCOIN
         </v-card-text>
         <v-card-subtitle class="white--text text-center d-flex flex-column align-center justify-center"
                          :class="subtitleClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem
@@ -18,11 +18,11 @@
           sed sequi veritatis. Minima, quibusdam, quos! Consectetur ducimus eaque et, fuga iure labore maiores modi <br>possimus
           praesentium quas quisquam quod quos ratione, reiciendis!
         </v-card-subtitle>
-        <v-container class="fill-height align-center justify-center">
+        <!--<v-container class="fill-height align-center justify-center">
           <v-btn class="white--text font-weight-black text-center d-flex flex-column align-center justify-center">
             <nuxt-link to="/SignUp" class="nuxt-link-active">SIGN UP</nuxt-link>
           </v-btn>
-        </v-container>
+        </v-container> -->
       </v-card>
 
       <!-- <iframe
@@ -51,7 +51,7 @@ export default {
 
 <style>
 .hero {
-  background: url('../assets/img/video.mp4');
+ /* background: url('../assets/img/video.mp4');*/
   background-size: cover;
   width: 100%;
   height: 100%;

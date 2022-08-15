@@ -12,8 +12,8 @@
         <v-toolbar-title>  <NuxtLink to="/"  class="nuxt-link-active">WEATHER WETTEN</NuxtLink></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn color="black">
-            <NuxtLink to="/bet"  class="nuxt-link-active">BET</NuxtLink>
+          <v-btn color="black" v-if="$fire.auth.currentUser != null">
+            <NuxtLink to="/bet" class="nuxt-link-active">BET</NuxtLink>
           </v-btn>
           <v-btn color="black">
             <nuxt-link to="/leaderboards" class="nuxt-link-active">LEADERBOARDS</nuxt-link>
@@ -24,7 +24,7 @@
           <v-btn color="black">
             <nuxt-link to="/aboutus" class="nuxt-link-active">ABOUT US</nuxt-link>
           </v-btn>
-          <v-btn color="black">
+          <v-btn color="black" v-if="$fire.auth.currentUser == null">
             <nuxt-link to="/Login" class="nuxt-link-active">LOG IN</nuxt-link>
           </v-btn>
           <v-btn color="black" v-if="$fire.auth.currentUser != null">

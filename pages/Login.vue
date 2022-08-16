@@ -2,12 +2,13 @@
 <v-app>
   <NavBar2/>
   <v-main>
-    <v-card  width="550" id="loginCard">
+    <v-card outlined width="550" id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
       <v-card-text>
-        <v-text-field color="info" v-model="auth.email" label="E-Mail" outlined/>
+        <v-text-field color="grey" v-model="auth.email" label="E-Mail" outlined/>
         <v-text-field outlined
-                      color="info"
+
+                      color="grey"
                       v-model="auth.password"
                       label="Password"
                       :rules="validatePassword"
@@ -35,6 +36,7 @@
       </template>
     </v-snackbar>
   </v-main>
+  <Footer></Footer>
 </v-app>
 
 

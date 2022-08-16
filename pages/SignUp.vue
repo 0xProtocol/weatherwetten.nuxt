@@ -3,19 +3,19 @@
   <v-app>
     <NavBar2/>
     <v-main>
-      <v-card width="550" id="signUpCard">
+      <v-card outlined width="550" id="signUpCard">
         <v-card-title class="justify-center">Start betting on the weather today!</v-card-title>
         <v-card-text>
-          <v-text-field :rules="validateEmail" label="E-Mail" outlined color="info" clearable v-model="auth.email"/>
-          <v-text-field label="Username" outlined color="info" v-model="username"
+          <v-text-field :rules="validateEmail" label="E-Mail" outlined color="grey" clearable v-model="auth.email"/>
+          <v-text-field label="Username" outlined color="grey" v-model="username"
                         :rules="validateUserName"></v-text-field>
           <v-text-field :rules="validatePassword" :type="showPassword ? 'text' : 'password'"
-                        color="info" outlined label="Password" v-model="auth.password"/>
+                        color="grey" outlined label="Password" v-model="auth.password"/>
           <v-text-field
             :rules="validateRepeatPassword"
             :type="showPassword ? 'text' : 'password'"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="showPassword = !showPassword" color="info" outlined label="Repeat your password"
+            @click:append="showPassword = !showPassword" color="grey" outlined label="Repeat your password"
             v-model="auth.passwordRepeat"></v-text-field>
         </v-card-text>
 
@@ -40,6 +40,8 @@
 
 
     </v-main>
+
+    <Footer></Footer>
 
   </v-app>
 
@@ -145,7 +147,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #signInButton {

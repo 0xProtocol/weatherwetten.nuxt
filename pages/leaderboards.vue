@@ -1,9 +1,12 @@
 <template>
+
   <v-app>
-    <nav-bar2/>
+    <nav-bar2></nav-bar2>
+    <score-table id="table"></score-table>
 
     <Footer/>
   </v-app>
+
 </template>
 
 <script>
@@ -34,11 +37,33 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
+
+#table {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  width: 30%;
+}
+
+@media screen and (max-width: 800px) {
+  #table {
+    width: 70%;
+  }
+}
+
+
+
+
+
 </style>

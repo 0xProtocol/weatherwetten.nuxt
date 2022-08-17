@@ -10,14 +10,11 @@
           <!----About section start---->
           <section class="about">
             <div class="main">
-              <img src="../assets/img/weatherstation2.png">
+              <img src="../assets/img/betting.png">
               <div class="about-text">
                 <h5>The betting system</h5>
-                <p>I am a front-end web developer. I can provide clean code and pixel perfect design. I also make the
-                  website more & more interactive with web animations.I can provide clean code and pixel perfect design.
-                  I also make the website more & more interactive with web animations.A responsive design makes your
-                  website accessible to all users, regardless of their device.</p>
-                <button type="button">Let's Talk</button>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem deleniti eaque et fugit, harum iste iure laboriosam laborum magnam minima numquam officia, quis quisquam quod ratione, reprehenderit suscipit. A consequatur dolor eaque hic ipsa, itaque neque optio placeat quod reprehenderit tenetur unde voluptate voluptatum! Consequuntur eaque eum recusandae sunt!</p>
+
               </div>
             </div>
           </section>
@@ -25,33 +22,41 @@
           <!-- SECTION 2-->
           <section class="about">
             <div class="main">
-              <img src="../assets/img/weatherstation2.png">
               <div class="about-text">
                 <h5>The concept of weather betting</h5>
-                <p>I am a front-end web developer. I can provide clean code and pixel perfect design. I also make the
-                  website more & more interactive with web animations.I can provide clean code and pixel perfect design.
-                  I also make the website more & more interactive with web animations.A responsive design makes your
-                  website accessible to all users, regardless of their device.</p>
-                <button type="button">Let's Talk</button>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis commodi, culpa cupiditate deleniti dicta dolorum eaque earum enim eos est et excepturi explicabo hic illum ipsa ipsam libero magni maiores nemo nostrum, pariatur perferendis perspiciatis placeat provident quia quos reiciendis sequi similique tempora totam ullam velit voluptas! Necessitatibus, repellendus?</p>
+
               </div>
+              <img src="../assets/img/weatherstation2.png">
             </div>
           </section>
 
 
-          <!-- SECTION 2-->
+          <!-- SECTION 3-->
           <section class="about">
             <div class="main">
-              <img src="../assets/img/weatherstation2.png">
+              <img src="../assets/img/concept.png">
               <div class="about-text">
                 <h5>Our Weatherstations</h5>
                 <p>I am a front-end web developer. I can provide clean code and pixel perfect design. I also make the
                   website more & more interactive with web animations.I can provide clean code and pixel perfect design.
                   I also make the website more & more interactive with web animations.A responsive design makes your
                   website accessible to all users, regardless of their device.</p>
-                <button type="button">Let's Talk</button>
+
               </div>
             </div>
           </section>
+        </div>
+      </section>
+
+      <!-- SECTION 4  -->
+      <section class="about">
+        <div class="main">
+          <div class="about-text">
+            <h5>The Leaderboards</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis commodi, culpa cupiditate deleniti dicta dolorum eaque earum enim eos est et excepturi explicabo hic illum ipsa ipsam libero magni maiores nemo nostrum, pariatur perferendis perspiciatis placeat provident quia quos reiciendis sequi similique tempora totam ullam velit voluptas! Necessitatibus, repellendus?</p>
+          </div>
+          <img src="../assets/img/leaderboards.png">
         </div>
       </section>
 
@@ -179,6 +184,8 @@ h4 {
 .about img {
   height: auto;
   width: 430px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .about-text {

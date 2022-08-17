@@ -50,14 +50,14 @@
                 </v-list-item>
                 <v-card-actions>
                 </v-card-actions></v-card>
-
                 </v-container>
+              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0]}} </h2>
             </div>
           </div>
         </div>
       </section>
 
-      <Footer/>
+      <FooterBlack/>
     </v-app>
   </div>
 </template>
@@ -65,7 +65,7 @@
 <script>
 import HelloWorld from "@/components/HelloWorld";
 import NavBar2 from "@/components/NavBar2";
-import Footer from "@/components/Footer";
+import Footer from "@/components/FooterBlack";
 import Hero from "@/components/Hero";
 
 export default {
@@ -78,6 +78,32 @@ export default {
   },
   props: {
     msg: String,
+  },
+  data() {
+    let minedWeatherCoins;
+    return {
+      userArray: [],
+      int: minedWeatherCoins
+
+    }
+  },
+
+  async created() {
+    const docRef = this.$fire.firestore.collection('users');
+    const snapshot = await docRef.get();
+    this.minedWeatherCoins=0;
+    let i = 0;
+    snapshot.forEach(doc => {
+      this.userArray[i] = doc.data();
+      this.minedWeatherCoins =  this.minedWeatherCoins + this.userArray[i].weatherCoin;
+      i++;
+    });
+
+    this.userArray.sort(this.compareScores); //first sort then calculating
+    console.log(this.minedWeatherCoins);
+    this.userArray[0] =  this.minedWeatherCoins;
+    console.log(this.userArray);
+
   },
 };
 </script>
@@ -134,6 +160,81 @@ h1:hover:after {
   width: 100%;
   left: 0;
 }
+
+h2 {
+  padding: 450px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 500;
+  position: relative;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+
+  text-shadow: .05em 0 0 rgba(255, 0, 0, .75),
+  -.05em -.025em 0 rgba(0, 255, 0, .75),
+  .025em .05em 0 rgba(0, 0, 255, .75);
+
+  animation: glitch 525ms infinite;
+}
+
+h2::before,
+h2::after {
+  content: attr(data-text);
+  position: absolute;
+  letter-spacing: .025em;
+  top: 0;
+  left: 0;
+  opacity: .7;
+}
+h2:before {
+  animation: glitch 675ms infinite;
+  transform: translate(-.035em, -.025em);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+h2::after {
+  animation: glitch 333ms infinite;
+  transform: translate(.035em, .025em);
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: .05em 0 0 rgba(255, 0, 0, .75),
+    -.05em -.025em 0 rgba(0, 255, 0, .75),
+    .025em .05em 0 rgba(0, 0, 255, .75);
+  }
+  14% {
+    text-shadow: .05em 0 0 rgba(255, 0, 0, .75),
+    -.05em -.025em 0 rgba(0, 255, 0, .75),
+    .025em .05em 0 rgba(0, 0, 255, .75);
+  }
+  15% {
+    text-shadow: -.05em -.025em 0 rgba(255, 0, 0, .75),
+    .025em .025em 0 rgba(0, 255, 0, .75),
+    -.05em -.05em 0 rgba(0, 0, 255, .75);
+  }
+  49% {
+    text-shadow: -.05em -.025em 0 rgba(255, 0, 0, .75),
+    .025em .025em 0 rgba(0, 255, 0, .75),
+    -.05em -.05em 0 rgba(0, 0, 255, .75);
+  }
+  50% {
+    text-shadow: .025em .05em 0 rgba(255, 0, 0, .75),
+    .05em 0 0 rgba(0, 255, 0, .75),
+    0 -.05em 0 rgba(0, 0, 255, .75);
+  }
+  99% {
+    text-shadow: .025em .05em 0 rgba(255, 0, 0, .75),
+    .05em 0 0 rgba(0, 255, 0, .75),
+    0 -.05em 0 rgba(0, 0, 255, .75);
+  }
+  100% {
+    text-shadow: -.025em 0 0 rgba(255, 0, 0, .75),
+    -.025em -.025em 0 rgba(0, 255, 0, .75),
+    -.025em -.05em 0 rgba(0, 0, 255, .75);
+  }
+}
+
 
 .about {
   margin-top: 100px;

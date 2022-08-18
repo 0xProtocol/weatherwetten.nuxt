@@ -124,6 +124,7 @@ h1 {
   display: inline-block;
   padding: 15px 20px;
   position: relative;
+  font-size: 1.5rem;
 }
 
 h1:after {

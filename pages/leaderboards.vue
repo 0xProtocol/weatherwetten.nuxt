@@ -2,8 +2,11 @@
 
   <v-app>
     <nav-bar2></nav-bar2>
+    <div class="content">
+    <h1>LEADERBOARDS</h1>
     <score-table id="table"></score-table>
 
+    </div>
     <Footer/>
   </v-app>
 
@@ -70,8 +73,36 @@ a {
   }
 }
 
+h1 {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
 
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+  font-size: 1.5rem;
+}
 
+h1:after {
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
 
-
+h1:hover:after {
+  width: 100%;
+  left: 0;
+}
+.content{
+  margin-top: 100px;
+  text-align: center;
+}
 </style>

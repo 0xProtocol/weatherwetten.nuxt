@@ -7,51 +7,58 @@
           <h1>WEATHERCOIN</h1>
           <div class="wrapper">
             <div class="content">
-              <v-container fill-height grid-list-md text-xs-center>
+              <v-container fill-height grid-list-xl text-xs-center>
 
                 <!-- VCARD 1 -->
-              <v-card class="mx-auto" max-width="344" outlined>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <div class="text-overline mb-4"> BENEFIT 1</div>
-                    <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
-                    <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
-                  </v-list-item-content>
-                  <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
-                  </v-list-item-avatar>
-                </v-list-item>
-                <v-card-actions>
-                </v-card-actions>
-              </v-card>
+                <v-card class="mx-auto" max-width="344" outlined height="100%">
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4"> BENEFIT 1</div>
+                      <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
+                      <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
+                    </v-list-item-avatar>
+                  </v-list-item>
+                  <v-card-actions>
+                  </v-card-actions>
+                </v-card>
 
                 <!-- VCARD 2 -->
-              <v-card class="mx-auto" max-width="344" outlined>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <div class="text-overline mb-4"> BENEFIT 2</div>
-                    <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
-                    <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
-                  </v-list-item-content>
-                  <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
-                  </v-list-item-avatar>
-                </v-list-item>
-                <v-card-actions>
-                </v-card-actions></v-card>
+                <v-card class="mx-auto" max-width="344" outlined>
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4"> BENEFIT 2</div>
+                      <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
+                      <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
+                    </v-list-item-avatar>
+                  </v-list-item>
+                  <v-card-actions>
+                  </v-card-actions>
+                </v-card>
 
                 <!-- VCARD 3 -->
-              <v-card class="mx-auto" max-width="344" outlined>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <div class="text-overline mb-4"> BENEFIT 3</div>
-                    <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
-                    <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
-                  </v-list-item-content>
-                  <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
-                  </v-list-item-avatar>
-                </v-list-item>
-                <v-card-actions>
-                </v-card-actions></v-card>
+                <v-card class="mx-auto" max-width="344" outlined>
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4"> BENEFIT 3</div>
+                      <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
+                      <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
+                    </v-list-item-avatar>
+                  </v-list-item>
+                  <v-card-actions>
+                  </v-card-actions>
+                </v-card>
+              </v-container>
 
+              <v-container fill-height grid-list-xl text-xs-center>
                 <!-- VCARD 4 -->
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
@@ -60,7 +67,8 @@
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
                       <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
@@ -75,11 +83,13 @@
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
                       <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
-                  </v-card-actions></v-card>
+                  </v-card-actions>
+                </v-card>
 
                 <!-- VCARD 6 -->
                 <v-card class="mx-auto" max-width="344" outlined>
@@ -89,12 +99,16 @@
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
                       <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
-                  </v-card-actions></v-card>
+                  </v-card-actions>
+                </v-card>
+              </v-container>
 
+              <v-container fill-height grid-list-xl text-xs-center>
                 <!-- VCARD 7 -->
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
@@ -103,7 +117,8 @@
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
                       <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
@@ -118,11 +133,13 @@
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
                       <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
-                  </v-card-actions></v-card>
+                  </v-card-actions>
+                </v-card>
 
                 <!-- VCARD 9 -->
                 <v-card class="mx-auto" max-width="344" outlined>
@@ -132,14 +149,17 @@
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
                       <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif" alt="John">
+                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                                                                         alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
-                  </v-card-actions></v-card>
+                  </v-card-actions>
+                </v-card>
+              </v-container>
 
-                </v-container>
-              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0]}} </h2>
+
+              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0] }} </h2>
             </div>
           </div>
         </div>
@@ -179,17 +199,17 @@ export default {
   async created() {
     const docRef = this.$fire.firestore.collection('users');
     const snapshot = await docRef.get();
-    this.minedWeatherCoins=0;
+    this.minedWeatherCoins = 0;
     let i = 0;
     snapshot.forEach(doc => {
       this.userArray[i] = doc.data();
-      this.minedWeatherCoins =  this.minedWeatherCoins + this.userArray[i].weatherCoin;
+      this.minedWeatherCoins = this.minedWeatherCoins + this.userArray[i].weatherCoin;
       i++;
     });
 
     this.userArray.sort(this.compareScores); //first sort then calculating
     console.log(this.minedWeatherCoins);
-    this.userArray[0] =  this.minedWeatherCoins;
+    this.userArray[0] = this.minedWeatherCoins;
     console.log(this.userArray);
 
   },
@@ -251,12 +271,14 @@ h1:hover:after {
 
 h2 {
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: .025em;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
+  margin-bottom: 100px;
+  margin-top: 75px;
 
   text-shadow: .05em 0 0 rgba(255, 0, 0, .75),
   -.05em -.025em 0 rgba(0, 255, 0, .75),
@@ -273,11 +295,13 @@ h2::after {
   left: 0;
   opacity: .7;
 }
+
 h2:before {
   animation: glitch 675ms infinite;
   transform: translate(-.035em, -.025em);
   clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
 }
+
 h2::after {
   animation: glitch 333ms infinite;
   transform: translate(.035em, .025em);
@@ -327,6 +351,5 @@ h2::after {
   margin-top: 100px;
   text-align: center;
 }
-
 
 </style>

@@ -17,7 +17,7 @@
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
                       <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit1.png"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -33,7 +33,7 @@
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
                       <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit2.png"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -49,7 +49,7 @@
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
                       <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit3.png"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -63,11 +63,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 1</div>
+                      <div class="text-overline mb-4"> BENEFIT 4</div>
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
                       <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -79,11 +79,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 2</div>
+                      <div class="text-overline mb-4"> BENEFIT 5</div>
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
                       <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -95,11 +95,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 3</div>
+                      <div class="text-overline mb-4"> BENEFIT 6</div>
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
                       <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -113,11 +113,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 1</div>
+                      <div class="text-overline mb-4"> BENEFIT 7</div>
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
                       <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -129,11 +129,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 2</div>
+                      <div class="text-overline mb-4"> BENEFIT 8</div>
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
                       <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>
@@ -145,11 +145,11 @@
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 3</div>
+                      <div class="text-overline mb-4"> BENEFIT 9</div>
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
                       <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="grey"><img src="../assets/img/weathercoin2.gif"
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/weathercoin2.gif"
                                                                          alt="John">
                     </v-list-item-avatar>
                   </v-list-item>

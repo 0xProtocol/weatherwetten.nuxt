@@ -344,27 +344,7 @@ h2::after {
   text-align: center;
 }
 
-
-.mx-auto:before {
-  content: '';
-  position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: #d35400;
-  transition: .5s;
-  z-index: -1;
-}
-
-.mx-auto:hover:before {
-  box-shadow: 0 0 15px #d35400;
-  filter: blur(3px);
-}
-
 .mx-auto:hover {
-  color: #ffa502;
-  box-shadow: 0 0 15px #d35400;
-  text-shadow: 0 0 15px #d35400;
+  box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
 </style>

@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <v-app>
-      <nav-bar2/>
-      <section>
-        <div class="about">
+      <nav-bar2/>      <!-- Navbar -->
+
+        <div class="weathercoin"> <!-- weathercoin div -->
           <h1>WEATHERCOIN</h1>
-          <div class="wrapper">
-            <div class="content">
-              <v-container fill-height grid-list-xl text-xs-center>
+
+            <div class="content"> <!-- content of weathercoin.vue -->
 
                 <!-- VCARD 1 -->
-                <v-card class="mx-auto" max-width="344" outlined height="100%" >
+              <v-container fill-height>  <!-- first container (one line) || fill-height applies height 100% and align-items to center-->
+                <v-card class="mx-auto" max-width="344" outlined height="100%">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 1</div>
@@ -56,7 +56,7 @@
               </v-container>
 
                 <!-- VCARD 4 -->
-              <v-container fill-height grid-list-xl text-xs-center>
+              <v-container fill-height grid-list-xl text-xs-center>  <!-- second container (one line) || fill-height applies height 100% and align-items to center-->
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
@@ -102,8 +102,8 @@
                 </v-card>
               </v-container>
 
-              <v-container fill-height grid-list-xl text-xs-center>
                 <!-- VCARD 7 -->
+              <v-container fill-height grid-list-xl text-xs-center> <!--third container (one line) || fill-height applies height 100% and align-items to center-->
                 <v-card class="mx-auto" max-width="344" outlined>
                   <v-list-item three-line>
                     <v-list-item-content>
@@ -150,13 +150,11 @@
               </v-container>
 
 
-              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0] }} </h2>
+              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0] }} </h2> <!-- gather weathercoins that are minted with created() function -->
             </div>
-          </div>
         </div>
-      </section>
 
-      <FooterBlack/>
+      <FooterBlack/> <!-- footer with background black -->
     </v-app>
   </div>
 </template>
@@ -210,13 +208,26 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #app {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('../assets/img/weathercoin.gif');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('../assets/img/weathercoin.gif'); /*background gif*/
   background-size: contain;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
 
 }
+.weathercoin {
+  margin-top: 100px; /* distance from top of div*/
+  text-align: center;
+}
+
+.mx-auto{
+  margin-top: 15px; /*spaces between cards */
+}
+.mx-auto:hover {
+  box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
+}
+
+
 
 h3 {
   margin: 40px 0 0;
@@ -338,13 +349,4 @@ h2::after {
   }
 }
 
-
-.about {
-  margin-top: 100px;
-  text-align: center;
-}
-
-.mx-auto:hover {
-  box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
-}
 </style>

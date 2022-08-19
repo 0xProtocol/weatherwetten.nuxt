@@ -10,7 +10,7 @@
               <v-container fill-height grid-list-xl text-xs-center>
 
                 <!-- VCARD 1 -->
-                <v-card class="mx-auto" max-width="344" outlined height="100%">
+                <v-card class="mx-auto" max-width="344" outlined height="100%" >
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 1</div>
@@ -344,4 +344,27 @@ h2::after {
   text-align: center;
 }
 
+
+.mx-auto:before {
+  content: '';
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: #d35400;
+  transition: .5s;
+  z-index: -1;
+}
+
+.mx-auto:hover:before {
+  box-shadow: 0 0 15px #d35400;
+  filter: blur(3px);
+}
+
+.mx-auto:hover {
+  color: #ffa502;
+  box-shadow: 0 0 15px #d35400;
+  text-shadow: 0 0 15px #d35400;
+}
 </style>

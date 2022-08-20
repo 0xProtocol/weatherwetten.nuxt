@@ -1,7 +1,6 @@
 <template>
-  <!-- <div id="app"  :class="typeof weather.main != 'undefined' && (weather.weather[0].main.toLowerCase() === 'clouds' ? 'warm' : '' || weather.main.temp <0 ? 'cold' : '')"> -->
-
-  <div id="app"  :class="typeof weather.main != 'undefined' && ((weather.main.temp > 16 &&  weather.weather[0].main.toLowerCase() === 'snow' ?  'warmSnow' : '')
+  <!-- decide if widget pic should be warm or cold dependending on temperature-->
+  <div id="app" :class="typeof weather.main != 'undefined' && ((weather.main.temp > 16 &&  weather.weather[0].main.toLowerCase() === 'snow' ?  'warmSnow' : '')
                                                             || (weather.main.temp > 16 &&  weather.weather[0].main.toLowerCase() === 'clouds' ?  'warmClouds' : '')
                                                             || (weather.main.temp > 16 &&  weather.weather[0].main.toLowerCase() === 'clear' ?  'warmClear' : '')
                                                             || (weather.main.temp > 16 &&  weather.weather[0].main.toLowerCase() === 'rain' ?  'warmRain' : '')
@@ -14,34 +13,32 @@
                                                             || (weather.main.temp <= 16 &&  weather.weather[0].main.toLowerCase() === 'drizzle' ?  'coldDrizzle' : '')
                                                             || (weather.main.temp <= 16 &&  weather.weather[0].main.toLowerCase() === 'thunderstorm' ?  'coldThunderstorm' : '')))">
 
-
-    <!-- decide if widget pic should be warm or cold dependending on temperature-->
     <main>
-        <div class="search-box">
-          <input
-            type="text"
-            class="search-bar"
-            placeholder="Search..."
-            v-model="query"
-            @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
+      <div class="search-box">
+        <input
+          type="text"
+          class="search-bar"
+          placeholder="Search..."
+          v-model="query"
+          @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
+      </div>
+
+      <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+        <div class="location-box">
+          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>  <!-- country  -->
+          <div class="date">{{ dateBuilder() }}</div>     <!-- date with function -->
         </div>
 
-        <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
-          <div class="location-box">
-            <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>  <!-- country  -->
-            <div class="date">{{ dateBuilder() }}</div>     <!-- date with function -->
-          </div>
-
-          <div class="weather-box">
-            <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>  <!-- temperature -->
-            <div class="weather">{{ weather.weather[0].main }}</div>      <!-- main weather  -->
-            <div class="weather">{{ weather.wind.speed }} m/s</div>  <!-- wind speed -->
-            <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
-          </div>
+        <div class="weather-box">
+          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>  <!-- temperature -->
+          <div class="weather">{{ weather.weather[0].main }}</div>      <!-- main weather  -->
+          <div class="weather">{{ weather.wind.speed }} m/s</div>  <!-- wind speed -->
+          <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
         </div>
-        <!-- there undefined if nothing found -->
-      </main>
-    </div>
+      </div>
+      <!-- there undefined if nothing found -->
+    </main>
+  </div>
 </template>
 
 <script>
@@ -100,18 +97,19 @@ body {
 }
 
 #app.warmSnow {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url('../assets/img/warmsnow.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.warmClouds {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url('../assets/img/warmclouds.png');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
+
 #app.warmClear {
   background-image: url('../assets/img/warm.jpg');
   background-size: cover;
@@ -120,39 +118,40 @@ body {
 }
 
 #app.warmRain {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.0)), url('../assets/img/warmrain.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.warmDrizzle {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: url('../assets/img/warmdrizzle.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.warmThunderstorm {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: url('../assets/img/warmthunderstorm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.coldSnow {
-  background-image: url('../assets/img/cold.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.0)), url('../assets/img/coldsnow.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.coldClouds {
-  background-image: url('../assets/img/cold.jpg');
+  background-image: url('../assets/img/coldcloud.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
+
 #app.coldClear {
   background-image: url('../assets/img/cold.jpg');
   background-size: cover;
@@ -161,21 +160,21 @@ body {
 }
 
 #app.coldRain {
-  background-image: url('../assets/img/cold.jpg');
+  background-image: url('../assets/img/coldrain.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.coldDrizzle {
-  background-image: url('../assets/img/cold.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../assets/img/colddrizzle.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
 #app.coldThunderstorm {
-  background-image: url('../assets/img/cold.jpg');
+  background-image: url('../assets/img/coldthunderstorm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;

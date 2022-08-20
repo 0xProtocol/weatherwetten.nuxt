@@ -119,10 +119,16 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/cards.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .card:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
+  background-image: linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 20%);
 }
 
 .card img {

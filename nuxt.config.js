@@ -125,6 +125,10 @@ export default {
 
   router: {
     middleware: ['auth']
-  }
+  },
+
+  serverMiddleware: [
+    '~/api/index.js'
+  ],
 
 }

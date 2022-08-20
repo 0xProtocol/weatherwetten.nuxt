@@ -4,63 +4,68 @@
       <nav-bar2/>
 
 
-      <section>
-        <div class="aboutsection">
-          <h1>ABOUT US</h1>
-          <!----About section start---->
-          <section class="about">
-            <div class="main">
-              <img src="../assets/img/betting.png">
-              <div class="about-text">
-                <h5>The betting system</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem deleniti eaque et fugit, harum iste iure laboriosam laborum magnam minima numquam officia, quis quisquam quod ratione, reprehenderit suscipit. A consequatur dolor eaque hic ipsa, itaque neque optio placeat quod reprehenderit tenetur unde voluptate voluptatum! Consequuntur eaque eum recusandae sunt!</p>
+      <div class="about">
+        <h1>ABOUT US</h1>
 
-              </div>
+        <!-- CARD 1 -->
+        <div class="body">
+          <div class="card">
+            <div class="content">
+              <h2>HOW TO BET</h2><br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi ipsa ipsum iure minus
+                reiciendis, vel. Accusantium, dolor doloribus eveniet nobis non nostrum provident quos similique. Ad
+                autem consequatur culpa excepturi natus nobis provident sequi vel! Ad cupiditate doloremque,
+                exercitationem explicabo illo in labore nulla optio tenetur voluptates. Magnam, rem!</p>
             </div>
-          </section>
-
-          <!-- SECTION 2-->
-          <section class="about">
-            <div class="main">
-              <div class="about-text">
-                <h5>The concept of weather betting</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis commodi, culpa cupiditate deleniti dicta dolorum eaque earum enim eos est et excepturi explicabo hic illum ipsa ipsam libero magni maiores nemo nostrum, pariatur perferendis perspiciatis placeat provident quia quos reiciendis sequi similique tempora totam ullam velit voluptas! Necessitatibus, repellendus?</p>
-
-              </div>
-              <img src="../assets/img/weatherstation2.png">
-            </div>
-          </section>
-
-
-          <!-- SECTION 3-->
-          <section class="about">
-            <div class="main">
-              <img src="../assets/img/concept.png">
-              <div class="about-text">
-                <h5>Our Weatherstations</h5>
-                <p>I am a front-end web developer. I can provide clean code and pixel perfect design. I also make the
-                  website more & more interactive with web animations.I can provide clean code and pixel perfect design.
-                  I also make the website more & more interactive with web animations.A responsive design makes your
-                  website accessible to all users, regardless of their device.</p>
-
-              </div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <!-- SECTION 4  -->
-      <section class="about">
-        <div class="main">
-          <div class="about-text">
-            <h5>The Leaderboards</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis commodi, culpa cupiditate deleniti dicta dolorum eaque earum enim eos est et excepturi explicabo hic illum ipsa ipsam libero magni maiores nemo nostrum, pariatur perferendis perspiciatis placeat provident quia quos reiciendis sequi similique tempora totam ullam velit voluptas! Necessitatibus, repellendus?</p>
+            <img src="../assets/img/betting2.png">
           </div>
-          <img src="../assets/img/leaderboards.png">
         </div>
-      </section>
 
 
+        <!-- CARD 2-->
+
+        <div class="body">
+          <div class="card">
+            <div class="content">
+              <h2>THE BETTING SYSTEM</h2><br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi ipsa ipsum iure minus
+                reiciendis, vel. Accusantium, dolor doloribus eveniet nobis non nostrum provident quos similique. Ad
+                autem consequatur culpa excepturi natus nobis provident sequi vel! Ad cupiditate doloremque,
+                exercitationem explicabo illo in labore nulla optio tenetur voluptates. Magnam, rem!</p>
+            </div>
+            <img src="../assets/img/weatherstation2.png">
+          </div>
+        </div>
+
+        <!-- CARD 3-->
+
+        <div class="body">
+          <div class="card">
+            <div class="content">
+              <h2>Our Weatherstations</h2><br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi ipsa ipsum iure minus
+                reiciendis, vel. Accusantium, dolor doloribus eveniet nobis non nostrum provident quos similique. Ad
+                autem consequatur culpa excepturi natus nobis provident sequi vel! Ad cupiditate doloremque,
+                exercitationem explicabo illo in labore nulla optio tenetur voluptates. Magnam, rem!</p>
+            </div>
+            <img src="../assets/img/concept.png">
+          </div>
+        </div>
+
+        <!-- CARD 4  -->
+        <div class="body">
+          <div class="card">
+            <div class="content">
+              <h2>The Leaderboards</h2><br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi ipsa ipsum iure minus
+                reiciendis, vel. Accusantium, dolor doloribus eveniet nobis non nostrum provident quos similique. Ad
+                autem consequatur culpa excepturi natus nobis provident sequi vel! Ad cupiditate doloremque,
+                exercitationem explicabo illo in labore nulla optio tenetur voluptates. Magnam, rem!</p>
+            </div>
+            <img src="../assets/img/leaderboards.png">
+          </div>
+        </div>
+      </div>
       <FooterBlack/>
     </v-app>
   </div>
@@ -97,22 +102,130 @@ export default {
   background-position: center;
 }
 
-h3 {
-  margin: 40px 0 0;
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin-top: 50px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.card {
+  position: relative;
+  width: 1000px;
+  height: 500px;
+  border-radius: 20px;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.card:hover {
+  box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
 
-a {
-  color: #42b983;
+.card img {
+  position: absolute;
+  bottom: 0;
+  transform: translate(-50%, -70%);
+  height: 200px;
+  transition: 0.5s;
+}
+
+.card:hover img {
+  bottom: 78%;
+  height: 100px;
+}
+
+.card .content {
+  position: relative;
+  display: block;
+  margin: 50px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+
+.card:hover .content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card .content h2 {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  line-height: 1em;
+}
+
+.card .content p {
+  color: #fff;
+}
+
+@media (max-width: 1190px) {
+  .card {
+    width: auto;
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 991px) {
+  .card {
+    position: relative;
+    width: auto;
+    max-width: 600px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 720px) {
+  .card {
+    width: auto;
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 620px) {
+  .card {
+    width: auto;
+    max-width: 400px;
+  }
+  .card .content h2 {
+    font-size: 1.6em;
+    line-height: 1em;
+  }
+}
+
+@media (max-width: 420px) {
+  .card {
+    width: auto;
+    max-width: 300px;
+    height: 650px;
+  }
+  .card .content h2 {
+    font-size: 1.5em;
+    line-height: 1em;
+  }
+  .body {
+    min-height: 120vh;
+  }
+  .card:hover img {
+    bottom: 75%;
+    height: 100px;
+  }
+  .card img {
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -120%);
+    height: 200px;
+    transition: 0.5s;
+  }
+}
+
+.about {
+  margin-top: 100px;
+  text-align: center;
 }
 
 h1 {
@@ -143,122 +256,4 @@ h1:hover:after {
   width: 100%;
   left: 0;
 }
-
-.aboutsection {
-  margin-top: 100px;
-  text-align: center;
-}
-
-/*XXXXXXXX NEW */
-.btn {
-  background-color: #f9004d;
-  color: white;
-  text-decoration: none;
-  border: 2px solid transparent;
-  font-weight: bold;
-  padding: 10px 25px;
-  border-radius: 30px;
-  transition: transform .4s;
-}
-
-.btn:hover {
-  transform: scale(1.2);
-}
-
-h3 {
-  color: white;
-  font-size: 25px;
-  margin-bottom: 50px;
-}
-
-h4 {
-  color: #fcfc;
-  letter-spacing: 2px;
-  font-size: 20px;
-}
-
-.about {
-  width: 100%;
-  padding: 100px 0px;
-}
-
-.about img {
-  height: auto;
-  width: 430px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
-.about-text {
-  width: 550px;
-}
-
-.main {
-  width: 1130px;
-  max-width: 95%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-}
-
-.about-text h2 {
-  color: white;
-  font-size: 75px;
-  text-transform: capitalize;
-  margin-bottom: 20px;
-}
-
-.about-text h5 {
-  color: white;
-  letter-spacing: 2px;
-  font-size: 22px;
-  margin-bottom: 25px;
-  text-transform: capitalize;
-}
-
-.about-text p {
-  color: #fcfc;
-  letter-spacing: 1px;
-  line-height: 28px;
-  font-size: 18px;
-  margin-bottom: 45px;
-}
-
-button {
-  background-color: #f9004d;
-  color: white;
-  text-decoration: none;
-  border: 2px solid transparent;
-  font-weight: bold;
-  padding: 13px 30px;
-  border-radius: 30px;
-  transition: .4s;
-}
-
-button:hover {
-  background-color: transparent;
-  border: 2px solid #f9004d;
-  cursor: pointer;
-}
-
-.service {
-  background: #101010;
-  width: 100%;
-  padding: 100px 0px;
-}
-
-.title h2 {
-  color: white;
-  font-size: 75px;
-  width: 1130px;
-  margin: 30px auto;
-  text-align: center;
-}
-
-h5 {
-  color: white;
-  font-size: 23px;
-  margin-bottom: 15px;
-}
-
 </style>

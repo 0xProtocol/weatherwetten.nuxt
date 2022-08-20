@@ -3,7 +3,6 @@
     <v-app>
       <nav-bar2/>
 
-
       <div class="about">
         <h1>ABOUT US</h1>
 
@@ -128,7 +127,7 @@ export default {
 
 .card:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
-  background-image: linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 20%);
+  background-image: linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 20%); /* make background black when hovered */
 }
 
 .card img {

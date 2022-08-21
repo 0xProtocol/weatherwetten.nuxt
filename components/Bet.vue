@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+    <div class="weatherData" v-if="typeof weather.main != 'undefined'">
       <v-simple-table style="background-color: #343838; border-radius: 10px" class="table">
         <thead>
         <tr>
@@ -27,27 +27,20 @@
           <td class="td">{{ weather.name }}</td>
           <td class="td">{{ weather.main.temp }}° C</td>
         </tr>
-        <tr>
-          <td class="td">{{ weather.name }}</td>
-          <td class="td">{{ weather.main.temp }}° C</td>
-        </tr>
-        <tr>
-          <td class="td">{{ weather.name }}</td>
-          <td class="td">{{ weather.main.temp }}° C</td>
-        </tr>
-        <tr>
-          <td class="td">{{ weather.name }}</td>
-          <td class="td">{{ weather.main.temp }}° C</td>
-        </tr>
-        <tr>
-          <td class="td">{{ weather.name }}</td>
-          <td class="td">{{ weather.main.temp }}° C</td>
-        </tr>
         </tbody>
       </v-simple-table>
-      <v-btn dark text > 1x</v-btn>
-      <v-btn dark text > 2x</v-btn>
-      <v-btn dark text > 3x</v-btn>
+
+      <v-card class="mx-auto" max-width="600"  elevation="2" loading outlined shaped>
+        <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
+        <v-card-actions class="justify-center">
+          <v-btn class="bettingButtons" dark text color="success">1x</v-btn>
+          <v-btn class="bettingButtons" dark text color="warning">2x</v-btn>
+          <v-btn class="bettingButtons" dark text color="error">3x</v-btn>
+          <v-text-field class="txtField" label="Weathercoins"></v-text-field>
+        </v-card-actions>
+      </v-card>
+
+
 
     </div>
   </div>
@@ -165,15 +158,22 @@ h1:hover:after {
   left: 0;
 }
 
-table {
-  margin-top: 20px;
-
+.weatherData {
+  margin-top: 50px;
 }
 
-.space {
-  width: 15px;
-  height: auto;
-  display: inline-block;
+
+.txtField{
+  padding:5px;
+}
+
+.bettingButtons{
+  margin-bottom: 12px;
+  margin-right: 10px;
+}
+
+.mx-auto{
+  margin-top: 250px;
 }
 
 </style>

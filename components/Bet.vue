@@ -20,17 +20,32 @@
         <tr>
           <th style="text-align: center; font-size: 15px; color: white">City</th>
           <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
+          <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
+          <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Bottom</th>
+          <th style="text-align: center; font-size: 15px; color: orange">2x Odds Top</th>
+          <th style="text-align: center; font-size: 15px; color: orange">2x Odds Bottom</th>
+          <th style="text-align: center; font-size: 15px; color: red">3x Odds Top</th>
+          <th style="text-align: center; font-size: 15px; color: red">3x Odds Bottom</th>
+          <th style="text-align: center; font-size: 15px; color: white">Deadline</th> <!-- date where it calculates -->
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td class="td">{{ weather.name }}</td>
-          <td class="td">{{ weather.main.temp }}° C</td>
+          <td class="td">{{ weather.name }}</td>  <!-- fixed data from API-->
+          <td class="td">{{ weather.main.temp }}° C</td>  <!-- fixed data from API-->
+
+          <td class="td">{{ weather.main.temp + 1.5 }}° C</td> <!-- predicted data + -->
+          <td class="td">{{ weather.main.temp - 1.5 }}° C</td> <!-- predicted data - -->
+          <td class="td">{{ weather.main.temp + 1 }}° C</td>  <!-- predicted data + -->
+          <td class="td">{{ weather.main.temp - 1 }}° C</td> <!-- predicted data - -->
+          <td class="td">{{ weather.main.temp + 0.5 }}° C</td>  <!-- predicted data + -->
+          <td class="td">{{ weather.main.temp - 0.5  }}° C</td> <!-- predicted data - -->
+          <td class="td">{{ dateBuilderModified()}}</td> <!-- deadline where we  -->
         </tr>
         </tbody>
       </v-simple-table>
 
-      <v-card class="mx-auto" max-width="600"  elevation="2" loading outlined shaped>
+      <v-card class="mx-auto" max-width="600" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-card-actions class="justify-center">
           <v-btn class="bettingButtons" dark text color="success">1x</v-btn>
@@ -68,12 +83,12 @@ export default {
     setResults(results) {
       this.weather = results;
     },
-    dateBuilder() {
+    dateBuilderModified() { /*modified to date we want to predict */
       let d = new Date();
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       let day = days[d.getDay()];
-      let date = d.getDate();
+      let date = d.getDate() + 1; /* modified here the days */
       let month = months[d.getMonth()];
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
@@ -159,7 +174,9 @@ h1:hover:after {
 }
 
 .weatherData {
-  margin-top: 50px;
+  margin-top: 60px;
+  width: 80%; /*so that it isn't too long*/
+  transform: translate(12.5%, 0%); /* make it into the middle*/
 }
 
 
@@ -172,8 +189,13 @@ h1:hover:after {
   margin-right: 10px;
 }
 
-.mx-auto{
-  margin-top: 250px;
+.mx-auto {
+  margin-top: 150px;  /* overwrites it to 100 from weathercoin css*/
+  margin-bottom: 100px; /* overwrites it to 100 from weathercoin css*/
+}
+
+.mx-auto:hover {
+  box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
 
 </style>

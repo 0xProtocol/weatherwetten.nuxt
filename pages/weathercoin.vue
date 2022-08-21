@@ -222,6 +222,8 @@ export default {
 
 .mx-auto{
   margin-top: 15px; /*spaces between cards */
+  margin-bottom: 0px;
+
 }
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/

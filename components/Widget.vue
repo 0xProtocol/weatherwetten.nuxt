@@ -255,5 +255,6 @@ main {
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 50px;
 }
 </style>

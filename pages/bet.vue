@@ -1,49 +1,30 @@
 <template>
-  <v-app>
+  <div id="app">
+    <v-app>
     <nav-bar2/>
-    <v-main>
-      <Betting/>
-      <BettingIntro/>
+    <bet/>
       <BettingTable/>
-    </v-main>
     <Footer/>
-  </v-app>
+    </v-app>
+  </div>
 </template>
 
 <script>
-import NavBar2 from "../components/NavBar2";
-import HelloWorld from "@/components/HelloWorld";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-
+import Bet from "@/components/Bet";
 export default {
-  name: 'bet',
-  components: {
-    HelloWorld,
-    NavBar2,
-    Hero,
-    Footer
-  }
+  components: {Bet}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+#app {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/img/betting2.jpg'); /*background gif*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>

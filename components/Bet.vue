@@ -13,6 +13,43 @@
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
+
+    <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+      <v-simple-table style="background-color: #343838; border-radius: 10px" class="table">
+        <thead>
+        <tr>
+          <th style="text-align: center; font-size: 15px; color: white">City</th>
+          <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="td">{{ weather.name }}</td>
+          <td class="td">{{ weather.main.temp }}° C</td>
+        </tr>
+        <tr>
+          <td class="td">{{ weather.name }}</td>
+          <td class="td">{{ weather.main.temp }}° C</td>
+        </tr>
+        <tr>
+          <td class="td">{{ weather.name }}</td>
+          <td class="td">{{ weather.main.temp }}° C</td>
+        </tr>
+        <tr>
+          <td class="td">{{ weather.name }}</td>
+          <td class="td">{{ weather.main.temp }}° C</td>
+        </tr>
+        <tr>
+          <td class="td">{{ weather.name }}</td>
+          <td class="td">{{ weather.main.temp }}° C</td>
+        </tr>
+        </tbody>
+      </v-simple-table>
+      <v-btn dark text > 1x</v-btn>
+      <v-btn dark text > 2x</v-btn>
+      <v-btn dark text > 3x</v-btn>
+
+    </div>
   </div>
 </template>
 
@@ -128,5 +165,15 @@ h1:hover:after {
   left: 0;
 }
 
+table {
+  margin-top: 20px;
+
+}
+
+.space {
+  width: 15px;
+  height: auto;
+  display: inline-block;
+}
 
 </style>

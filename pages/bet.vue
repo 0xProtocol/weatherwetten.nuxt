@@ -3,7 +3,6 @@
     <v-app>
     <nav-bar2/>
     <bet/>
-      <BettingTable/>
     <Footer/>
     </v-app>
   </div>

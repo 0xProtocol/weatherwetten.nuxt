@@ -2,7 +2,7 @@
 <v-app>
   <NavBar2/>
   <v-main>
-    <v-card outlined width="550" id="loginCard">
+    <v-card outlined id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
       <v-card-text>
         <v-text-field color="grey" v-model="auth.email" label="E-Mail" outlined/>
@@ -119,24 +119,30 @@ export default {
 <style scoped>
 
 
-#loginCard{
+#loginCard {
   position: fixed;
-  top: 35%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
-
+  width: 30%;
 }
 
-#loginButton{
+@media screen and (max-width: 850px) {
+  #loginCard {
+    width: 90%;
+  }
+}
+
+#loginButton {
   color: forestgreen;
 }
 
-#newHereButton{
+#newHereButton {
   color: forestgreen;
 }
 
-#forgotButton{
+#forgotButton {
   color: orange;
 }
 

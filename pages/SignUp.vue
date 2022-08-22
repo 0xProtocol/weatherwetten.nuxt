@@ -3,7 +3,7 @@
   <v-app>
     <NavBar2/>
     <v-main>
-      <v-card outlined width="550" id="signUpCard">
+      <v-card outlined id="signUpCard">
         <v-card-title class="justify-center">Start betting on the weather today!</v-card-title>
         <v-card-text>
           <v-text-field :rules="validateEmail" label="E-Mail" outlined color="grey" clearable v-model="auth.email"/>
@@ -148,6 +148,19 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
+
+}
+
+@media screen and (max-width: 690px) {
+  #signUpCard {
+    width: 96%;
+  }
+}
+
+@media screen and (min-width: 1160px) {
+  #signUpCard {
+    width: 30%;
+  }
 }
 
 #signInButton {

@@ -130,7 +130,7 @@ export default {
 
 @media screen and (max-width: 850px) {
   #loginCard {
-    width: 90%;
+    width: 85%;
   }
 }
 

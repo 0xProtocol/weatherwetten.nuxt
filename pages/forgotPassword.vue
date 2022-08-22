@@ -5,20 +5,20 @@
 
 
     <v-main>
-      <v-card id="cardArea" width="600px" height="280">
+      <v-card id="cardArea" height="280">
         <v-card-title class="justify-center" id="header">
           Reset your password here!
         </v-card-title>
 
 
         <v-form>
-        <div style=" padding: 10px">
-          <v-text-field
-            label="E-Mail"
-            required
-            v-model="userEmailAddress"
-            id="emailField" outlined color="info"
-          ></v-text-field>
+          <div style=" padding: 10px">
+            <v-text-field
+              label="E-Mail"
+              required
+              v-model="userEmailAddress"
+              id="emailField" outlined
+            ></v-text-field>
         </div>
 
           <v-btn id="reset" @click="sendEmailToUser">
@@ -118,16 +118,23 @@ export default {
 
 <style scoped>
 
-#cardArea{
+#cardArea {
   position: fixed;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 10px;
+  border-radius: 8px;
+  width: 30%;
+}
+
+@media screen and (max-width: 900px) {
+  #cardArea {
+    width: 90%;
+  }
 }
 
 
-#reset{
+#reset {
   position: fixed;
   top: 65%;
   left: 50%;

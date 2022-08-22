@@ -34,13 +34,13 @@
           <td class="td">{{ weather.name }}</td>  <!-- fixed data from API-->
           <td class="td">{{ weather.main.temp }}° C</td>  <!-- fixed data from API-->
 
-          <td class="td">{{ weather.main.temp + 1.5 }}° C</td> <!-- predicted data + -->
-          <td class="td">{{ weather.main.temp - 1.5 }}° C</td> <!-- predicted data - -->
-          <td class="td">{{ weather.main.temp + 1 }}° C</td>  <!-- predicted data + -->
-          <td class="td">{{ weather.main.temp - 1 }}° C</td> <!-- predicted data - -->
-          <td class="td">{{ weather.main.temp + 0.5 }}° C</td>  <!-- predicted data + -->
-          <td class="td">{{ weather.main.temp - 0.5  }}° C</td> <!-- predicted data - -->
-          <td class="td">{{ dateBuilderModified()}}</td> <!-- deadline where we  -->
+          <td class="td">{{ parseFloat(weather.main.temp + 1.5).toFixed(2)}}° C</td> <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 1.5).toFixed(2) }}° C</td> <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp + 1 ).toFixed(2)}}° C</td>  <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 1).toFixed(2) }}° C</td> <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp + 0.5).toFixed(2) }}° C</td>  <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 0.5).toFixed(2)  }}° C</td> <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ dateBuilderModified()}}</td> <!-- deadline where we evaluate -->
         </tr>
         </tbody>
       </v-simple-table>

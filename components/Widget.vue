@@ -36,7 +36,7 @@
           <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
         </div>
       </div>
-      <!-- there undefined if nothing found -->
+
     </main>
   </div>
 </template>
@@ -85,12 +85,9 @@ export default {
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'montserrat', sans-serif;
-}
 
 #app {
-  background-image: url('../assets/img/16-.jpg');
+  background-image:url('../assets/img/app.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -184,7 +181,7 @@ body {
 main {
   min-height: 100%;
   padding: 25px; /* distance adjusted*/
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)); /*darker*/
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); /*darker background image*/
 }
 
 .search-box {
@@ -202,9 +199,8 @@ main {
   appearance: none;
   border: none;
   outline: none;
-  background: none;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5) none;
   border-radius: 0px 16px 0px 16px;
   transition: 0.4s;
 }

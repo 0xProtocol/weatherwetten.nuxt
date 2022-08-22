@@ -4,7 +4,7 @@
    <!-- <hero/> -->
       <widget/>
 
-      <Footer/>
+     <!-- <Footer/> -->
     </v-app>
 </template>
 

@@ -7,6 +7,7 @@
       <v-card-text>
         <v-text-field color="grey" v-model="auth.email" label="E-Mail" outlined/>
         <v-text-field outlined
+                      @keyup.enter="login"
 
                       color="grey"
                       v-model="auth.password"
@@ -124,7 +125,7 @@ export default {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
+  border-radius: 8px;
   width: 30%;
 }
 

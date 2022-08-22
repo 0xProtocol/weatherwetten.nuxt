@@ -4,7 +4,6 @@
     <NavBar2/>
     <v-main>
       <v-card outlined id="signUpCard">
-        <v-card-title class="justify-center">Start betting on the weather today!</v-card-title>
         <v-card-text>
           <v-text-field :rules="validateEmail" label="E-Mail" outlined color="grey" clearable v-model="auth.email"/>
           <v-text-field label="Username" outlined color="grey" v-model="username"
@@ -13,6 +12,7 @@
                         color="grey" outlined label="Password" v-model="auth.password"/>
           <v-text-field
             :rules="validateRepeatPassword"
+            @keyup.enter="signUp"
             :type="showPassword ? 'text' : 'password'"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword" color="grey" outlined label="Repeat your password"
@@ -144,10 +144,10 @@ export default {
 
 #signUpCard {
   position: fixed;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
+  border-radius: 8px;
 
 }
 

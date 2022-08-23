@@ -77,7 +77,7 @@ import Hero from "@/components/Hero";
 import Footer from "@/components/FooterBlack";
 
 export default {
-  name: "HelloWorld",
+  name: "aboutus",
   components: {
     NavBar2,
     Hero,

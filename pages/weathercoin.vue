@@ -167,7 +167,7 @@ import Footer from "@/components/FooterBlack";
 import Hero from "@/components/Hero";
 
 export default {
-  name: "HelloWorld",
+  name: "weathercoin",
   components: {
     NavBar2,
     Footer,

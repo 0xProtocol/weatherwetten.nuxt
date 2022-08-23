@@ -57,7 +57,7 @@
           <v-btn class="bettingButtons" dark text color="success" @click="setBet">1x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
-          <v-text-field id="txtFieldAmount" class="txtField"> {{ weathercoin }}</v-text-field>
+          <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
         </v-card-actions>
       </v-card>
 

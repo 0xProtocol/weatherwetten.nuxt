@@ -72,7 +72,6 @@
 
 
 <script>
-import HelloWorld from "@/pages/profile";
 import NavBar2 from "@/components/NavBar2";
 import Hero from "@/components/Hero";
 import Footer from "@/components/FooterBlack";
@@ -80,7 +79,6 @@ import Footer from "@/components/FooterBlack";
 export default {
   name: "HelloWorld",
   components: {
-    HelloWorld,
     NavBar2,
     Hero,
     Footer

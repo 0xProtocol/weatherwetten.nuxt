@@ -162,7 +162,6 @@
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld";
 import NavBar2 from "@/components/NavBar2";
 import Footer from "@/components/FooterBlack";
 import Hero from "@/components/Hero";
@@ -170,7 +169,6 @@ import Hero from "@/components/Hero";
 export default {
   name: "HelloWorld",
   components: {
-    HelloWorld,
     NavBar2,
     Footer,
     Hero

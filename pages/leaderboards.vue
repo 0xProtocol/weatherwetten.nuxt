@@ -14,7 +14,6 @@
 
 <script>
 import NavBar2 from "../components/NavBar2";
-import HelloWorld from "@/components/HelloWorld";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 
@@ -23,7 +22,6 @@ export default {
   props: {
     msg: String,
   },  components: {
-    HelloWorld,
     NavBar2,
     Hero,
     Footer

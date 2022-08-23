@@ -48,7 +48,7 @@ export default {
       showTextField: false,
       newUsername: "",
       showSnackBar: false,
-      msg: ""
+      msg: "",
     }
   },
 
@@ -90,7 +90,8 @@ export default {
     let document = ref.get();
     this.username = (await document).get("username");
     this.weathercoin = (await document).get("weatherCoin");
-
+    console.log(this.weathercoin);
+    console.log(this.username);
     // console.log(ref);
   }
 };

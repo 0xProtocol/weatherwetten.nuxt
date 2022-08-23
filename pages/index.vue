@@ -11,14 +11,12 @@
 
 <script>
 import NavBar2 from "../components/NavBar2";
-import HelloWorld from "@/components/HelloWorld";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import Widget from "@/components/Widget";
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     NavBar2,
     Hero,
     Footer,

@@ -34,13 +34,19 @@
           <td class="td">{{ weather.name }}</td>  <!-- fixed data from API-->
           <td class="td">{{ weather.main.temp }}° C</td>  <!-- fixed data from API-->
 
-          <td class="td">{{ parseFloat(weather.main.temp + 1.5).toFixed(2)}}° C</td> <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 1.5).toFixed(2) }}° C</td> <!-- predicted data -° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp + 1 ).toFixed(2)}}° C</td>  <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 1).toFixed(2) }}° C</td> <!-- predicted data -° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp + 0.5).toFixed(2) }}° C</td>  <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 0.5).toFixed(2)  }}° C</td> <!-- predicted data -° (round to two decimals)-->
-          <td class="td">{{ dateBuilderModified()}}</td> <!-- deadline where we evaluate -->
+          <td class="td">{{ parseFloat(weather.main.temp + 1.5).toFixed(2) }}° C</td>
+          <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 1.5).toFixed(2) }}° C</td>
+          <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp + 1).toFixed(2) }}° C</td>
+          <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 1).toFixed(2) }}° C</td>
+          <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp + 0.5).toFixed(2) }}° C</td>
+          <!-- predicted data +° (round to two decimals)-->
+          <td class="td">{{ parseFloat(weather.main.temp - 0.5).toFixed(2) }}° C</td>
+          <!-- predicted data -° (round to two decimals)-->
+          <td class="td">{{ dateBuilderModified() }}</td> <!-- deadline where we evaluate -->
         </tr>
         </tbody>
       </v-simple-table>
@@ -51,10 +57,9 @@
           <v-btn class="bettingButtons" dark text color="success" @click="setBet">1x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
-          <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
+          <v-text-field id="txtFieldAmount" class="txtField"> {{ weathercoin }}</v-text-field>
         </v-card-actions>
       </v-card>
-
 
 
     </div>
@@ -62,13 +67,15 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
+      weathercoin: null,
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'http://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {}
+      weather: {},
     }
   },
   methods: {
@@ -93,16 +100,23 @@ export default {
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
     },
-    setBet(){
-      if (document.getElementById('txtFieldAmount').value !== "") { //for just numbers and not over weathercoin profile amount impelent
-        console.log("setBet");
-      }
-      else {
-        //give error back
+    setBet() {
+      if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
+        document.getElementById('txtFieldAmount').value !== "") {
+        console.log(this.weathercoin);
+      } else {
+        console.log("error");
       }
     }
+  },
+  async created() {
+    // get user data from document
+    console.log(this.$fire.auth.currentUser.uid);
+    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
+    let document = ref.get();
+    this.weathercoin = (await document).get("weatherCoin");
   }
-}
+};
 </script>
 
 <style>
@@ -188,17 +202,17 @@ h1:hover:after {
 }
 
 
-.txtField{
-  padding:5px;
+.txtField {
+  padding: 5px;
 }
 
-.bettingButtons{
+.bettingButtons {
   margin-bottom: 12px;
   margin-right: 10px;
 }
 
 .mx-auto {
-  margin-top: 150px;  /* overwrites it to 100 from weathercoin css*/
+  margin-top: 150px; /* overwrites it to 100 from weathercoin css*/
   margin-bottom: 100px; /* overwrites it to 100 from weathercoin css*/
 }
 

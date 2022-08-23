@@ -48,10 +48,10 @@
       <v-card class="mx-auto" max-width="600" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn class="bettingButtons" dark text color="success">1x</v-btn>
-          <v-btn class="bettingButtons" dark text color="warning">2x</v-btn>
-          <v-btn class="bettingButtons" dark text color="error">3x</v-btn>
-          <v-text-field class="txtField" label="Weathercoins"></v-text-field>
+          <v-btn class="bettingButtons" dark text color="success" @click="setBet">1x</v-btn>
+          <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
+          <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
+          <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
         </v-card-actions>
       </v-card>
 
@@ -92,6 +92,14 @@ export default {
       let month = months[d.getMonth()];
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
+    },
+    setBet(){
+      if (document.getElementById('txtFieldAmount').value !== "") { //for just numbers and not over weathercoin profile amount impelent
+        console.log("setBet");
+      }
+      else {
+        //give error back
+      }
     }
   }
 }

@@ -141,7 +141,8 @@
                       <v-list-item-title class="text-h5 mb-2">SECURE</v-list-item-title>
                       <v-list-item-subtitle>We guarantee a good security</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png" alt="BENEFIT 9">
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png"
+                                                                                alt="BENEFIT 9">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
@@ -150,7 +151,8 @@
               </v-container>
 
 
-              <h2>WEAHTERCOINS MINTED -> {{ this.userArray[0] }} </h2> <!-- gather weathercoins that are minted with created() function -->
+              <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }} </h2>
+              <!-- gather weathercoins that are minted with created() function -->
             </div>
         </div>
 

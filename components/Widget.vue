@@ -57,6 +57,9 @@ export default {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
+            if (res.statusText === 'Not Found') {
+              this.$noty.error("Please enter a valid city!")
+            }
             return res.json();
           }).then(this.setResults);
       }
@@ -87,7 +90,7 @@ export default {
 
 
 #app {
-  background-image:url('../assets/img/app.jpg');
+  background-image: url('../assets/img/app.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;

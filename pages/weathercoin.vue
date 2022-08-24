@@ -151,8 +151,7 @@
               </v-container>
 
 
-              <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }} </h2>
-              <!-- gather weathercoins that are minted with created() function -->
+              <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
             </div>
         </div>
 
@@ -292,25 +291,8 @@ h2 {
   animation: glitch 525ms infinite;
 }
 
-h2::before,
-h2::after {
-  content: attr(data-text);
-  letter-spacing: .025em;
-  top: 0;
-  left: 0;
-  opacity: .7;
-}
-
-h2:before {
-  animation: glitch 675ms infinite;
-  transform: translate(-.035em, -.025em);
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-}
-
-h2::after {
-  animation: glitch 333ms infinite;
-  transform: translate(.035em, .025em);
-  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+h2:hover:after {
+  width: 0%; /* reset the h2 defintion -> so no effect is visible*/
 }
 
 @keyframes glitch {

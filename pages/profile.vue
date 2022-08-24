@@ -3,7 +3,8 @@
     <div id="app">
       <NavBar2/>
       <v-main>
-        <v-card id="profileCard" height="280" width="400" color="transparent" outlined>
+
+        <v-card class="mx-auto" max-width="600" outlined shaped loading>
           <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
           <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }} </h3></v-card-text>
           <br>
@@ -21,6 +22,8 @@
           <v-text-field dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
                         append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
         </v-card>
+
+
         <v-snackbar timeout="10000" id="snackbar" v-model="showSnackBar">
           {{ msg }}
           <template v-slot:action="{ attrs }">
@@ -152,6 +155,10 @@ a {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+}
+
+.mx-auto{
+  margin-top: 230px;
 }
 
 

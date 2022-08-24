@@ -54,7 +54,7 @@
       <v-card class="mx-auto" max-width="600" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn class="bettingButtons" dark text color="success" @click="setBet">1x</v-btn>
+          <v-btn class="bettingButtons" dark text color="success" @click="setBet">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
           <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>

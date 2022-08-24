@@ -31,7 +31,7 @@
       </tbody>
     </table>-->
 
-  <v-simple-table style="background-color: #343838; border-radius: 10px" class="table" v-if="userArray.length">
+  <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="userArray.length">
     <thead>
     <tr>
       <th style="text-align: center; font-size: 15px; color: white">Username</th>
@@ -125,6 +125,12 @@ table.GeneratedTable {
   transform: translate(-50%, -50%);
   border-radius: 5px;
 
+}
+.table:hover {
+  box-shadow: 0 0 15px #ffffff; /*shadow around table*/
+}
+tr:hover {
+  background-color: #262626 !important; /* hover over table entry color */
 }
 
 table.GeneratedTable td, table.GeneratedTable th {

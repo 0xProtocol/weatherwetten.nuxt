@@ -15,7 +15,7 @@
     </div>
 
     <div class="weatherData" v-if="typeof weather.main != 'undefined'">
-      <v-simple-table style="background-color: #343838; border-radius: 10px" class="table">
+      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
         <thead>
         <tr>
           <th style="text-align: center; font-size: 15px; color: white">City</th>
@@ -193,24 +193,24 @@ h1:after {
 }
 
 h1:hover:after {
-  width: 100%;
-  left: 0;
+  width: 100%; /* full text get's the effect*/
+  left: 0; /* begin left at text*/
 }
 
 .weatherData {
-  margin-top: 60px;
+  margin-top: 60px; /* distance from top */
   width: 80%; /*so that it isn't too long*/
   transform: translate(12.5%, 0%); /* make it into the middle*/
 }
 
 
 .txtField {
-  padding: 5px;
+  padding: 5px; /* inner distance around txtField*/
 }
 
 .bettingButtons {
-  margin-bottom: 12px;
-  margin-right: 10px;
+  margin-bottom: 12px; /*distance bottom from buttons (1x,2x,3x) */
+  margin-right: 10px; /*distance from right from buttons (1x,2x,3x) */
 }
 
 .mx-auto {
@@ -220,6 +220,12 @@ h1:hover:after {
 
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
+}
+.table:hover {
+  box-shadow: 0 0 15px #ffffff; /*shadow around table*/
+}
+tr:hover {
+  background-color: transparent !important; /* transparent if you hover over table entry color */
 }
 
 </style>

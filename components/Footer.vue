@@ -13,7 +13,7 @@
 import NavBar from "@/components/NavBar";
 
 export default {
-  name: "HelloWorld",
+  name: "Footer",
   props: {
     msg: String,
   },components: {

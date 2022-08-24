@@ -11,7 +11,7 @@
 <script>
 import Bet from "@/components/Bet";
 export default {
-  name: "bet",
+  name: "betPage",
   components: {Bet}
 }
 </script>

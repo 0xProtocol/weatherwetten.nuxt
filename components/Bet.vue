@@ -104,8 +104,10 @@ export default {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
+        this.$noty.success("Bet placed!")
       } else {
         console.log("error");
+        this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     }
   },

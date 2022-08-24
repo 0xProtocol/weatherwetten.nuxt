@@ -1,7 +1,7 @@
 <template>
 
-  <v-app-bar app color="black">
-    <v-toolbar color="black" height="60">
+  <v-app-bar app color="black"  height="60">
+    <v-toolbar color="black" height="58">
       <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="pb-2">
         <v-img
@@ -41,7 +41,7 @@
       temporary
       color="black"
       height="1080"
-      width="220"
+      width="280"
       class="my-1"
     >
 
@@ -51,7 +51,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title class="title">Weather Wetten</v-list-item-title>
+          <v-list-item-title><h2>Weather Wetten</h2></v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -150,19 +150,19 @@ export default {
   width: 100%;
   left: 0;
 }
-.title {
+h2{
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.15em;
 
   display: inline-block;
-  padding: 15px 20px;
+  padding: 15px 5px;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
-.title:after {
+h2:after {
   bottom: 0;
   content: "";
   display: block;
@@ -174,7 +174,7 @@ export default {
   width: 0;
 }
 
-.title:hover:after {
+h2:hover:after {
   width: 100%;
   left: 0;
 }

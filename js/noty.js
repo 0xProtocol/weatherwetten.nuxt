@@ -3,11 +3,13 @@ import 'vuejs-noty/dist/vuejs-noty.css'
 import Vue from 'vue'
 import VueNoty from 'vuejs-noty'
 
+/*https://github.com/needim/noty/blob/master/docs/themes.md */
 export default ({app}, inject) => {
   inject('noty', Vue.use(VueNoty, {
-    timeout: 3000,
+    timeout: 1000,
     progressBar: false,
-    layout: 'topRight',
+    layout: 'bottomCenter',
     closeWith: ['click', 'button'],
+    theme: 'sunset', //default: mint
   }).noty)
 }

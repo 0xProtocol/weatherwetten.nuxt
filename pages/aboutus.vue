@@ -92,7 +92,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #app {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url('../assets/img/aboutme.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../assets/img/concept.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -116,7 +116,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/cards.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/aboutus2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -258,5 +258,9 @@ h1:after {
 h1:hover:after {
   width: 100%;
   left: 0;
+}
+
+h2:hover:after {
+  width: 0%; /* reset the h2 defintion -> so no effect is visible*/
 }
 </style>

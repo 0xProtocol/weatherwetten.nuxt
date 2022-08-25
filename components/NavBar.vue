@@ -103,10 +103,10 @@ export default {
 
         drawer: null,
         items: [
-          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
-          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
-          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-          {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
+          {title: 'LEADERBOARDS', icon: 'mdi-chart-bar', link: 'leaderboards'},
+          {title: 'WEATHERCOIN', icon: 'mdi-currency-btc', link: 'weathercoin'},
+          {title: 'ABOUT US', icon: 'mdi-account-multiple', link: 'aboutus'},
+          {title: 'LOG IN', icon: 'mdi-login', link: 'Login'},
         ],
       }
     }

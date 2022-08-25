@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div id="app">
-      <NavBar2/>
+      <nav-bar/>
       <v-main>
 
         <v-card class="mx-auto" max-width="600" outlined shaped loading>

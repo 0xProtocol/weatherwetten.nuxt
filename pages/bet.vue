@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-    <nav-bar2/>
+    <nav-bar/>
     <bet/>
     <Footer/>
     </v-app>

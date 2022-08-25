@@ -1,6 +1,6 @@
 <template>
     <v-app>
-    <nav-bar2/>
+      <nav-bar/>
    <!-- <hero/> -->
       <widget/>
 
@@ -10,15 +10,13 @@
 
 
 <script>
-import NavBar2 from "../components/NavBar2";
-import Hero from "@/components/Hero";
+import NavBar2 from "../components/NavBar";
 import Footer from "@/components/Footer";
 import Widget from "@/components/Widget";
 export default {
   name: 'App',
   components: {
     NavBar2,
-    Hero,
     Footer,
     Widget
   }

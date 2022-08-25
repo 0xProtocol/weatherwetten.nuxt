@@ -1,7 +1,7 @@
 <template>
 
   <v-app>
-    <NavBar2/>
+    <nav-bar/>
     <v-main>
       <v-card outlined id="signUpCard">
         <v-card-text>

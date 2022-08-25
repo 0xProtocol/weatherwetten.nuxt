@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <nav-bar2/>      <!-- Navbar -->
+      <nav-bar/>    <!-- Navbar -->
 
         <div class="weathercoin"> <!-- weathercoin div -->
           <h1>WEATHERCOIN</h1>
@@ -160,7 +160,7 @@
 
 <script>
 /* import all necessary components*/
-import NavBar2 from "@/components/NavBar2";
+import NavBar2 from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
 export default {

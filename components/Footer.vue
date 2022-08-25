@@ -10,14 +10,12 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
 
 export default {
   name: "Footer",
   props: {
     msg: String,
   },components: {
-    NavBar
   }
 };
 </script>

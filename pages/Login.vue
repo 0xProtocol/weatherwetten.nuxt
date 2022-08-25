@@ -1,6 +1,6 @@
 <template>
 <v-app>
-  <NavBar2/>
+  <nav-bar/>
   <v-main>
     <v-card outlined id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
@@ -47,7 +47,6 @@
 
 
 <script>
-import NavBar from "@/components/NavBar";
 import SignUp from "@/pages/SignUp";
 import forgotPassword from "@/pages/forgotPassword";
 
@@ -72,10 +71,6 @@ export default {
 
   name: "Login",
 
-  components: {
-    NavBar
-
-  },
   methods:{
     routeToSignUp(){
       this.$router.push('SignUp')

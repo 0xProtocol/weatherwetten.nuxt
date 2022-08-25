@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <nav-bar2/>
+      <nav-bar/>
 
       <div class="about">
         <h1>ABOUT US</h1>
@@ -72,15 +72,13 @@
 
 
 <script>
-import NavBar2 from "@/components/NavBar2";
-import Hero from "@/components/Hero";
+import NavBar2 from "@/components/NavBar";
 import Footer from "@/components/FooterBlack";
 
 export default {
   name: "aboutus",
   components: {
     NavBar2,
-    Hero,
     Footer
   },
   props: {

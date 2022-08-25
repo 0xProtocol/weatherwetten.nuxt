@@ -1,7 +1,7 @@
 <template>
 
   <v-app>
-    <nav-bar2></nav-bar2>
+    <nav-bar/>
     <div class="content">
     <h1>LEADERBOARDS</h1>
     <score-table id="table"></score-table>
@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import NavBar2 from "../components/NavBar2";
-import Hero from "@/components/Hero";
+import NavBar2 from "../components/NavBar";
 import Footer from "@/components/Footer";
 
 export default {
@@ -23,7 +22,6 @@ export default {
     msg: String,
   },  components: {
     NavBar2,
-    Hero,
     Footer
   }
 };

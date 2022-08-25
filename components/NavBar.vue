@@ -1,44 +1,61 @@
 <template>
-  <v-app>
 
-    <v-app-bar app color="black">
-      <v-toolbar color="black">
-        <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <div class="pb-2">
-          <v-img
-            max-height="60"
-            max-width="60"
-            :src="require('../assets/img/icon.png')"></v-img>
-        </div>
-        <v-toolbar-title>WEATHER WETTEN</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn color="black">
-            <nuxt-link to="/profile" tag="a">PROFILE</nuxt-link>
-          </v-btn>
-          <v-btn color="black">
-            <nuxt-link to="/bet" tag="a">BET</nuxt-link>
-          </v-btn>
-          <v-btn color="black">
-            <nuxt-link to="/leaderboards" tag="a">LEADERBOARDS</nuxt-link>
-          </v-btn>
-          <v-btn color="black">
-            <nuxt-link to="/weathercoin" tag="a">WEATHERCOIN</nuxt-link>
-          </v-btn>
-          <v-btn color="black">
-            <nuxt-link to="/aboutus" tag="a">ABOUT US</nuxt-link>
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
-    </v-app-bar>
-
+  <v-app-bar app color="black"  height="60">
+    <v-toolbar color="black" height="58">
+      <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <div class="pb-2">
+        <v-img
+          max-height="60"
+          max-width="60"
+          :src="require('../assets/img/icon.png')"></v-img>
+      </div>
+      <v-toolbar-title>
+        <NuxtLink to="/" class="nuxt-link-active-underline-headline">WEATHER WETTEN</NuxtLink>
+      </v-toolbar-title> <!--  or nuxt-link-active -->
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn color="transparent" v-if="$fire.auth.currentUser != null">
+          <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink>
+        </v-btn>
+        <v-btn color="black">
+          <nuxt-link to="/leaderboards" class="nuxt-link-active-underline">LEADERBOARDS</nuxt-link>
+        </v-btn>
+        <v-btn color="black">
+          <nuxt-link to="/weathercoin" class="nuxt-link-active-underline">WEATHERCOIN</nuxt-link>
+        </v-btn>
+        <v-btn color="black">
+          <nuxt-link to="/aboutus" class="nuxt-link-active-underline">ABOUT US</nuxt-link>
+        </v-btn>
+        <v-btn color="black" v-if="$fire.auth.currentUser == null">
+          <nuxt-link to="/Login" class="nuxt-link-active-underline">LOG IN</nuxt-link>
+        </v-btn>
+        <v-btn color="black" v-if="$fire.auth.currentUser != null">
+          <nuxt-link to="/Profile" class="nuxt-link-active-underline">PROFILE</nuxt-link>
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
     <!-- NAVBAR DRAWER -->
     <v-navigation-drawer
       v-model="drawer"
       absolute
       temporary
       color="black"
+      height="1080"
+      width="280"
+      class="my-1"
     >
+
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-icon> mdi-weather-sunny</v-icon>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title><h2>Weather Wetten</h2></v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
 
       <v-list dense>
         <v-list-item
@@ -52,73 +69,127 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}">{{ item.title }}</nuxt-link>
+              <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}" class="nuxt-link-active">{{
+                  item.title
+                }}
+              </nuxt-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+  </v-app-bar>
 
-    <v-main color="white">
-
-      <span class="hero"></span>
-      <!-- Overlay over img-->
-      <v-overlay absolute>
-        <v-card flat color="transparent" >
-          <v-card-text class="white--text font-weight-black text-center d-flex flex-column align-center justify-center"
-            :class="headingClass">BET WITH WEATHERCOIN</v-card-text>
-          <v-card-subtitle class="white--text text-center d-flex flex-column align-center justify-center" :class="subtitleClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam autem blanditiis, commodi cum dignissimos dolor dolore enim eum id illum in iusto, nemo omnis placeat, quis quisquam<br> sed sequi veritatis. Minima, quibusdam, quos! Consectetur ducimus eaque et, fuga iure labore maiores modi <br>possimus praesentium quas quisquam quod quos ratione, reiciendis!</v-card-subtitle>
-        </v-card>
-      </v-overlay>
-
-      <!-- <iframe
-        width="560"
-        height="315"
-        :src="require('../assets/img/video.mp4')"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe> -->
-    </v-main>
-
-    <v-footer app>
-      <!-- -->
-    </v-footer>
-  </v-app>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      drawer: null,
-      items: [
-        {title: 'PROFILE', icon: 'mdi-view-dashboard', link: 'profile'},
-        {title: 'BET', icon: 'mdi-view-dashboard', link: 'bet'},
-        {title: 'LEADERBOARD', icon: 'mdi-view-dashboard', link: 'leaderboards'},
-        {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
-        {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
-      ],
+    if (this.$fire.auth.currentUser != null) {
+      console.log("LOGGED IN");
+      return {
+        drawer: null,
+        items: [
+          {title: 'BET', icon: 'mdi-dice-6', link: 'bet'},
+          {title: 'LEADERBOARDS', icon: 'mdi-chart-bar', link: 'leaderboards'},
+          {title: 'WEATHERCOIN', icon: 'mdi-currency-btc', link: 'weathercoin'},
+          {title: 'ABOUT US', icon: 'mdi-account-multiple', link: 'aboutus'},
+          {title: 'PROFILE', icon: "mdi-emoticon-cool", link: 'Profile'}
+        ],
+      }
+    } else {
+      console.log("NOT LOGGED IN");
+      return {
+
+        drawer: null,
+        items: [
+          {title: 'LEADERBOARDS', icon: 'mdi-view-dashboard', link: 'leaderboards'},
+          {title: 'WEATHERCOIN', icon: 'mdi-view-dashboard', link: 'weathercoin'},
+          {title: 'ABOUT US', icon: 'mdi-view-dashboard', link: 'aboutus'},
+          {title: 'LOG IN', icon: 'mdi-view-dashboard', link: 'Login'},
+        ],
+      }
     }
   }
 }
-
 </script>
 
 <style>
-.hero {
-  background: url('../assets/img/hero.jpg');
-  background-size: cover;
-  width: 100%;
-  height: 100%;
+
+.nuxt-link-active {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nuxt-link-active-underline {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nuxt-link-active-underline:after {
+  bottom: -5px;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
   position: absolute;
-  top: 0;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.nuxt-link-active-underline:hover:after {
+  width: 100%; /* fill width */
+  left: 0; /* start left */
+}
+
+
+.nuxt-link-active-underline-headline:after {
+  bottom: -5px;
+  content: "";
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.nuxt-link-active-underline-headline:hover:after {
+  width: 115%; /* fill whole width */
+  left: -15px; /* start more left */
+}
+
+
+h2{
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+
+  display: inline-block;
+  padding: 15px 5px;
+  position: relative;
+  font-size: 1rem;
+}
+
+h2:after {
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+h2:hover:after {
+  width: 100%;
   left: 0;
-  transform: scale(1.03); /*to scale img right to main element (not really a good way but working)*/
 }
-.overlay{
-  justify-content: center;
-  align-items: center;
-  transform: scale(1.03);
-}
+
+
 </style>

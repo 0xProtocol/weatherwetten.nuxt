@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <NavBar2/>
+    <nav-bar/>
 
 
     <v-main>

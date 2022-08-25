@@ -28,7 +28,7 @@
       </v-card-actions>
     </v-card>
 
-    <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="info">
+    <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="red darken-2">
       {{ userMsg }}
       <template v-slot:action="{ attrs }">
         <v-btn dark text v-bind="attrs" @click="showSnackbar = false">

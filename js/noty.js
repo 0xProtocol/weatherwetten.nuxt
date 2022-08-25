@@ -8,7 +8,7 @@ export default ({app}, inject) => {
   inject('noty', Vue.use(VueNoty, {
     timeout: 1000,
     progressBar: false,
-    layout: 'bottomCenter',
+    layout: 'bottomRight',
     closeWith: ['click', 'button'],
     theme: 'sunset', //default: mint
   }).noty)

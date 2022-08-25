@@ -40,7 +40,7 @@
       </v-card>
 
 
-      <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="info">
+      <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="red darken-2">
         {{ userMsg }}
         <template v-slot:action="{ attrs }">
           <v-btn dark text v-bind="attrs" @click="showSnackbar = false">
@@ -100,7 +100,7 @@ export default {
 
       let that = this;
       if (this.auth.password !== this.auth.passwordRepeat) {
-        alert("Passwords do not match")
+        this.$noty.error("Passwords do not match!");
       } else {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
           .then((user) => this.initializeUserData()).then((user) => this.$router.push('Profile'))

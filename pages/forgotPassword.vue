@@ -29,7 +29,7 @@
         <v-btn @click="routeToLogin" id="return" class="buttons">Return to Login</v-btn>
       </v-card>
 
-      <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="info">
+      <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="red darken-2">
         {{ msgToUser }}
         <template v-slot:action="{ attrs }">
           <v-btn dark text v-bind="attrs" @click="snackbarVisible = false">

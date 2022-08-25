@@ -10,8 +10,8 @@
 
                 <!-- VCARD 1 -->
               <v-container fill-height>  <!-- first container (one line) || fill-height applies height 100% and align-items to center-->
-                <v-card class="mx-auto" max-width="344" outlined height="100%">
-                  <v-list-item three-line>
+                <v-card class="mx-auto" max-width="344" outlined >
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 1</div>
                       <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
@@ -26,7 +26,7 @@
 
                 <!-- VCARD 2 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 2</div>
                       <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
@@ -41,7 +41,7 @@
 
                 <!-- VCARD 3 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 3</div>
                       <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
@@ -58,7 +58,7 @@
                 <!-- VCARD 4 -->
               <v-container fill-height grid-list-xl text-xs-center>  <!-- second container (one line) || fill-height applies height 100% and align-items to center-->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 4</div>
                       <v-list-item-title class="text-h5 mb-2">LEADERBOARD</v-list-item-title>
@@ -73,7 +73,7 @@
 
                 <!-- VCARD 5 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 5</div>
                       <v-list-item-title class="text-h5 mb-2">WEATHER DATA</v-list-item-title>
@@ -88,7 +88,7 @@
 
                 <!-- VCARD 6 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4">BENEFIT 6</div>
                       <v-list-item-title class="text-h5 mb-2">LOG IN SYSTEM</v-list-item-title>
@@ -105,7 +105,7 @@
                 <!-- VCARD 7 -->
               <v-container fill-height grid-list-xl text-xs-center> <!--third container (one line) || fill-height applies height 100% and align-items to center-->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 7</div>
                       <v-list-item-title class="text-h5 mb-2">FAST</v-list-item-title>
@@ -120,7 +120,7 @@
 
                 <!-- VCARD 8 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 8</div>
                       <v-list-item-title class="text-h5 mb-2">CLIMATE FRIENDLY</v-list-item-title>
@@ -135,14 +135,13 @@
 
                 <!-- VCARD 9 -->
                 <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line>
+                  <v-list-item three-line> <!-- items three in a row -->
                     <v-list-item-content>
                       <div class="text-overline mb-4"> BENEFIT 9</div>
                       <v-list-item-title class="text-h5 mb-2">SECURE</v-list-item-title>
                       <v-list-item-subtitle>We guarantee a good security</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png"
-                                                                                alt="BENEFIT 9">
+                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png" alt="BENEFIT 9">
                     </v-list-item-avatar>
                   </v-list-item>
                   <v-card-actions>
@@ -154,37 +153,32 @@
               <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
             </div>
         </div>
-
-      <!-- <Footer/> --> <!-- footer with background black -->
+      <!-- <Footer/> -->
     </v-app>
   </div>
 </template>
 
 <script>
+/* import all necessary components*/
 import NavBar2 from "@/components/NavBar2";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
 
 export default {
   name: "weathercoin",
   components: {
     NavBar2,
     Footer,
-    Hero
-  },
-  props: {
-    msg: String,
   },
   data() {
-    let minedWeatherCoins;
+    let mintedWeatherCoins;
     return {
       userArray: [],
-      int: minedWeatherCoins
-
+      int: mintedWeatherCoins
     }
   },
 
-  async created() {
+  /* get's instantly called*/
+  async created() {  /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
     const docRef = this.$fire.firestore.collection('users');
     const snapshot = await docRef.get();
     this.minedWeatherCoins = 0;
@@ -196,10 +190,9 @@ export default {
     });
 
     this.userArray.sort(this.compareScores); //first sort then calculating
-    console.log(this.minedWeatherCoins);
-    this.userArray[0] = this.minedWeatherCoins;
-    console.log(this.userArray);
-
+    //console.log(this.minedWeatherCoins);
+    this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
+    //console.log(this.userArray);
   },
 };
 </script>
@@ -221,80 +214,50 @@ export default {
 
 .mx-auto{
   margin-top: 15px; /*spaces between cards */
-  margin-bottom: 0px;
+  margin-bottom: 0px; /* overwrite margin-bottom */
 
 }
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
 
-
-
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
 h1 {
   color: #fff;
   text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15em; /* distance between letters*/
 
-  display: inline-block;
-  padding: 15px 20px;
-  position: relative;
-  font-size: 1.5rem;
+  padding: 15px 20px; /* inner distance top | right */
+  font-size: 1.5rem; /* root em -> 1rem = equal of the font size of html element */
 }
 
 h1:after {
-  bottom: 0;
-  content: "";
-  display: block;
-  height: 2px;
-  left: 50%;
-  position: absolute;
+  height: 2px; /* high of effect*/
+  left: 50%; /* start at mid*/
   background: #fff;
-  transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  width: 0;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s; /* effect of underline */
 }
 
 h1:hover:after {
-  width: 100%;
-  left: 0;
+  width: 100%; /* hovering over headline get underline effect full width*/
+  left: 0; /* start at left*/
 }
 
 h2 {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: .025em;
+  color: white; /* color of heading */
+  font-size: 1.5rem; /* root em -> 1rem = equal of the font size of html element */
+  font-weight: 500; /* normal font weight */
+  letter-spacing: .025em; /* distance between each letter*/
   text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-  margin-bottom: 100px;
-  margin-top: 75px;
-
-  text-shadow: .05em 0 0 rgba(255, 0, 0, .75),
-  -.05em -.025em 0 rgba(0, 255, 0, .75),
-  .025em .05em 0 rgba(0, 0, 255, .75);
-
-  animation: glitch 525ms infinite;
+  margin-bottom: 100px; /* distance to bottom*/
+  margin-top: 75px; /* distance to top */
+  animation: glitch 525ms infinite; /* play animation */
 }
 
 h2:hover:after {
   width: 0%; /* reset the h2 defintion -> so no effect is visible*/
 }
 
+/* glitch effect from -> https://codepen.io/dpletiko/pen/ExoKOxN */
 @keyframes glitch {
   0% {
     text-shadow: .05em 0 0 rgba(255, 0, 0, .75),

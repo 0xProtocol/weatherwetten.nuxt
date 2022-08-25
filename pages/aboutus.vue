@@ -92,7 +92,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #app {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../assets/img/concept.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.0)), url('../assets/img/concept.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -112,11 +112,11 @@ export default {
   width: 1000px;
   height: 500px;
   border-radius: 20px;
-  background-color: black;
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/aboutus2.jpg');
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('../assets/img/aboutus2.jpg');*/
+  background-color: transparent;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -126,6 +126,7 @@ export default {
 .card:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
   background-image: linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 20%); /* make background black when hovered */
+  background-color: black;
 }
 
 .card img {

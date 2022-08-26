@@ -51,7 +51,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title><h2>Weather Wetten</h2></v-list-item-title>
+          <v-list-item-title>  <NuxtLink to="/" class="nuxt-link-active-underline-headline-navbarDrawer">WEATHER WETTEN</NuxtLink></v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -115,18 +115,19 @@ export default {
 </script>
 
 <style>
-
+/* standard nuxt link for navbar-drawer*/
 .nuxt-link-active {
   font-weight: bold;
-  color: white;
   text-decoration: none;
 }
 
+/* nuxt link for standard navbar at top*/
 .nuxt-link-active-underline {
   font-weight: bold;
   text-decoration: none;
 }
 
+/* nuxt link for standard navbar at top hovering*/
 .nuxt-link-active-underline:after {
   bottom: -5px;
   content: "";
@@ -139,12 +140,13 @@ export default {
   width: 0;
 }
 
+/* nuxt link for standard navbar at top hovering*/
 .nuxt-link-active-underline:hover:after {
   width: 100%; /* fill width */
   left: 0; /* start left */
 }
 
-
+/* nuxt link for headline of navbar hovering*/
 .nuxt-link-active-underline-headline:after {
   bottom: -5px;
   content: "";
@@ -156,13 +158,14 @@ export default {
   width: 0;
 }
 
+/* nuxt link for headline of navbar hovering*/
 .nuxt-link-active-underline-headline:hover:after {
   width: 115%; /* fill whole width */
   left: -15px; /* start more left */
 }
 
-
-h2{
+/* nuxt link for headline of navbarDrawer*/
+.nuxt-link-active-underline-headline-navbarDrawer{
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -174,7 +177,8 @@ h2{
   font-size: 1rem;
 }
 
-h2:after {
+/* nuxt link for headline of navbarDrawer hovering*/
+.nuxt-link-active-underline-headline-navbarDrawer:after {
   bottom: 0;
   content: "";
   display: block;
@@ -186,9 +190,10 @@ h2:after {
   width: 0;
 }
 
-h2:hover:after {
-  width: 100%;
-  left: 0;
+/* nuxt link for headline of navbarDrawer hovering*/
+.nuxt-link-active-underline-headline-navbarDrawer:hover:after {
+  width: 100%; /* fill width */
+  left: 0; /* start left*/
 }
 
 

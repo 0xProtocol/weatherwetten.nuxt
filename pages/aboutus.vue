@@ -95,7 +95,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #app {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('../assets/img/concept.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/img/concept.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -171,6 +171,46 @@ export default {
 
 }
 
+.about {
+  margin-top: 100px;
+  text-align: center;
+}
+
+h1 {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+  font-size: 1.5rem;
+}
+
+h1:after {
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+h1:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+h2:hover:after {
+  width: 0%; /* reset the h2 defintion -> so no effect is visible*/
+}
+
+
+/* responsiveness */
 @media (max-width: 1190px) {
   .card {
     width: auto;
@@ -239,41 +279,4 @@ export default {
   }
 }
 
-.about {
-  margin-top: 100px;
-  text-align: center;
-}
-
-h1 {
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0.15em;
-
-  display: inline-block;
-  padding: 15px 20px;
-  position: relative;
-  font-size: 1.5rem;
-}
-
-h1:after {
-  bottom: 0;
-  content: "";
-  display: block;
-  height: 2px;
-  left: 50%;
-  position: absolute;
-  background: #fff;
-  transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  width: 0;
-}
-
-h1:hover:after {
-  width: 100%;
-  left: 0;
-}
-
-h2:hover:after {
-  width: 0%; /* reset the h2 defintion -> so no effect is visible*/
-}
 </style>

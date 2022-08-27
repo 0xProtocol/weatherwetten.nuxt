@@ -2,35 +2,32 @@
 
   <v-app-bar app color="black"  height="60">
     <v-toolbar color="black" height="58">
-      <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <div class="pb-2">
-        <v-img
-          max-height="60"
-          max-width="60"
-          :src="require('../assets/img/icon.png')"></v-img>
+      <v-app-bar-nav-icon color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> <!-- when clicked navbardrawer get's displayed -->
+      <div class="pb-2"> <!-- image get's displayed more top -->
+        <v-img max-height="60" max-width="60" :src="require('../assets/img/icon.png')"></v-img>
       </div>
       <v-toolbar-title>
-        <NuxtLink to="/" class="nuxt-link-active-underline-headline">WEATHER WETTEN</NuxtLink>
-      </v-toolbar-title> <!--  or nuxt-link-active -->
-      <v-spacer></v-spacer>
+        <NuxtLink to="/" class="nuxt-link-active-underline-headline">WEATHER WETTEN</NuxtLink> <!-- link to index.vue -->
+      </v-toolbar-title>
+      <v-spacer/> <!-- space to other navbar elements -->
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn color="transparent" v-if="$fire.auth.currentUser != null">
-          <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink>
+        <v-btn color="transparent" v-if="$fire.auth.currentUser != null"> <!-- condition if you are logged in or not -->
+          <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink> <!-- link to bet.vue -->
         </v-btn>
         <v-btn color="black">
-          <nuxt-link to="/leaderboards" class="nuxt-link-active-underline">LEADERBOARDS</nuxt-link>
+          <nuxt-link to="/leaderboards" class="nuxt-link-active-underline">LEADERBOARDS</nuxt-link> <!-- link to leaderboards.vue -->
         </v-btn>
         <v-btn color="black">
-          <nuxt-link to="/weathercoin" class="nuxt-link-active-underline">WEATHERCOIN</nuxt-link>
+          <nuxt-link to="/weathercoin" class="nuxt-link-active-underline">WEATHERCOIN</nuxt-link> <!-- link to weathercoin.vue -->
         </v-btn>
         <v-btn color="black">
-          <nuxt-link to="/aboutus" class="nuxt-link-active-underline">ABOUT US</nuxt-link>
+          <nuxt-link to="/aboutus" class="nuxt-link-active-underline">ABOUT US</nuxt-link> <!-- link to aboutus.vue -->
         </v-btn>
         <v-btn color="black" v-if="$fire.auth.currentUser == null">
-          <nuxt-link to="/Login" class="nuxt-link-active-underline">LOG IN</nuxt-link>
+          <nuxt-link to="/Login" class="nuxt-link-active-underline">LOG IN</nuxt-link> <!-- link to login.vue -->
         </v-btn>
         <v-btn color="black" v-if="$fire.auth.currentUser != null">
-          <nuxt-link to="/Profile" class="nuxt-link-active-underline">PROFILE</nuxt-link>
+          <nuxt-link to="/Profile" class="nuxt-link-active-underline">PROFILE</nuxt-link> <!-- link to profile.vue -->
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -42,8 +39,7 @@
       color="black"
       height="1080"
       width="280"
-      class="my-1"
-    >
+      class="my-1">
 
       <v-list-item>
         <v-list-item-avatar>
@@ -61,18 +57,18 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
-          link
-        >
+          link> <!-- for each item in items list them in navbar -->
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ item.icon }}</v-icon> <!-- for each item in items list them in navbar as icons beside element -->
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>
+              <!-- for each item in items list them in navbar as links when clicking onto the text-->
               <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}" class="nuxt-link-active">{{
                   item.title
                 }}
-              </nuxt-link>
+              </nuxt-link> <!-- ??? plan:'private' ???? -->
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -85,6 +81,7 @@
 <script>
 export default {
   data() {
+    // if logged in display this sort of navbar elements
     if (this.$fire.auth.currentUser != null) {
       console.log("LOGGED IN");
       return {
@@ -97,7 +94,9 @@ export default {
           {title: 'PROFILE', icon: "mdi-emoticon-cool", link: 'Profile'}
         ],
       }
-    } else {
+    }
+    // if not logged in display this sort of navbar elements
+    else {
       console.log("NOT LOGGED IN");
       return {
 

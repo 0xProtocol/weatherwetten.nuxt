@@ -5,7 +5,7 @@
 
         <div class="weathercoin"> <!-- weathercoin div -->
           <h1>WEATHERCOIN</h1>
-
+          <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
             <div class="content"> <!-- content of weathercoin.vue -->
 
                 <!-- VCARD 1 -->
@@ -150,7 +150,7 @@
               </v-container>
 
 
-              <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
+
             </div>
         </div>
       <!-- <Footer/> -->
@@ -248,7 +248,7 @@ h2 {
   font-weight: 500; /* normal font weight */
   letter-spacing: .025em; /* distance between each letter*/
   text-transform: uppercase;
-  margin-bottom: 100px; /* distance to bottom*/
+
   margin-top: 75px; /* distance to top */
   animation: glitch 525ms infinite; /* play animation */
 }

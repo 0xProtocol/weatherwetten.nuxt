@@ -4,9 +4,9 @@
       <nav-bar/>
       <v-main>
 
-        <v-card class="mx-auto" max-width="600" outlined shaped loading>
+        <v-card id="card" class="mx-auto" outlined shaped loading max-width="600">
           <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
-          <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }} </h3></v-card-text>
+          <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }}</h3></v-card-text>
           <br>
           <br>
           <v-card-actions class="justify-center">
@@ -19,7 +19,7 @@
           </v-card-actions>
 
           <br>
-          <v-text-field dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
+          <v-text-field style="margin: 10px" dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
                         append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
         </v-card>
 
@@ -157,10 +157,19 @@ a {
   background-position: center;
 }
 
-.mx-auto{
-  margin-top: 230px;
+.mx-auto {
+  margin-top: 100px;
 }
 
+#card{
+  background-color: #2d2d2d;
+}
+
+@media screen and (max-width: 600px) {
+  #card{
+    width: 90%;
+  }
+}
 
 
 

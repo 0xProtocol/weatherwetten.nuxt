@@ -115,8 +115,8 @@ export default {
     },
 
 
-    compareBetTemp: function (bettedValue, actualValue, bettedCoins) {
-      //For calling the bettedValue from TextBox: document.getElementById('txtFieldAmount').value
+    compareBetTemp: function (bettedValue, actualValue = this.weather.main.temp, bettedCoins = document.getElementById('txtFieldAmount').value) {
+      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
 
       var value = bettedValue - actualValue;
       if (value < 0) {
@@ -132,7 +132,9 @@ export default {
       }
     },
 
-    compareBetGen (bettedValue, actualValue, bettedCoins) {
+    compareBetGen (bettedValue, actualValue, bettedCoins = document.getElementById('txtFieldAmount').value) {
+     // var actualValue = this.weather.main.description; maybe a way to get value, have yet to finally test how to get this value now
+      // it is yet to be tested out
       if (bettedValue == actualValue) {
         return bettedCoins * 1.1;
       } else {
@@ -140,7 +142,7 @@ export default {
       }
     },
 
-    makeBet (bettedCoins, bettedValue, time) {
+    makeBet (bettedCoins, time) {
 
       //still yet open to work out saving bet to user profile
       /* if (user pressed buttonForGeneralBet) {
@@ -156,7 +158,7 @@ export default {
       return betDate, betType;
     },
 
-    checkBet (betType, bettedValue, actualValue, bettedCoins) {
+    checkBet (betType, bettedValue, actualValue, bettedCoins  = document.getElementById('txtFieldAmount').value) {
       if (betType == 0) {
         return this.compareBetGen(bettedValue, actualValue, bettedCoins)
       } else if (betType == 1) {

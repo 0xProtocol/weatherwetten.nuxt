@@ -112,8 +112,17 @@ export default {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
-    }
-  },
+    },
+
+
+
+
+
+
+
+    },
+
+
   async created() {
     // get user data from document
     console.log(this.$fire.auth.currentUser.uid);

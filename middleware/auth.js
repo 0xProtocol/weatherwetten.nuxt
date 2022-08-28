@@ -1,7 +1,7 @@
 export default function ({app, route, redirect}) {
 
   // if user tries to access profile or bet page via url when he is not actually logged in, redirect him to the login page
-  if (route.path === '/Profile' || route.path === '/Bet') {
+  if (route.path === '/profile' || route.path === '/bet') {
     if (!app.$fire.auth.currentUser) {
       return redirect('/Login')
     }

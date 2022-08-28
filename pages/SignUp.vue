@@ -168,7 +168,7 @@ export default {
 /* From uiverse.io by @adamgiebl */
 button {
   font-family: inherit;
-  font-size: 18px;
+  font-size: 17px;
   background: #383636;
   color: #dfdfe8;
   padding: 0.1em 1em 0.1em 0.9em; /*inner distance of object*/
@@ -202,7 +202,7 @@ button:hover svg {
 
 /* 'Already have an account' button */
 #login:hover {
-  color: #42b983;
+  background-color: #494646;
 }
 
 button:hover span {

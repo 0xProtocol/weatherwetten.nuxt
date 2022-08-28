@@ -20,11 +20,11 @@
 
 
       <v-card-actions class="justify-center">
-        <v-btn id="loginButton" @click="login">Login</v-btn>
-        <v-btn id="newHereButton" @click="routeToSignUp">New here?</v-btn>
+        <button @click="login">Login</button>
+        <button @click="routeToSignUp">New here?</button>
       </v-card-actions>
       <v-card-actions class="justify-center">
-        <v-btn id="forgotButton" @click="routeToForgotPassword">Forgot your password?</v-btn>
+        <button @click="routeToForgotPassword">Forgot your password?</button>
       </v-card-actions>
     </v-card>
 
@@ -94,6 +94,10 @@ export default {
             that.showSnackbar = true;
             that.userMsg = "Your account has been disabled";
             break;
+          case "auth/invalid-email":
+            that.showSnackbar = true;
+            that.userMsg = "Please enter a valid email address";
+            break;
           default:
             that.showSnackbar = true;
             that.userMsg = error.message;
@@ -114,6 +118,18 @@ export default {
 
 <style scoped>
 
+button {
+  font-size: 17px;
+  background: #383636;
+  color: #dfdfe8;
+  border-radius: 8px;
+  padding: 0.05em 0.9em 0.05em 0.9em;
+  margin: 2px 2px 0 3px;
+}
+
+button:hover {
+  background-color: #494646;
+}
 
 #loginCard {
   position: fixed;
@@ -130,17 +146,7 @@ export default {
   }
 }
 
-#loginButton {
-  color: forestgreen;
-}
 
-#newHereButton {
-  color: forestgreen;
-}
-
-#forgotButton {
-  color: orange;
-}
 
 
 </style>

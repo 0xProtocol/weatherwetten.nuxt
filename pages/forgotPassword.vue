@@ -6,27 +6,27 @@
 
     <v-main>
       <v-card id="cardArea" height="280">
-        <v-card-title class="justify-center" id="header">
+        <v-card-title class="justify-center">
           Reset your password here!
         </v-card-title>
-
-
-        <v-form>
-          <div style=" padding: 10px">
-            <v-text-field
-              label="E-Mail"
-              required
-              v-model="userEmailAddress"
-              id="emailField" outlined
-            ></v-text-field>
+        <div style=" padding: 10px">
+          <v-text-field
+            label="E-Mail"
+            required
+            v-model="userEmailAddress"
+            id="emailField" outlined
+          ></v-text-field>
         </div>
 
-          <v-btn id="reset" @click="sendEmailToUser">
-            Reset Password
-          </v-btn>
-        </v-form>
 
-        <v-btn @click="routeToLogin" id="return" class="buttons">Return to Login</v-btn>
+        <v-card-actions class="justify-center">
+          <button id="reset" @click="sendEmailToUser">
+            Reset Password
+          </button>
+        </v-card-actions>
+        <v-card-actions class="justify-center">
+          <button @click="routeToLogin" id="return">Return to Login</button>
+        </v-card-actions>
       </v-card>
 
       <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="red darken-2">
@@ -133,35 +133,22 @@ export default {
   }
 }
 
-
-#reset {
-  position: fixed;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 10px;
-  color: #ef9421;
-  border-radius: 10px;
-
-
+button {
+  font-size: 17px;
+  background: #383636;
+  color: #dfdfe8;
+  border-radius: 8px;
+  padding: 0.05em 0.9em 0.05em 0.9em;
+  margin: 2px 2px 0 3px;
 }
 
-#emailField{
-
+button:hover {
+  background-color: #494646;
 }
 
 
 
-#return {
-  position: fixed;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 10px;
-  color: forestgreen;
-  border-radius: 10px;
 
-}
 
 </style>
 

@@ -86,6 +86,7 @@ export default {
   background-size: cover;
   width: 100%;
   height: 100%;
+  background-position: center right; /* shrink from right to left (better design at less px screen*/
 }
 
 /* different background for each possibility */

@@ -115,6 +115,23 @@ export default {
     },
 
 
+    compareBetTemp: function (bettedValue, actualValue, bettedCoins) {
+      //For calling the bettedValue from TextBox: document.getElementById('txtFieldAmount').value
+
+      var value = bettedValue - actualValue;
+      if (value < 0) {
+        value *= -1;
+      }
+
+      if (value < 1.0) {
+        return bettedCoins * 1.2;
+      } else if (value < 1.5) {
+        return bettedCoins * 1.05;
+      } else {
+        return 0;
+      }
+    },
+
 
 
 

@@ -132,7 +132,13 @@ export default {
       }
     },
 
-
+    compareBetGen (bettedValue, actualValue, bettedCoins) {
+      if (bettedValue == actualValue) {
+        return bettedCoins * 1.1;
+      } else {
+        return 0;
+      }
+    },
 
 
 

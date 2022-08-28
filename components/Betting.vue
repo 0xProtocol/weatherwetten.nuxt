@@ -1,20 +1,14 @@
 <template>
-  <!-- decide if widget pic should be warm or cold dependending on temperature-->
-  <div class="headline"> <!-- weathercoin div -->
+  <div class="betting">
     <h1>BETTING</h1>
     <div :class="typeof weather.main != 'undefined'">
-
       <div class="searchBox">
-        <input
-          type="text"
-          class="searchBar"
-          placeholder="Search..."
-          v-model="query"
+        <input type="text" class="searchBar" placeholder="Search..." v-model="query"
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
 
-    <div class="weatherData" v-if="typeof weather.main != 'undefined'">
+    <div class="weatherData" v-if="typeof weather.main != 'undefined'"> <!
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
         <thead>
         <tr>
@@ -79,6 +73,7 @@ export default {
     }
   },
   methods: {
+    //request the weather on specific query and get response back
     fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
@@ -86,12 +81,13 @@ export default {
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json();
+            return res.json(); //get response in form of .json
           }).then(this.setResults);
       }
     },
-    setResults(results) {
-      this.weather = results;
+    //set result from fetch to actual weather
+    setResults(response) {
+      this.weather = response;
     },
     dateBuilderModified() { /*modified to date we want to predict */
       let d = new Date();
@@ -103,6 +99,7 @@ export default {
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
     },
+    // action when clicking on a betting button
     setBet() {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
         document.getElementById('txtFieldAmount').value !== "") {
@@ -114,77 +111,68 @@ export default {
       }
     }
   },
-  async created() {
+  async created() { /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
     // get user data from document
     console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
-    this.weathercoin = (await document).get("weatherCoin");
+    this.weathercoin = (await document).get("weatherCoin"); // get's weathercoins from user
   }
 };
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'montserrat', sans-serif;
+  font-family: 'montserrat', sans-serif; /*font for noty alert mainly */
 }
-
-.headline {
+.betting {
   margin-top: 100px; /* distance from top of div*/
   text-align: center;
 }
 
 .searchBox {
-  padding: 25px;
-  width: 50%;
+  padding: 25px; /* inner distance top */
+  width: 50%; /* make search box half of width */
   text-align: center;
-  transform: translate(50%, 10%)
+  transform: translate(50%, 10%); /* position the searchBox */
 }
 
 .searchBox .searchBar {
-  display: block;
-  width: 100%;
-  padding: 15px;
+  width: 100%;  /* search bar has full width*/
+  padding: 15px; /* top padding (inner distance) */
 
   color: #313131;
   font-size: 20px;
-  appearance: none;
-  border: none;
-  outline: none;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.5) none;
-  border-radius: 0px 16px 0px 16px;
-  transition: 0.4s;
+  outline: none; /* border around none*/
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /*shadow around search bar*/
+  background: rgba(255, 255, 255, 0.5) none; /*white transparent color of search bar*/
+  border-radius: 0 16px 0 16px;
+  transition: 0.4s; /*time where it changes to other state*/
 }
 
 
 .searchBox .searchBar:focus {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 16px 0px 16px 0px;
+  border-radius: 16px 0 16px 0;
 }
 
-
+/* headline effect from https://codepen.io/jstn/pen/mdoOZJ*/
 h1 {
   color: #fff;
   text-transform: uppercase;
-  text-decoration: none;
   letter-spacing: 0.15em;
 
-  display: inline-block;
-  padding: 15px 20px;
-  position: relative;
+  display: inline-block; /* display list items horizontally and set width and height */
+  padding: 15px 20px; /*inner distance*/
+  position: relative; /* places element relative to it's current*/
   font-size: 1.5rem;
 }
 
+/* after - selector inserts something after the content of each selected element */
 h1:after {
   bottom: 0;
+  width: 0;
   content: "";
   display: block;
   height: 2px;
@@ -192,7 +180,6 @@ h1:after {
   position: absolute;
   background: #fff;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  width: 0;
 }
 
 h1:hover:after {
@@ -206,7 +193,6 @@ h1:hover:after {
   transform: translate(12.5%, 0%); /* make it into the middle*/
 }
 
-
 .txtField {
   padding: 5px; /* inner distance around txtField*/
 }
@@ -217,7 +203,7 @@ h1:hover:after {
 }
 
 .mx-auto {
-  margin-top: 150px; /* overwrites it to 100 from weathercoin css*/
+  margin-top: 150px; /* overwrites it to 150 from weathercoin css*/
   margin-bottom: 100px; /* overwrites it to 100 from weathercoin css*/
 }
 

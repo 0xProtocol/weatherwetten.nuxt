@@ -27,7 +27,7 @@
         <v-snackbar timeout="10000" id="snackbar" v-model="showSnackBar">
           {{ msg }}
           <template v-slot:action="{ attrs }">
-            <v-btn dark text v-bind="attrs" @click="showSnackBar = false">
+            <v-btn dark text v-bind="attrs" @click="showSnackBar = false"> <!-- v-bind ??? -->
               Close
             </v-btn>
           </template>
@@ -56,13 +56,14 @@ export default {
 
     async logoutUser() {
       await this.$fire.auth.signOut()
-      this.$router.push("/")
+      await this.$router.push("/") //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
     },
 
     changeName() {
       this.showTextField = true;
     },
 
+    //change username
     async saveToDatabase() {
       if (this.newUsername.length < 5) {
         this.msg = "Enter a valid username!"
@@ -70,62 +71,38 @@ export default {
         return;
       }
 
+      //change username and save it to database
       const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
-      const res = await ref.update({username: this.newUsername})
+      await ref.update({username: this.newUsername})
 
       this.msg = "Username changed successfully"
       this.showSnackBar = true;
-      location.reload();
+      location.reload(); // reload the current page
     }
-
-
   },
 
   async created() {
-
-    // get user data from document
-
+    // get user data from database
     console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
-    this.username = (await document).get("username");
-    this.weathercoin = (await document).get("weatherCoin");
+    this.username = (await document).get("username"); //get username from database
+    this.weathercoin = (await document).get("weatherCoin"); //get weathercoins from database
     console.log(this.weathercoin);
     console.log(this.username);
     // console.log(ref);
   }
 };
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-
 #profileCard {
-  position: fixed;
+  position: fixed; /*positioned relative to the viewport, it always stays in the same place even if the page is scrolled */
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #3c4242;
-
 }
 
 #weatherCoin {
@@ -136,14 +113,11 @@ a {
 
 #greetUser {
   font-size: 25px;
-
 }
 
 .buttons {
   border-radius: 10px;
   color: white;
-
-
 }
 
 #app {
@@ -162,12 +136,10 @@ a {
   background-color: #2d2d2d;
 }
 
+/* responsiveness*/
 @media screen and (max-width: 600px) {
   #card{
     width: 90%;
   }
 }
-
-
-
 </style>

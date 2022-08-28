@@ -2,8 +2,6 @@
   <v-app>
 
     <nav-bar/>
-
-
     <v-main>
       <v-card id="cardArea" height="280">
         <v-card-title class="justify-center">
@@ -18,7 +16,6 @@
           ></v-text-field>
         </div>
 
-
         <v-card-actions class="justify-center">
           <button id="reset" @click="sendEmailToUser">
             Reset Password
@@ -32,7 +29,7 @@
       <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="red darken-2">
         {{ msgToUser }}
         <template v-slot:action="{ attrs }">
-          <v-btn dark text v-bind="attrs" @click="snackbarVisible = false">
+          <v-btn dark text v-bind="attrs" @click="snackbarVisible = false"> <!-- v-bind ??? -->
             Close
           </v-btn>
         </template>
@@ -46,19 +43,13 @@
           </v-btn>
         </template>
       </v-snackbar>
-
     </v-main>
-
-
-
 
   </v-app>
 
 </template>
 
 <script>
-
-
 export default {
   name: "forgotPassword",
 
@@ -69,17 +60,17 @@ export default {
       snackbarVisible: false,
       OkSnackbarVisible: false,
       msgToUser: ""
-
     }
-
-
   },
 
   methods:{
+
+    //return to login action
     routeToLogin(){
-      this.$router.push('Login')
+      this.$router.push('Login') //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
     },
 
+    //reset password action
     sendEmailToUser: function () {
       console.log("reset password");
 
@@ -87,7 +78,6 @@ export default {
         () => {
           this.OkSnackbarVisible = true;
           this.msgToUser = "Reset link sent to: " + this.userEmailAddress;
-
         }
       )
         .catch((error) => {
@@ -117,20 +107,13 @@ export default {
 
 
 <style scoped>
-
 #cardArea {
-  position: fixed;
+  position: fixed; /*positioned relative to the viewport, it always stays in the same place even if the page is scrolled */
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 8px;
   width: 30%;
-}
-
-@media screen and (max-width: 900px) {
-  #cardArea {
-    width: 90%;
-  }
 }
 
 button {
@@ -146,10 +129,12 @@ button:hover {
   background-color: #494646;
 }
 
-
-
-
-
+/* responsiveness*/
+@media (max-width: 900px) {
+  #cardArea {
+    width: 90%;
+  }
+}
 </style>
 
 

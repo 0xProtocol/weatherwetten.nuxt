@@ -1,6 +1,7 @@
 <template>
 <v-app>
   <nav-bar/>
+
   <v-main>
     <v-card outlined id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
@@ -8,7 +9,6 @@
         <v-text-field color="grey" v-model="auth.email" label="E-Mail" outlined/>
         <v-text-field outlined
                       @keyup.enter="login"
-
                       color="grey"
                       v-model="auth.password"
                       label="Password"
@@ -31,25 +31,19 @@
     <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="red darken-2">
       {{ userMsg }}
       <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="showSnackbar = false">
+        <v-btn dark text v-bind="attrs" @click="showSnackbar = false"> <!-- v-bind ???-->
           Close
         </v-btn>
       </template>
     </v-snackbar>
   </v-main>
-  <Footer></Footer>
+
+  <footer/>
 </v-app>
-
-
-
-
 </template>
 
 
 <script>
-import SignUp from "@/pages/SignUp";
-import forgotPassword from "@/pages/forgotPassword";
-
 export default {
   data(){
     return {
@@ -73,13 +67,14 @@ export default {
 
   methods:{
     routeToSignUp(){
-      this.$router.push('SignUp')
+      this.$router.push('SignUp') //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
     },
 
+    //login with email and password
     login(){
       let that = this
       this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
-        .then((user) => this.$router.push('Profile'))
+        .then((user) => this.$router.push('Profile')) //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
       .catch(function (error) {
         switch (error.code) {
           case "auth/wrong-password":
@@ -102,13 +97,11 @@ export default {
             that.showSnackbar = true;
             that.userMsg = error.message;
         }
-
       })
     },
 
-
     routeToForgotPassword() {
-      this.$router.push('forgotPassword')
+      this.$router.push('forgotPassword') //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
     },
 
 
@@ -117,7 +110,6 @@ export default {
 </script>
 
 <style scoped>
-
 button {
   font-size: 17px;
   background: #383636;
@@ -140,13 +132,10 @@ button:hover {
   width: 30%;
 }
 
+/* responsiveness*/
 @media screen and (max-width: 850px) {
   #loginCard {
     width: 85%;
   }
 }
-
-
-
-
 </style>

@@ -140,6 +140,26 @@ export default {
       }
     },
 
+    makeBet (bettedCoins, bettedValue, time) {
+
+      //still yet open to work out saving bet to user profile
+      /* if (user pressed buttonForGeneralBet) {
+      betType = 0;
+      } else if (user pressed buttonForTempBet) {
+      betType = 1;
+      }
+      */
+      var betType = 0;
+
+      var betDate = new Date(time.getTime() + 7 * 24 *60 *60 * 1000);  //set betDate to in 7 seven days
+      // when the bet will be realized
+      return betDate, betType;
+    },
+
+
+
+
+
 
 
 

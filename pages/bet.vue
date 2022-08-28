@@ -1,20 +1,13 @@
 <template>
   <div id="app">
     <v-app>
-    <nav-bar/>
-    <bet/>
-    <Footer/>
+    <nav-bar/> <!-- NavBar component -->
+    <betting/> <!-- Betting component -->
+    <footer/> <!-- Footer component -->
     </v-app>
   </div>
 </template>
 
-<script>
-import Bet from "@/components/Bet";
-export default {
-  name: "betPage",
-  components: {Bet}
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
@@ -24,7 +17,5 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-
 }
-
 </style>

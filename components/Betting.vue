@@ -156,12 +156,24 @@ export default {
       return betDate, betType;
     },
 
+    checkBet (betType, bettedValue, actualValue, bettedCoins) {
+      if (betType == 0) {
+        return this.compareBetGen(bettedValue, actualValue, bettedCoins)
+      } else if (betType == 1) {
+        return this.compareBetTemp(bettedValue, actualValue, bettedCoins)
+      } else {
+        return;
+      }
+    },
 
+    checkDate (betDate) {
+      //Valid solution? or do we have to use a sleeper function, would have to run for every bet, would be a problem I fear
+      var currentTime = new Date();
+      if (currentTime - betDate >= 0) {
+        return this.checkBet;
+      }
 
-
-
-
-
+    },
 
     },
 

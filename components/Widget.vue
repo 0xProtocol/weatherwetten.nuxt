@@ -15,15 +15,11 @@
 
     <main>
       <div class="search-box">
-        <input
-          type="text"
-          class="search-bar"
-          placeholder="Search..."
-          v-model="query"
+        <input type="text" class="search-bar" placeholder="Search..." v-model="query"
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
 
-      <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
+      <div v-if="typeof weather.main != 'undefined'"> <!-- if weather is found then show details -->
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>  <!-- country  -->
           <div class="date">{{ dateBuilder() }}</div>     <!-- date with function -->
@@ -36,8 +32,8 @@
           <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->
         </div>
       </div>
-
     </main>
+
   </div>
 </template>
 
@@ -53,6 +49,7 @@ export default {
     }
   },
   methods: {
+    //request the weather on specific query and get response back
     fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
@@ -60,13 +57,15 @@ export default {
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json();
+            return res.json(); //get response in form of .json
           }).then(this.setResults);
       }
     },
-    setResults(results) {
-      this.weather = results;
+    //set result from fetch to actual weather
+    setResults(response) {
+      this.weather = response;
     },
+    //get date back for widget
     dateBuilder() {
       let d = new Date();
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -82,13 +81,6 @@ export default {
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
 #app {
   background-image: url('../assets/img/app.jpg');
   background-size: cover;
@@ -96,6 +88,7 @@ export default {
   height: 100%;
 }
 
+/* different background for each possibility */
 #app.warmSnow {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url('../assets/img/warmsnow.jpg');
   background-size: cover;
@@ -182,36 +175,33 @@ export default {
 
 
 main {
-  min-height: 100%;
+  min-height: 100%; /* main content 100% of screen*/
   padding: 25px; /* distance adjusted*/
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); /*darker background image*/
 }
 
 .search-box {
-  width: 100%;
+  width: 100%; /* search box has full width*/
   margin-top: 60px; /* distance from top*/
 }
 
 .search-box .search-bar {
-  display: block;
-  width: 100%;
-  padding: 15px;
+  width: 100%;  /* search bar has full width*/
+  padding: 15px; /* top padding (inner distance) */
 
   color: #313131;
   font-size: 20px;
-  appearance: none;
-  border: none;
-  outline: none;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.5) none;
-  border-radius: 0px 16px 0px 16px;
-  transition: 0.4s;
+  outline: none; /* border around none*/
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /*shadow around search bar*/
+  background: rgba(255, 255, 255, 0.5) none; /*white transparent color of search bar*/
+  border-radius: 0 16px 0 16px;
+  transition: 0.4s; /*time where it changes to other state*/
 }
 
 .search-box .search-bar:focus {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 16px 0px 16px 0px;
+  border-radius: 16px 0 16px 0;
 }
 
 .location-box .location {
@@ -220,7 +210,7 @@ main {
   font-weight: 500;
   text-align: center;
   text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 70px;
+  margin-top: 70px; /* distance from top*/
 }
 
 .location-box .date {
@@ -236,15 +226,15 @@ main {
 }
 
 .weather-box .temp {
-  display: inline-block;
-  padding: 10px 25px;
+  display: inline-block; /* display list items horizontally and set width and height */
+  padding: 10px 25px; /* inner distance top and right - so that box is bigger */
   color: #FFF;
-  font-size: 102px;
+  font-size: 100px;
   font-weight: 900;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 16px;
-  margin: 30px 0px;
+  margin: 30px;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
 

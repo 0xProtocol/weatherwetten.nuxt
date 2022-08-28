@@ -73,7 +73,7 @@ export default {
     return {
       weathercoin: null,
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
-      url_base: 'http://api.openweathermap.org/data/2.5/',
+      url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
     }

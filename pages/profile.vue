@@ -40,9 +40,6 @@
 <script>
 export default {
   name: "profile",
-  props: {
-    msg: String,
-  },
 
   data() {
     return {

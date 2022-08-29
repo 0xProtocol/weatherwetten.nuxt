@@ -133,6 +133,8 @@ export default {
     },
 
     compareBetGen (bettedValue, actualValue, bettedCoins = document.getElementById('txtFieldAmount').value) {
+      //use weather.weather[0].main.toLowerCase()
+
      // var actualValue = this.weather.main.description; maybe a way to get value, have yet to finally test how to get this value now
       // it is yet to be tested out
       if (bettedValue == actualValue) {

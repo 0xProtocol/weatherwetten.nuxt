@@ -1,7 +1,9 @@
+import Vue from 'vue'
 
-class Bet {
+class Bet extends Vue {
 
   constructor(bettedValue, bettedCoins, time, betType) {
+    super();
     this.bettedValue = bettedValue;
     this.bettedCoins = bettedCoins;
     this.time = time;

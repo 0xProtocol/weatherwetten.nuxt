@@ -14,7 +14,7 @@
         <v-btn color="transparent" v-if="$fire.auth.currentUser != null"> <!-- condition if you are logged in or not -->
           <NuxtLink to="/bet" class="nuxt-link-active-underline">BET</NuxtLink> <!-- link to bet.vue -->
         </v-btn>
-        <v-btn color="black">
+        <v-btn color="black" v-if="$fire.auth.currentUser != null">
           <nuxt-link to="/leaderboards" class="nuxt-link-active-underline">LEADERBOARDS</nuxt-link> <!-- link to leaderboards.vue -->
         </v-btn>
         <v-btn color="black">
@@ -102,7 +102,6 @@ export default {
 
         drawer: null,
         items: [
-          {title: 'LEADERBOARDS', icon: 'mdi-chart-bar', link: 'leaderboards'},
           {title: 'WEATHERCOIN', icon: 'mdi-currency-btc', link: 'weathercoin'},
           {title: 'ABOUT US', icon: 'mdi-account-multiple', link: 'aboutus'},
           {title: 'LOG IN', icon: 'mdi-login', link: 'Login'},

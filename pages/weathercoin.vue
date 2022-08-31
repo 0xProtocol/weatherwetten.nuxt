@@ -5,7 +5,7 @@
 
         <div class="weathercoin"> <!-- weathercoin div -->
           <h1>WEATHERCOIN</h1>
-          <h2>WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
+          <h2 v-if="$fire.auth.currentUser != null">WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
             <div class="content"> <!-- content of weathercoin.vue -->
 
                 <!-- VCARD 1 -->
@@ -178,21 +178,25 @@ export default {
   },
 
   /* get's instantly called*/
-  async created() {  /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
-    const docRef = this.$fire.firestore.collection('users');
-    const snapshot = await docRef.get();
-    this.minedWeatherCoins = 0;
-    let i = 0;
-    snapshot.forEach(doc => {
-      this.userArray[i] = doc.data();
-      this.minedWeatherCoins = this.minedWeatherCoins + this.userArray[i].weatherCoin;
-      i++;
-    });
+  async created() {
+    /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
+    if (this.$fire.auth.currentUser != null){
+      const docRef = this.$fire.firestore.collection('users');
+      const snapshot = await docRef.get();
+      this.minedWeatherCoins = 0;
+      let i = 0;
+      snapshot.forEach(doc => {
+        this.userArray[i] = doc.data();
+        this.minedWeatherCoins = this.minedWeatherCoins + this.userArray[i].weatherCoin;
+        i++;
+      });
 
-    this.userArray.sort(this.compareScores); //first sort then calculating
-    //console.log(this.minedWeatherCoins);
-    this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
-    //console.log(this.userArray);
+      this.userArray.sort(this.compareScores); //first sort then calculating
+      //console.log(this.minedWeatherCoins);
+      this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
+      //console.log(this.userArray);
+    }
+
   },
 };
 </script>

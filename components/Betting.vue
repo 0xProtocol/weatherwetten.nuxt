@@ -113,7 +113,6 @@ export default {
   },
   async created() { /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
     // get user data from document
-    console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin"); // get's weathercoins from user

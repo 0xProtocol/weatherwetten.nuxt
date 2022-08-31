@@ -192,9 +192,8 @@ export default {
       });
 
       this.userArray.sort(this.compareScores); //first sort then calculating
-      //console.log(this.minedWeatherCoins);
       this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
-      //console.log(this.userArray);
+
     }
 
   },

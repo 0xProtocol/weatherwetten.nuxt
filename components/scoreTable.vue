@@ -53,7 +53,6 @@ export default {
       i++;
     });
     this.userArray.sort(this.compareScores);
-    // console.log(this.userArray);
   },
 
   methods: {

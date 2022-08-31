@@ -83,7 +83,6 @@ export default {
   data() {
     // if logged in display this sort of navbar elements
     if (this.$fire.auth.currentUser != null) {
-      console.log("LOGGED IN");
       return {
         drawer: null,
         items: [
@@ -97,7 +96,6 @@ export default {
     }
     // if not logged in display this sort of navbar elements
     else {
-      console.log("NOT LOGGED IN");
       return {
 
         drawer: null,

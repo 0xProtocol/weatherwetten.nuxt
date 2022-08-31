@@ -72,8 +72,6 @@ export default {
 
     //reset password action
     sendEmailToUser: function () {
-      console.log("reset password");
-
       this.$fire.auth.sendPasswordResetEmail(this.userEmailAddress).then(
         () => {
           this.OkSnackbarVisible = true;

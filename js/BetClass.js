@@ -78,3 +78,5 @@ class Bet extends Vue {
 
 
 }
+
+export default class Bet {}

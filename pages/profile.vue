@@ -35,6 +35,7 @@
         </v-snackbar>
       </v-main>
     </div>
+    <FooterCoinPrice/>
   </v-app>
 </template>
 
@@ -124,7 +125,7 @@ export default {
 }
 
 #app {
-  background-image: url('../assets/img/warm.jpg');
+  background-image: url('../assets/img/profile.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

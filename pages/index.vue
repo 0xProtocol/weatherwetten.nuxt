@@ -17,7 +17,7 @@ html{
   url('../assets/img/warmclouds.png'), url('../assets/img/warmdrizzle.jpg'), url('../assets/img/warmrain.jpg'), url('../assets/img/warmsnow.jpg'),
   url('../assets/img/warmthunderstorm.jpg'), url('../assets/img/weathercoin.gif'), url("../assets/img/betting2.jpg"),
   url("../assets/img/aboutus1.png"),url("../assets/img/aboutus2.png"),url("../assets/img/aboutus3.png"),url("../assets/img/aboutus4.png"),url("../assets/img/weathercoin2.gif")
-  ,url("../assets/img/profile3.jpg") ,url("../assets/img/concept.jpg");
+  ,url("../assets/img/profile3.jpg") ,url("../assets/img/concept.jpg"),url("../assets/img/profile.jpg");
   background-size: 0;
 }
 </style>

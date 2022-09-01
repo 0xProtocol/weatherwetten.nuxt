@@ -68,6 +68,10 @@
 
 <script>
 
+
+import Bet from "@/js/BetClass";
+
+
 export default {
   data() {
     return {
@@ -120,6 +124,7 @@ export default {
     },
 
 
+
   async created() {
     // get user data from document
     console.log(this.$fire.auth.currentUser.uid);
@@ -127,7 +132,10 @@ export default {
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
   }
+
+
 };
+
 </script>
 
 <style>

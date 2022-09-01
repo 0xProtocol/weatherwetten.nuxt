@@ -211,7 +211,7 @@ main {
   font-weight: 500;
   text-align: center;
   text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 70px; /* distance from top*/
+  margin-top: 50px; /* distance from top*/
 }
 
 .location-box .date {
@@ -230,7 +230,7 @@ main {
   display: inline-block; /* display list items horizontally and set width and height */
   padding: 10px 25px; /* inner distance top and right - so that box is bigger */
   color: #FFF;
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 900;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.25);
@@ -241,10 +241,10 @@ main {
 
 .weather-box .weather {
   color: #FFF;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 </style>

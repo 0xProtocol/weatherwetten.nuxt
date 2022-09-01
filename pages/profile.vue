@@ -5,7 +5,7 @@
       <v-main>
 
 
-          <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined shaped loading max-width="600">
+          <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined shaped max-width="600">
             <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
             <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }}</h3></v-card-text>
             <br>

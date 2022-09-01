@@ -4,24 +4,25 @@
       <nav-bar/>
       <v-main>
 
-        <v-card id="card" class="mx-auto" outlined shaped loading max-width="600">
-          <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
-          <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }}</h3></v-card-text>
-          <br>
-          <br>
-          <v-card-actions class="justify-center">
-            <v-btn class="buttons" @click="logoutUser" id="logoutButton">
-              Logout
-            </v-btn>
-            <v-btn v-if="!showTextField" class="buttons" @click="changeName">
-              Change username
-            </v-btn>
-          </v-card-actions>
 
-          <br>
-          <v-text-field style="margin: 10px" dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
-                        append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
-        </v-card>
+          <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined shaped loading max-width="600">
+            <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
+            <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }}</h3></v-card-text>
+            <br>
+            <br>
+            <v-card-actions class="justify-center">
+              <v-btn class="buttons" @click="logoutUser" id="logoutButton">
+                Logout
+              </v-btn>
+              <v-btn v-if="!showTextField" class="buttons" @click="changeName">
+                Change username
+              </v-btn>
+            </v-card-actions>
+
+            <br>
+            <v-text-field @keyup.enter="saveToDatabase" style="margin: 10px" dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
+                          append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
+          </v-card>
 
 
         <v-snackbar timeout="10000" id="snackbar" v-model="showSnackBar">
@@ -44,11 +45,12 @@ export default {
   data() {
     return {
       username: "",
-      weathercoin: null,
+      weathercoin: 0,
       showTextField: false,
       newUsername: "",
       showSnackBar: false,
       msg: "",
+      dataLoaded: false
     }
   },
 
@@ -82,15 +84,16 @@ export default {
   },
 
   async created() {
-    // get user data from database
-    console.log(this.$fire.auth.currentUser.uid);
-    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
-    let document = ref.get();
-    this.username = (await document).get("username"); //get username from database
-    this.weathercoin = (await document).get("weatherCoin"); //get weathercoins from database
-    console.log(this.weathercoin);
-    console.log(this.username);
-    // console.log(ref);
+    // get the user data from our backend
+    let jsonDoc;
+    await fetch("/api/userdata/" + this.$fire.auth.currentUser.uid, {
+      method: 'GET'
+    })
+    .then(res => res.json())
+    .then(data => jsonDoc = data)
+    this.username = jsonDoc.username;
+    this.weathercoin = jsonDoc.weathercoin;
+    this.dataLoaded = true;
   }
 };
 </script>

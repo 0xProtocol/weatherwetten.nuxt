@@ -18,9 +18,15 @@ const firebaseConfig = { // Have the firebase config here
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 
-app.get("/test", (req, res) => {
-  res.send({message: "Test API Endpoint"})
+app.get("/userdata/:id", async (req, res)=>{
+  const docRef = db.collection("/users").doc(req.params.id)
+  let document = docRef.get();
+  let username = (await document).get("username")
+  let weathercoin = (await document).get("weatherCoin")
+  res.json({"username":username, "weathercoin":weathercoin})
 })
+
+
 
 
 module.exports = {

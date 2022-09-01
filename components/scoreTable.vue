@@ -45,32 +45,20 @@ export default {
 
   /* ???*/
   async created() {
-    const docRef = this.$fire.firestore.collection('users');
-    const snapshot = await docRef.get();
-    let i = 0;
-    snapshot.forEach(doc => {
-      this.userArray[i] = doc.data();
-      i++;
-    });
-    this.userArray.sort(this.compareScores);
-  },
-
-  methods: {
-    /* compare scores with two parameters */
-    compareScores(a, b) {
-      let scoreA = a.weatherCoin;
-      let scoreB = b.weatherCoin;
-
-      if (scoreA < scoreB) {
-        return 1;
+    fetch("/api/leaderboard", {
+      method: 'GET'
+    }).then(res => {
+      if (!res.ok) {
+        console.log("HTTP request unsuccessful")
       }
-      if (scoreA > scoreB) {
-        return -1;
-      }
-      return 0; //same score
-    }
+      return res;
+    })
+      .then(response => response.json())
+      .then(data => this.userArray = data)
   }
 }
+
+
 </script>
 
 <style scoped> /* scoped = apply to elements of the current component only */

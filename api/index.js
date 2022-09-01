@@ -19,14 +19,43 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 
 app.get("/userdata/:id", async (req, res)=>{
-  const docRef = db.collection("/users").doc(req.params.id)
-  let document = docRef.get();
+  const fbDocument = db.collection("/users").doc(req.params.id)
+  let document = fbDocument.get();
   let username = (await document).get("username")
   let weathercoin = (await document).get("weatherCoin")
-  res.json({"username":username, "weathercoin":weathercoin})
+  res.json({"username":username, "weathercoin":weathercoin}).status(200)
 })
 
 
+app.get("/leaderboard", async (req, res)=>{
+  let userArray = [];
+  const documents = db.collection('users');
+  const snapshot = await documents.get();
+  let i = 0;
+  snapshot.forEach(doc => {
+    userArray[i] = doc.data();
+    i++;
+  });
+  userArray.sort(compareScores);
+  for (let i = userArray.length; i>5; i--)
+  {
+    userArray.pop();
+  }
+  res.send(userArray)
+})
+
+function compareScores(a, b) {
+  let scoreA = a.weatherCoin;
+  let scoreB = b.weatherCoin;
+
+  if (scoreA < scoreB) {
+    return 1;
+  }
+  if (scoreA > scoreB) {
+    return -1;
+  }
+  return 0; //same score
+}
 
 
 module.exports = {

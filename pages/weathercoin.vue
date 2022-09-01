@@ -3,156 +3,167 @@
     <v-app>
       <nav-bar/>    <!-- Navbar -->
 
-        <div class="weathercoin"> <!-- weathercoin div -->
-          <h1>WEATHERCOIN</h1>
-          <h2 v-if="$fire.auth.currentUser != null">WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2> <!-- gather weathercoins that are minted with created() function -->
-            <div class="content"> <!-- content of weathercoin.vue -->
+      <div class="weathercoin"> <!-- weathercoin div -->
+        <h1>WEATHERCOIN</h1>
+        <h2 id="randomColorHeading" v-if="$fire.auth.currentUser != null">WEATHERCOINS MINTED -> {{ this.userArray[0] }}</h2>
+        <!-- gather weathercoins that are minted with created() function -->
+        <div class="content"> <!-- content of weathercoin.vue -->
 
-                <!-- VCARD 1 -->
-              <v-container fill-height>  <!-- first container (one line) || fill-height applies height 100% and align-items to center-->
-                <v-card class="mx-auto" max-width="344" outlined >
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 1</div>
-                      <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
-                      <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit1.png" alt="BENEFIT 1">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+          <!-- VCARD 1 -->
+          <v-container fill-height>
+            <!-- first container (one line) || fill-height applies height 100% and align-items to center-->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 1</div>
+                  <v-list-item-title class="text-h5 mb-2">EDUCATION</v-list-item-title>
+                  <v-list-item-subtitle>We want to educate in risk analysis</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit1.png"
+                                                                            alt="BENEFIT 1">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 2 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 2</div>
-                      <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
-                      <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit2.png" alt="BENEFIT 2">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+            <!-- VCARD 2 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 2</div>
+                  <v-list-item-title class="text-h5 mb-2">HEALTH</v-list-item-title>
+                  <v-list-item-subtitle>We want to improve mental health</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit2.png"
+                                                                            alt="BENEFIT 2">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 3 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 3</div>
-                      <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
-                      <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit3.png" alt="BENEFIT 3">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
-              </v-container>
+            <!-- VCARD 3 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 3</div>
+                  <v-list-item-title class="text-h5 mb-2">CURE</v-list-item-title>
+                  <v-list-item-subtitle>We want to cure gambling addiction</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/benefit3.png"
+                                                                            alt="BENEFIT 3">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
+          </v-container>
 
-                <!-- VCARD 4 -->
-              <v-container fill-height grid-list-xl text-xs-center>  <!-- second container (one line) || fill-height applies height 100% and align-items to center-->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 4</div>
-                      <v-list-item-title class="text-h5 mb-2">LEADERBOARD</v-list-item-title>
-                      <v-list-item-subtitle>A leaderboard for the best of us</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/leaderboard4.png" alt="BENEFIT 4">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+          <!-- VCARD 4 -->
+          <v-container fill-height grid-list-xl text-xs-center>
+            <!-- second container (one line) || fill-height applies height 100% and align-items to center-->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 4</div>
+                  <v-list-item-title class="text-h5 mb-2">LEADERBOARD</v-list-item-title>
+                  <v-list-item-subtitle>A leaderboard for the best of us</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/leaderboard4.png"
+                                                                            alt="BENEFIT 4">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 5 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 5</div>
-                      <v-list-item-title class="text-h5 mb-2">WEATHER DATA</v-list-item-title>
-                      <v-list-item-subtitle>Gather data on our main page</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/data.png" alt="BENEFIT 5">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+            <!-- VCARD 5 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 5</div>
+                  <v-list-item-title class="text-h5 mb-2">WEATHER DATA</v-list-item-title>
+                  <v-list-item-subtitle>Gather data on our main page</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/data.png"
+                                                                            alt="BENEFIT 5">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 6 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4">BENEFIT 6</div>
-                      <v-list-item-title class="text-h5 mb-2">LOG IN SYSTEM</v-list-item-title>
-                      <v-list-item-subtitle>Easy and secure login system</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/login.png" alt="BENEFIT 6">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
-              </v-container>
+            <!-- VCARD 6 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4">BENEFIT 6</div>
+                  <v-list-item-title class="text-h5 mb-2">LOG IN SYSTEM</v-list-item-title>
+                  <v-list-item-subtitle>Easy and secure login system</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/login.png"
+                                                                            alt="BENEFIT 6">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
+          </v-container>
 
-                <!-- VCARD 7 -->
-              <v-container fill-height grid-list-xl text-xs-center> <!--third container (one line) || fill-height applies height 100% and align-items to center-->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 7</div>
-                      <v-list-item-title class="text-h5 mb-2">FAST</v-list-item-title>
-                      <v-list-item-subtitle>We guarantee a fast transmission</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/fast.png" alt="BENEFIT 7">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+          <!-- VCARD 7 -->
+          <v-container fill-height grid-list-xl text-xs-center>
+            <!--third container (one line) || fill-height applies height 100% and align-items to center-->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 7</div>
+                  <v-list-item-title class="text-h5 mb-2">FAST</v-list-item-title>
+                  <v-list-item-subtitle>We guarantee a fast transmission</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/fast.png"
+                                                                            alt="BENEFIT 7">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 8 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 8</div>
-                      <v-list-item-title class="text-h5 mb-2">CLIMATE FRIENDLY</v-list-item-title>
-                      <v-list-item-subtitle>Weathercoin is climate friendly</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/climate.png" alt="BENEFIT 8">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
+            <!-- VCARD 8 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 8</div>
+                  <v-list-item-title class="text-h5 mb-2">CLIMATE FRIENDLY</v-list-item-title>
+                  <v-list-item-subtitle>Weathercoin is climate friendly</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/climate.png"
+                                                                            alt="BENEFIT 8">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
 
-                <!-- VCARD 9 -->
-                <v-card class="mx-auto" max-width="344" outlined>
-                  <v-list-item three-line> <!-- items three in a row -->
-                    <v-list-item-content>
-                      <div class="text-overline mb-4"> BENEFIT 9</div>
-                      <v-list-item-title class="text-h5 mb-2">SECURE</v-list-item-title>
-                      <v-list-item-subtitle>We guarantee a good security</v-list-item-subtitle>
-                    </v-list-item-content>
-                    <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png" alt="BENEFIT 9">
-                    </v-list-item-avatar>
-                  </v-list-item>
-                  <v-card-actions>
-                  </v-card-actions>
-                </v-card>
-              </v-container>
+            <!-- VCARD 9 -->
+            <v-card class="mx-auto" max-width="344" outlined>
+              <v-list-item three-line> <!-- items three in a row -->
+                <v-list-item-content>
+                  <div class="text-overline mb-4"> BENEFIT 9</div>
+                  <v-list-item-title class="text-h5 mb-2">SECURE</v-list-item-title>
+                  <v-list-item-subtitle>We guarantee a good security</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png"
+                                                                            alt="BENEFIT 9">
+                </v-list-item-avatar>
+              </v-list-item>
+              <v-card-actions>
+              </v-card-actions>
+            </v-card>
+          </v-container>
 
-
-
-            </div>
         </div>
+      </div>
       <!-- <Footer/> -->
     </v-app>
   </div>
@@ -173,14 +184,16 @@ export default {
     let mintedWeatherCoins;
     return {
       userArray: [],
-      int: mintedWeatherCoins
+      int: mintedWeatherCoins,
+      url_base: 'http://api.creativehandles.com/getRandomColor',
     }
   },
 
   /* get's instantly called*/
   async created() {
+    var color;
     /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
-    if (this.$fire.auth.currentUser != null){
+    if (this.$fire.auth.currentUser != null) {
       const docRef = this.$fire.firestore.collection('users');
       const snapshot = await docRef.get();
       this.minedWeatherCoins = 0;
@@ -193,10 +206,19 @@ export default {
 
       this.userArray.sort(this.compareScores); //first sort then calculating
       this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
-
     }
 
-  },
+    // fetch random color and apply it to our weathercoin minted text
+      fetch(`${this.url_base}`)
+        .then(function (response) {
+
+          response.json().then(function (data) {
+            color = data["color"]; // set color var with response random color
+            //console.log(color);
+            document.getElementById("randomColorHeading").style.color  = color; //set color to our element
+          })
+        })
+    }
 };
 </script>
 
@@ -210,16 +232,18 @@ export default {
   background-position: center;
 
 }
+
 .weathercoin {
   margin-top: 100px; /* distance from top of div*/
   text-align: center;
 }
 
-.mx-auto{
+.mx-auto {
   margin-top: 15px; /*spaces between cards */
   margin-bottom: 0px; /* overwrite margin-bottom */
 
 }
+
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
@@ -259,6 +283,7 @@ h2 {
 h2:hover:after {
   width: 0%; /* reset the h2 defintion -> so no effect is visible*/
 }
+
 
 /* glitch effect from -> https://codepen.io/dpletiko/pen/ExoKOxN */
 @keyframes glitch {

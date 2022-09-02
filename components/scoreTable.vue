@@ -8,26 +8,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
+    <tr v-for="user in userArray">
       <!-- get's username and according weathercoins from array -->
-      <td class="td">{{ this.userArray[0].username }}</td>
-      <td class="td">{{ this.userArray[0].weatherCoin }}</td>
-    </tr>
-    <tr>
-      <td class="td">{{ this.userArray[1].username }}</td>
-      <td class="td">{{ this.userArray[1].weatherCoin }}</td>
-    </tr>
-    <tr>
-      <td class="td">{{ this.userArray[2].username }}</td>
-      <td class="td">{{ this.userArray[2].weatherCoin }}</td>
-    </tr>
-    <tr>
-      <td class="td">{{ this.userArray[3].username }}</td>
-      <td class="td">{{ this.userArray[3].weatherCoin }}</td>
-    </tr>
-    <tr>
-      <td class="td">{{ this.userArray[4].username }}</td>
-      <td class="td">{{ this.userArray[4].weatherCoin }}</td>
+      <td class="td">{{ user.username }}</td>
+      <td class="td">{{ user.weatherCoin }}</td>
     </tr>
     </tbody>
   </v-simple-table>

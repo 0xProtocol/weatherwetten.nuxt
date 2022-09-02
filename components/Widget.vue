@@ -26,7 +26,7 @@
         </div>
 
         <div class="weather-box">
-          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>  <!-- temperature -->
+          <div class="temp">{{ Math.round(weather.main.temp) }}°C</div>  <!-- temperature -->
           <div class="weather">{{ weather.weather[0].main }}</div>      <!-- main weather  -->
           <div class="weather">{{ weather.wind.speed }} m/s</div>  <!-- wind speed -->
           <div class="weather">{{ weather.clouds.all }} % cloudiness</div>    <!-- clouds in % -->

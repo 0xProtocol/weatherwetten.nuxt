@@ -44,6 +44,20 @@ app.get("/leaderboard", async (req, res)=>{
   res.send(userArray)
 })
 
+app.post("/create/:id/:name", async (req, res)=>{
+  const reference = db.collection('users').doc(req.params.id);
+  const document = {
+    username: req.params.name,
+    weatherCoin: 0
+  }
+  try {
+    await reference.set(document)
+  } catch (error) {
+    console.log(error.message)
+  }
+  res.status(200)
+})
+
 function compareScores(a, b) {
   let scoreA = a.weatherCoin;
   let scoreB = b.weatherCoin;

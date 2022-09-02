@@ -88,7 +88,8 @@ export default {
     // get the user data from our backend
     let jsonDoc;
     await fetch("/api/userdata/" + this.$fire.auth.currentUser.uid, {
-      method: 'GET'
+      method: 'GET',
+      cache: 'reload'
     })
     .then(res => res.json())
     .then(data => jsonDoc = data)

@@ -104,7 +104,11 @@ export default {
         this.$noty.error("Passwords do not match!");
       } else {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
-          .then((user) => this.initializeUserData()).then((user) => this.$router.push('Profile'))
+          .then((user) => {
+            fetch("/api/create/" + this.$fire.auth.currentUser.uid + "/" + this.username, {
+              method: 'PUT'
+            })
+          }).then(() => this.$router.push('Profile'))
           .catch(function (e) {
             switch (e.code) {
               case "auth/email-already-in-use":
@@ -135,7 +139,7 @@ export default {
       this.$router.push('Login')
     },
     // ??
-    async initializeUserData() {
+   /* async initializeUserData() {
       const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
 
       const document = {
@@ -147,7 +151,7 @@ export default {
       } catch (error) {
         console.log(error.message)
       }
-    }
+    }*/
   }
 }
 

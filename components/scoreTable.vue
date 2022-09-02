@@ -30,7 +30,8 @@ export default {
   /* ???*/
   async created() {
     fetch("/api/leaderboard", {
-      method: 'GET'
+      method: 'GET',
+      cache: 'reload'
     }).then(res => {
       if (!res.ok) {
         console.log("HTTP request unsuccessful")

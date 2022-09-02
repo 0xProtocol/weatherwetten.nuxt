@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - weatherwetten.nuxt',
-    title: 'weatherwetten.nuxt',
+    titleTemplate: '',
+    title: 'Weather Wetten',
     htmlAttrs: {
       lang: 'en'
     },

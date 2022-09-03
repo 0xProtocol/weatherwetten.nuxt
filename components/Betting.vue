@@ -57,7 +57,7 @@
           <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
-          <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
+          <v-text-field id="txtFieldAmount" class="txtField" v-model="coins"></v-text-field>
         </v-card-actions>
       </v-card>
 
@@ -81,8 +81,8 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
-      temp: null,
-      coins: 5, // later insert document.getElementById('txtFieldAmount').value
+      temp: null,   // <----- Christoph, this is the variable name we talked about
+      coins: null, // later insert document.getElementById('txtFieldAmount').value
     }
   },
   methods: {
@@ -115,7 +115,9 @@ export default {
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
         this.temp = this.weather.main.temp; // get actual temperature and write it into the variable
-        //console.log(range);
+        console.log(range);
+        console.log(this.temp);
+        console.log(this.coins);
         //saveBet(range) --> determine which button was pressed (1.5 OR 2 OR 3) with 'range' var
         this.$noty.success("Bet placed!")
       } else {

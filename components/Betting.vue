@@ -18,7 +18,7 @@
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
         <thead>
         <tr>
-          <th style="text-align: center; font-size: 15px; color: white">City</th>
+          <th style="text-align: center; font-size: 15px; color: white">?????{{this.temp}}!!!</th>
           <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Bottom</th>
@@ -81,6 +81,7 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
+      temp: null,
     }
   },
   methods: {
@@ -112,6 +113,7 @@ export default {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
+        this.temp = this.weather.main.temp;
         this.$noty.success("Bet placed!")
       } else {
         console.log("error");

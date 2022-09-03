@@ -126,8 +126,8 @@ export default {
     1. Data is set -> finished (only variable from Christoph missing)
     2. We save bet object -> finished
     3. Used coins get deducted from account -> finished
-    4. Bet gets realized e.g. comperator does it's magic -> open
-    5. Result of bet: Coins get added to account (if not won, amount is 0) -> open
+    4. Bet gets realized e.g. comperator does it's magic -> finished
+    5. Result of bet: Coins get added to account (if not won, amount is 0) -> finished
     6. Profit$$$ -> hopefully soon
 
 
@@ -223,10 +223,10 @@ export default {
       let prizeUpdate = refPrize.get();
       this.weathercoin = (await prizeUpdate).get("weatherCoin");
 
-      // coins get deducted
+      // prize gets added
       await refPrize.update(
         {
-          weatherCoin: this.weatherCoin - this.coins
+          weatherCoin: this.weatherCoin + prize
         })
     },
 

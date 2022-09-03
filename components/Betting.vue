@@ -121,14 +121,21 @@ export default {
 
     //Testing out stuff from Timmy's dbTestFile
 
+    /*
+    What has to happen
+    1. Data is set -> finished (only variable from Christoph missing)
+    2. We save bet object -> finished
+    3. Used coins get deducted from account -> open
+    4. Bet gets realized e.g. comperator does it's magic -> open
+    5. Result of bet: Coins get added to account (if not won, amount is 0) -> open
+    6. Profit$$$ -> hopefully soon
+
+
+
+     */
+
     data(){
       return{
-        bet: {
-          value: 12,
-          coins: 10,
-          betType : 1
-        },
-
         docData: {
           bet: {
             temp: 10,  // <----- Christoph, this is the variable name we talked about

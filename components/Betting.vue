@@ -125,7 +125,7 @@ export default {
     What has to happen
     1. Data is set -> finished (only variable from Christoph missing)
     2. We save bet object -> finished
-    3. Used coins get deducted from account -> open
+    3. Used coins get deducted from account -> finished
     4. Bet gets realized e.g. comperator does it's magic -> open
     5. Result of bet: Coins get added to account (if not won, amount is 0) -> open
     6. Profit$$$ -> hopefully soon
@@ -189,6 +189,7 @@ export default {
     },
 
     async saveBet(){
+      //method is not yet completely finished, right now maybe too many things happen in one method, bit unclean
       const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
       //still need to solve problem for continuous numbering of bets
@@ -203,6 +204,27 @@ export default {
 
       // coins get deducted
       await ref.update(
+        {
+          weatherCoin: this.weatherCoin - this.coins
+        })
+
+      ///bet gets realized
+      //more elegant way vor these variables, do I have to create them first?
+      let bettedValue;
+      let actualValue;
+      let bettedCoins;
+
+      let prize = compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+        bettedCoins = document.getElementById('txtFieldAmount').value)
+
+      //update coins
+      //get current coin value
+      const refPrize = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      let prizeUpdate = refPrize.get();
+      this.weathercoin = (await prizeUpdate).get("weatherCoin");
+
+      // coins get deducted
+      await refPrize.update(
         {
           weatherCoin: this.weatherCoin - this.coins
         })

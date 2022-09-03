@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+app.use(express.json())
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -44,10 +44,11 @@ app.get("/leaderboard", async (req, res)=>{
   res.send(userArray)
 })
 
-app.post("/create/:id/:name", async (req, res)=>{
+app.post("/create/:id", async (req, res)=>{
   const reference = db.collection('users').doc(req.params.id);
+  console.log(req.body)
   const document = {
-    username: req.params.name,
+    username: req.body.username,
     weatherCoin: 10
   }
   try {
@@ -55,7 +56,7 @@ app.post("/create/:id/:name", async (req, res)=>{
   } catch (error) {
     console.log(error.message)
   }
-  res.status(200)
+  res.status(201) // 201 means "created", post request successful and resource created
 })
 
 function compareScores(a, b) {

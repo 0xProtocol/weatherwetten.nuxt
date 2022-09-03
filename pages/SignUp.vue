@@ -105,10 +105,17 @@ export default {
       } else {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
           .then((user) => {
-            fetch("/api/create/" + this.$fire.auth.currentUser.uid + "/" + this.username, {
-              method: 'PUT'
+            fetch("/api/create/" + this.$fire.auth.currentUser.uid, {
+              method: 'POST',
+              headers:{
+                'Content-Type':'application/json'
+              },
+              body: JSON.stringify({
+                username: this.username
+              })
             })
-          }).then(() => this.$router.push('Profile'))
+          }).then(() => {this.$router.push('Profile')
+          this.$noty.success("10 weathercoin added!")})
           .catch(function (e) {
             switch (e.code) {
               case "auth/email-already-in-use":

@@ -165,7 +165,10 @@ export default {
 
     async saveObject(){
       const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      await document.set(this.docData, {merge: true});
+      // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
+      //still need to solve problem for continuous numbering of bets
+      //await document.set(this.docData, {merge: true});
+      await document.set(this.docData);
     },
 
     async deleteObject(){
@@ -176,7 +179,8 @@ export default {
       })
     },
 
-    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp, bettedCoins = document.getElementById('txtFieldAmount').value) {
+    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+                    bettedCoins = document.getElementById('txtFieldAmount').value) {
       //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
 
       var value = bettedValue - actualValue;
@@ -185,17 +189,13 @@ export default {
       }
 
       if (value < 1.0) {
-        return bettedCoins * 1.2;
+        return bettedCoins * 3;
       } else if (value < 1.5) {
-        return bettedCoins * 1.05;
+        return bettedCoins * 1.5;
       } else {
         return 0;
       }
     }
-
-
-
-
     },
 
 

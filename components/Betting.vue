@@ -54,9 +54,9 @@
       <v-card class="mx-auto" max-width="600" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn class="bettingButtons" dark text color="success" @click="setBet">1,5x</v-btn>
-          <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
-          <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
+          <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
+          <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
+          <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
           <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
         </v-card-actions>
       </v-card>
@@ -109,11 +109,13 @@ export default {
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
     },
-    setBet() {
+    setBet(range) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
-        this.temp = this.weather.main.temp;
+        this.temp = this.weather.main.temp; // get actual temperature and write it into the variable
+        //console.log(range);
+        //saveBet(range) --> determine which button was pressed (1.5 OR 2 OR 3) with 'range' var
         this.$noty.success("Bet placed!")
       } else {
         console.log("error");

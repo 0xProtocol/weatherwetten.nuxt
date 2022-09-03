@@ -82,6 +82,7 @@ export default {
       query: '',
       weather: {},
       temp: null,
+      coins: 5, // later insert document.getElementById('txtFieldAmount').value
     }
   },
   methods: {
@@ -138,7 +139,7 @@ export default {
 
      */
 
-    docData(){
+    /*docData(){
       return{
         docData: {
           bet: {
@@ -147,7 +148,7 @@ export default {
           }
         }
       }
-    },
+    },*/
 
     compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
                     bettedCoins = document.getElementById('txtFieldAmount').value) {

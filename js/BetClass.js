@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-class Bet extends Vue {
+export default class Bet extends Vue {
 
   constructor(bettedValue, bettedCoins, time, betType) {
     super();
@@ -78,5 +78,3 @@ class Bet extends Vue {
 
 
 }
-
-export default class Bet {}

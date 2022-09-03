@@ -70,6 +70,7 @@
 
 
 import Bet from "@/js/BetClass";
+import {deleteField} from "firebase/firestore";
 
 
 export default {
@@ -117,6 +118,80 @@ export default {
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
+
+    //Testing out stuff from Timmy's dbTestFile
+
+    data(){
+      return{
+        bet: {
+          value: 12,
+          coins: 10,
+          betType : 1
+        },
+
+        docData: {
+          bet: {
+            temp: 10,  // <----- Christoph, this is the variable name we talked about
+            coins: 5, // later insert document.getElementById('txtFieldAmount').value
+          }
+        }
+      }
+    },
+
+    async mergeDataIntoDB(){
+      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      await document.set(this.bet, {merge:true})
+      console.log("Merge into document")
+    },
+
+    async deleteDataFields(){
+      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      await document.update(
+        {
+          betType: deleteField()
+        }
+      )
+    },
+
+    betDoc(){
+      const betDoc = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      betDoc.set(this.bet)
+    },
+
+    deleteDoc(){
+      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      document.delete();
+    },
+
+    async saveObject(){
+      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      await document.set(this.docData, {merge: true});
+    },
+
+    async deleteObject(){
+      console.log("Delete object we just merged")
+      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      await document.update({
+        bet: deleteField()
+      })
+    },
+
+    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp, bettedCoins = document.getElementById('txtFieldAmount').value) {
+      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
+
+      var value = bettedValue - actualValue;
+      if (value < 0) {
+        value *= -1;
+      }
+
+      if (value < 1.0) {
+        return bettedCoins * 1.2;
+      } else if (value < 1.5) {
+        return bettedCoins * 1.05;
+      } else {
+        return 0;
+      }
+    }
 
 
 

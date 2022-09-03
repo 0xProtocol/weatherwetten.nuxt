@@ -59,6 +59,14 @@ app.post("/create/:id", async (req, res)=>{
   res.status(201) // 201 means "created", post request successful and resource created
 })
 
+app.patch("/edit/:id", async (req, res)=>{
+  let newUsername = req.body.newUsername;
+  const reference = db.collection('users').doc(req.params.id);
+  await reference.update({username: newUsername})
+  res.sendStatus(200)
+})
+
+
 function compareScores(a, b) {
   let scoreA = a.weatherCoin;
   let scoreB = b.weatherCoin;

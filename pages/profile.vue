@@ -75,12 +75,21 @@ export default {
       }
 
       //change username and save it to database
-      const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
-      await ref.update({username: this.newUsername})
+      await fetch("/api/edit/"+this.$fire.auth.currentUser.uid, {
+        method: 'PATCH',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          newUsername: this.newUsername
+        })
+      })
+      .then(() => {
+        this.msg = "Username changed successfully"
+        this.showSnackBar = true;
+        location.reload(); // reload the current page
+      })
 
-      this.msg = "Username changed successfully"
-      this.showSnackBar = true;
-      location.reload(); // reload the current page
     }
   },
 

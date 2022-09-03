@@ -106,7 +106,7 @@ export default {
         this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
           .then((user) => {
             fetch("/api/create/" + this.$fire.auth.currentUser.uid, {
-              method: 'POST',
+              method: 'POST',           // here we make our post request to create a document storing user information
               headers:{
                 'Content-Type':'application/json'
               },

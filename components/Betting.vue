@@ -134,7 +134,7 @@ export default {
 
      */
 
-    data(){
+    docData(){
       return{
         docData: {
           bet: {
@@ -142,6 +142,24 @@ export default {
             coins: 5, // later insert document.getElementById('txtFieldAmount').value
           }
         }
+      }
+    },
+
+    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+                    bettedCoins = document.getElementById('txtFieldAmount').value) {
+      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
+
+      var value = bettedValue - actualValue;
+      if (value < 0) {
+        value *= -1;
+      }
+
+      if (value < 1.0) {
+        return bettedCoins * 3;
+      } else if (value < 1.5) {
+        return bettedCoins * 1.5;
+      } else {
+        return 0;
       }
     },
 
@@ -170,12 +188,24 @@ export default {
       document.delete();
     },
 
-    async saveObject(){
-      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+    async saveBet(){
+      const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
       //still need to solve problem for continuous numbering of bets
       //await document.set(this.docData, {merge: true});
-      await document.set(this.docData);
+      await bet.set(this.docData);
+
+      ///deduct coins used for bet
+      //get current coin value
+      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      let coin = ref.get();
+      this.weathercoin = (await coin).get("weatherCoin");
+
+      // coins get deducted
+      await ref.update(
+        {
+          weatherCoin: this.weatherCoin - this.coins
+        })
     },
 
     async deleteObject(){
@@ -186,23 +216,7 @@ export default {
       })
     },
 
-    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
-                    bettedCoins = document.getElementById('txtFieldAmount').value) {
-      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
 
-      var value = bettedValue - actualValue;
-      if (value < 0) {
-        value *= -1;
-      }
-
-      if (value < 1.0) {
-        return bettedCoins * 3;
-      } else if (value < 1.5) {
-        return bettedCoins * 1.5;
-      } else {
-        return 0;
-      }
-    }
     },
 
 

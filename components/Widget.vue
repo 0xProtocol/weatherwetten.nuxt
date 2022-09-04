@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     //request the weather on specific query and get response back
-    fetchWeather(e) {
+   async fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {

@@ -60,8 +60,9 @@
           <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
-          <v-text-field id="txtFieldAmount" class="txtField" v-model="coins"></v-text-field>
         </v-card-actions>
+        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" label="temperature"></v-text-field> <!-- make , to . -->
+        <v-text-field id="txtFieldAmount" class="txtField" v-model="coins" label="weathercoins"></v-text-field>
       </v-card>
 
 
@@ -123,46 +124,47 @@ export default {
         console.log("actual temp " + this.actualTemp);
         console.log(this.coins);
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
-        this.$noty.success("Bet placed!");
+        //this.$noty.success("Bet placed!");
       } else {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
+    sleep(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+},
 
-    bet(odds) {
+    async bet(odds) {
       if (odds === 1.5) {
-        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
         //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
-        if (this.actualTemp - 1.5 <= this.predictedTemp <= this.actualTemp + 1.5) {
+        if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) {
           //get 1.5 from betting volume
-          console.log("SUCCESS");
+          this.$noty.success("You won " + "amount");
         } else {
           //lose betted amount volume
-          console.log("FAILED");
+          this.$noty.error("You lost " + "amount");
         }
       } else if (odds === 2) {
-        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
         //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
-        if (this.actualTemp - 1 <= this.predictedTemp <= this.actualTemp + 1) {
+        if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) {
           //get 2 from betting volume
-          console.log("SUCCESS");
+          this.$noty.success("You won " + "amount");
         } else {
           //lose betted amount volume
-          console.log("FAILED");
+          this.$noty.error("You lost " + "amount");
         }
       } else if (odds === 3) {
-        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
         //BOTTOM = actualTemp - 0.5 || TOP = actualTemp + 0.5
-        if (this.actualTemp - 0.5 <= this.predictedTemp <= this.actualTemp + 0.5) {
+        if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) {
           //get 3 from betting volume
-          console.log("SUCCESS");
+          this.$noty.success("You won " + "amount");
         } else {
           //lose betted amount volume
-          console.log("FAILED");
+          this.$noty.error("You lost " + "amount");
         }
       }
     },
+
   }
 
   //Testing out stuff from Timmy's dbTestFile
@@ -386,12 +388,13 @@ h1:hover:after {
 
 
 .txtField {
-  padding: 5px; /* inner distance around txtField*/
+  margin-right: 100px; /* inner distance around txtField*/
+  margin-left: 100px; /* inner distance around txtField*/
 }
 
 .bettingButtons {
   margin-bottom: 12px; /*distance bottom from buttons (1x,2x,3x) */
-  margin-right: 10px; /*distance from right from buttons (1x,2x,3x) */
+  margin-right: 0; /*distance from right from buttons (1x,2x,3x) */
 }
 
 .mx-auto {

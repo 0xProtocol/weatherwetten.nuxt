@@ -7,9 +7,15 @@
 
           <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined shaped max-width="600">
             <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
-            <v-card-text><h3 id="weatherCoin">Current weatherCoin balance: {{ weathercoin }}</h3></v-card-text>
-            <br>
-            <br>
+            <v-card-text>
+              <h3 class="text">Your weatherCoin balance: {{ weathercoin }}</h3>
+              <h3 class="text">Level: {{userLevel}}</h3>
+            </v-card-text>
+
+            <v-card-actions class="justify-center">
+              <v-img max-height="70" max-width="70" :src="imageSrc"></v-img>
+            </v-card-actions>
+
             <v-card-actions class="justify-center">
               <v-btn class="buttons" @click="logoutUser" id="logoutButton">
                 Logout
@@ -51,7 +57,10 @@ export default {
       newUsername: "",
       showSnackBar: false,
       msg: "",
-      dataLoaded: false
+      dataLoaded: false,
+      imageSrc: require("assets/img/normalUser.png"),
+      userLevel: "",
+
     }
   },
 
@@ -64,6 +73,26 @@ export default {
 
     changeName() {
       this.showTextField = true;
+    },
+
+    setBadge(){
+      let coins = this.weathercoin;
+      if (coins < 40){
+        this.imageSrc = require("assets/img/newbie.png")
+        this.userLevel = "Beginner"
+      } else if (coins >= 40 && coins < 100){
+        this.imageSrc = require("assets/img/third.png")
+        this.userLevel = "Bronze"
+      } else if (coins >=100  && coins < 300){
+        this.imageSrc = require("assets/img/second.png")
+        this.userLevel = "Silver"
+      } else if (coins >= 300 && coins < 1000){
+        this.imageSrc = require("assets/img/best.png")
+        this.userLevel = "Gold";
+      } else if (coins >= 1000){
+        this.imageSrc = require("assets/img/expert.png")
+        this.userLevel = "Expert";
+      }
     },
 
     //change username
@@ -104,6 +133,7 @@ export default {
     .then(data => jsonDoc = data)
     this.username = jsonDoc.username;
     this.weathercoin = jsonDoc.weathercoin;
+    this.setBadge();
     this.dataLoaded = true;
   }
 };
@@ -119,10 +149,11 @@ export default {
   background-color: #3c4242;
 }
 
-#weatherCoin {
+.text {
   text-align: center;
   font-size: 18px;
   color: white;
+  margin-top: 2px;
 }
 
 #greetUser {

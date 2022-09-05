@@ -119,7 +119,7 @@
                 <v-list-item-content>
                   <div class="text-overline mb-4"> BENEFIT 7</div>
                   <v-list-item-title class="text-h5 mb-2">FAST</v-list-item-title>
-                  <v-list-item-subtitle>We guarantee a fast transmission</v-list-item-subtitle>
+                  <v-list-item-subtitle>We guarantee fast transmission</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/fast.png"
                                                                             alt="BENEFIT 7">
@@ -135,7 +135,7 @@
                 <v-list-item-content>
                   <div class="text-overline mb-4"> BENEFIT 8</div>
                   <v-list-item-title class="text-h5 mb-2">CLIMATE FRIENDLY</v-list-item-title>
-                  <v-list-item-subtitle>Weathercoin is climate friendly</v-list-item-subtitle>
+                  <v-list-item-subtitle>Unlike bitcoin, weathercoin is climate friendly</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="80" color="transparent"><img src="../assets/img/climate.png"
                                                                             alt="BENEFIT 8">
@@ -151,7 +151,7 @@
                 <v-list-item-content>
                   <div class="text-overline mb-4"> BENEFIT 9</div>
                   <v-list-item-title class="text-h5 mb-2">SECURE</v-list-item-title>
-                  <v-list-item-subtitle>We guarantee a good security</v-list-item-subtitle>
+                  <v-list-item-subtitle>We guarantee excellent security</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="70" color="transparent"><img src="../assets/img/secure.png"
                                                                             alt="BENEFIT 9">

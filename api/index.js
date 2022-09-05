@@ -70,8 +70,10 @@ app.put("/", (req, res)=>{
 
 })
 
-app.delete("/", (req, res)=>{
-
+app.delete("/delete/:id", (req, res)=>{
+  const document = db.collection("/bets").doc(req.params.id)
+  document.delete()
+    .then(()=>res.sendStatus(204));
 })
 
 

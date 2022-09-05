@@ -66,6 +66,14 @@ app.patch("/edit/:id", async (req, res)=>{
   res.sendStatus(200)
 })
 
+app.put("/", (req, res)=>{
+
+})
+
+app.delete("/", (req, res)=>{
+
+})
+
 
 function compareScores(a, b) {
   let scoreA = a.weatherCoin;

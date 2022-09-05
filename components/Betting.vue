@@ -138,6 +138,7 @@ export default {
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
+    //sleep function
     delay(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },

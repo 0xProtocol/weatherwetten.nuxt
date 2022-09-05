@@ -18,14 +18,14 @@
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
         <thead>
         <tr>
-          <th style="text-align: center; font-size: 15px; color: white">?????{{this.temp}}!!!</th>
+          <th style="text-align: center; font-size: 15px; color: white">?????{{ this.actualTemp }}!!!</th>
           <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
-          <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Bottom</th>
-          <th style="text-align: center; font-size: 15px; color: orange">2x Odds Top</th>
+          <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: orange">2x Odds Bottom</th>
-          <th style="text-align: center; font-size: 15px; color: red">3x Odds Top</th>
+          <th style="text-align: center; font-size: 15px; color: orange">2x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: red">3x Odds Bottom</th>
+          <th style="text-align: center; font-size: 15px; color: red">3x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: white">Deadline</th> <!-- date where it calculates -->
         </tr>
         </thead>
@@ -34,18 +34,21 @@
           <td class="td">{{ weather.name }}</td>  <!-- fixed data from API-->
           <td class="td">{{ weather.main.temp }}° C</td>  <!-- fixed data from API-->
 
+          <td class="td">{{ parseFloat(weather.main.temp - 1.5).toFixed(2) }}° C</td>
+          <!-- predicted data -° (round to two decimals)-->
           <td class="td">{{ parseFloat(weather.main.temp + 1.5).toFixed(2) }}° C</td>
           <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 1.5).toFixed(2) }}° C</td>
+
+          <td class="td">{{ parseFloat(weather.main.temp - 1).toFixed(2) }}° C</td>
           <!-- predicted data -° (round to two decimals)-->
           <td class="td">{{ parseFloat(weather.main.temp + 1).toFixed(2) }}° C</td>
           <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 1).toFixed(2) }}° C</td>
+
+          <td class="td">{{ parseFloat(weather.main.temp - 0.5).toFixed(2) }}° C</td>
           <!-- predicted data -° (round to two decimals)-->
           <td class="td">{{ parseFloat(weather.main.temp + 0.5).toFixed(2) }}° C</td>
           <!-- predicted data +° (round to two decimals)-->
-          <td class="td">{{ parseFloat(weather.main.temp - 0.5).toFixed(2) }}° C</td>
-          <!-- predicted data -° (round to two decimals)-->
+
           <td class="td">{{ dateBuilderModified() }}</td> <!-- deadline where we evaluate -->
         </tr>
         </tbody>
@@ -81,7 +84,8 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
-      temp: null,   // <----- Christoph, this is the variable name we talked about
+      actualTemp: null,   // actualTemp fetched by the API
+      predictedTemp: null, //predictedTemp by the user input
       coins: null, // later insert document.getElementById('txtFieldAmount').value
     }
   },
@@ -110,145 +114,180 @@ export default {
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
     },
-    setBet(range) {
-      if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
+    setBet(odds) {
+      if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin &&
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
-        this.temp = this.weather.main.temp; // get actual temperature and write it into the variable
-        console.log(range);
-        console.log(this.temp);
+        this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
+        console.log(odds);
+        console.log("actual temp " + this.actualTemp);
         console.log(this.coins);
-        //saveBet(range) --> determine which button was pressed (1.5 OR 2 OR 3) with 'range' var
-        this.$noty.success("Bet placed!")
+        this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
+        this.$noty.success("Bet placed!");
       } else {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
 
-    //Testing out stuff from Timmy's dbTestFile
+    bet(odds) {
+      if (odds === 1.5) {
+        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
+        //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
+        if (this.actualTemp - 1.5 <= this.predictedTemp <= this.actualTemp + 1.5) {
+          //get 1.5 from betting volume
+          console.log("SUCCESS");
+        } else {
+          //lose betted amount volume
+          console.log("FAILED");
+        }
+      } else if (odds === 2) {
+        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
+        //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
+        if (this.actualTemp - 1 <= this.predictedTemp <= this.actualTemp + 1) {
+          //get 2 from betting volume
+          console.log("SUCCESS");
+        } else {
+          //lose betted amount volume
+          console.log("FAILED");
+        }
+      } else if (odds === 3) {
+        // actualTemp BOTTOM  <= predictedTemp <= actualTemp TOP
+        //BOTTOM = actualTemp - 0.5 || TOP = actualTemp + 0.5
+        if (this.actualTemp - 0.5 <= this.predictedTemp <= this.actualTemp + 0.5) {
+          //get 3 from betting volume
+          console.log("SUCCESS");
+        } else {
+          //lose betted amount volume
+          console.log("FAILED");
+        }
+      }
+    },
+  }
 
-    /*
-    What has to happen
-    1. Data is set -> finished (only variable from Christoph missing)
-    2. We save bet object -> finished
-    3. Used coins get deducted from account -> finished
-    4. Bet gets realized e.g. comperator does it's magic -> finished
-    5. Result of bet: Coins get added to account (if not won, amount is 0) -> finished
-    6. Profit$$$ -> hopefully soon
+  //Testing out stuff from Timmy's dbTestFile
+
+  /*
+  What has to happen
+  1. Data is set -> finished (only variable from Christoph missing)
+  2. We save bet object -> finished
+  3. Used coins get deducted from account -> finished
+  4. Bet gets realized e.g. comperator does it's magic -> finished
+  5. Result of bet: Coins get added to account (if not won, amount is 0) -> finished
+  6. Profit$$$ -> hopefully soon
 
 
 
-     */
+   */
 
-    /*docData(){
-      return{
-        docData: {
-          bet: {
-            temp: 10,  // <----- Christoph, this is the variable name we talked about
-            coins: 5, // later insert document.getElementById('txtFieldAmount').value
+  /*docData(){
+    return{
+      docData: {
+        bet: {
+          temp: 10,  // <----- Christoph, this is the variable name we talked about
+          coins: 5, // later insert document.getElementById('txtFieldAmount').value
+        }
+      }
+    }
+  },*/
+  /*
+      compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+                      bettedCoins = document.getElementById('txtFieldAmount').value) {
+        //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
+
+        var value = bettedValue - actualValue;
+        if (value < 0) {
+          value *= -1;
+        }
+
+        if (value < 1.0) {
+          return bettedCoins * 3;
+        } else if (value < 1.5) {
+          return bettedCoins * 1.5;
+        } else {
+          return 0;
+        }
+      },
+
+      async mergeDataIntoDB(){
+        const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+        await document.set(this.bet, {merge:true})
+        console.log("Merge into document")
+      },
+
+      async deleteDataFields(){
+        const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+        await document.update(
+          {
+            betType: deleteField()
           }
-        }
-      }
-    },*/
+        )
+      },
 
-    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
-                    bettedCoins = document.getElementById('txtFieldAmount').value) {
-      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
+      betDoc(){
+        const betDoc = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+        betDoc.set(this.bet)
+      },
 
-      var value = bettedValue - actualValue;
-      if (value < 0) {
-        value *= -1;
-      }
+      deleteDoc(){
+        const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+        document.delete();
+      },
 
-      if (value < 1.0) {
-        return bettedCoins * 3;
-      } else if (value < 1.5) {
-        return bettedCoins * 1.5;
-      } else {
-        return 0;
-      }
-    },
+      async saveBet(){
+        //method is not yet completely finished, right now maybe too many things happen in one method, bit unclean
+        const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+        // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
+        //still need to solve problem for continuous numbering of bets
+        //await document.set(this.docData, {merge: true});
+        await bet.set(this.docData);
 
-    async mergeDataIntoDB(){
-      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-      await document.set(this.bet, {merge:true})
-      console.log("Merge into document")
-    },
+        ///deduct coins used for bet
+        //get current coin value
+        const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+        let coin = ref.get();
+        this.weathercoin = (await coin).get("weatherCoin");
 
-    async deleteDataFields(){
-      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-      await document.update(
-        {
-          betType: deleteField()
-        }
-      )
-    },
+        // coins get deducted
+        await ref.update(
+          {
+            weatherCoin: this.weatherCoin - this.coins
+          })
 
-    betDoc(){
-      const betDoc = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      betDoc.set(this.bet)
-    },
+        ///bet gets realized
+        //more elegant way vor these variables, do I have to create them first?
+        let bettedValue;
+        let actualValue;
+        let bettedCoins;
 
-    deleteDoc(){
-      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      document.delete();
-    },
+        let prize = compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+          bettedCoins = document.getElementById('txtFieldAmount').value)
 
-    async saveBet(){
-      //method is not yet completely finished, right now maybe too many things happen in one method, bit unclean
-      const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
-      //still need to solve problem for continuous numbering of bets
-      //await document.set(this.docData, {merge: true});
-      await bet.set(this.docData);
+        //update coins
+        //get current coin value
+        const refPrize = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+        let prizeUpdate = refPrize.get();
+        this.weathercoin = (await prizeUpdate).get("weatherCoin");
 
-      ///deduct coins used for bet
-      //get current coin value
-      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-      let coin = ref.get();
-      this.weathercoin = (await coin).get("weatherCoin");
+        // prize gets added
+        await refPrize.update(
+          {
+            weatherCoin: this.weatherCoin + prize
+          })
+      },
 
-      // coins get deducted
-      await ref.update(
-        {
-          weatherCoin: this.weatherCoin - this.coins
+      async deleteObject(){
+        console.log("Delete object we just merged")
+        const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+        await document.update({
+          bet: deleteField()
         })
-
-      ///bet gets realized
-      //more elegant way vor these variables, do I have to create them first?
-      let bettedValue;
-      let actualValue;
-      let bettedCoins;
-
-      let prize = compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
-        bettedCoins = document.getElementById('txtFieldAmount').value)
-
-      //update coins
-      //get current coin value
-      const refPrize = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-      let prizeUpdate = refPrize.get();
-      this.weathercoin = (await prizeUpdate).get("weatherCoin");
-
-      // prize gets added
-      await refPrize.update(
-        {
-          weatherCoin: this.weatherCoin + prize
-        })
-    },
-
-    async deleteObject(){
-      console.log("Delete object we just merged")
-      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      await document.update({
-        bet: deleteField()
-      })
-    },
+      },
 
 
-    },
+      },
 
-
+  */,
 
   async created() {
     // get user data from document
@@ -363,9 +402,11 @@ h1:hover:after {
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
+
 .table:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around table*/
 }
+
 tr:hover {
   background-color: transparent !important; /* transparent if you hover over table entry color */
 }

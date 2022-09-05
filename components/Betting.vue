@@ -1,18 +1,24 @@
 <template>
-  <div class="betting">
+  <!-- decide if widget pic should be warm or cold dependending on temperature-->
+  <div class="headline"> <!-- weathercoin div -->
     <h1>BETTING</h1>
     <div :class="typeof weather.main != 'undefined'">
+
       <div class="searchBox">
-        <input type="text" class="searchBar" placeholder="Search..." v-model="query"
+        <input
+          type="text"
+          class="searchBar"
+          placeholder="Search..."
+          v-model="query"
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
 
-    <div class="weatherData" v-if="typeof weather.main != 'undefined'"> <!
+    <div class="weatherData" v-if="typeof weather.main != 'undefined'">
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
         <thead>
         <tr>
-          <th style="text-align: center; font-size: 15px; color: white">City</th>
+          <th style="text-align: center; font-size: 15px; color: white">?????{{this.temp}}!!!</th>
           <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Bottom</th>
@@ -48,10 +54,10 @@
       <v-card class="mx-auto" max-width="600" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn class="bettingButtons" dark text color="success" @click="setBet">1,5x</v-btn>
-          <v-btn class="bettingButtons" dark text color="warning" @click="setBet">2x</v-btn>
-          <v-btn class="bettingButtons" dark text color="error" @click="setBet">3x</v-btn>
-          <v-text-field id="txtFieldAmount" class="txtField"></v-text-field>
+          <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
+          <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
+          <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
+          <v-text-field id="txtFieldAmount" class="txtField" v-model="coins"></v-text-field>
         </v-card-actions>
       </v-card>
 
@@ -62,6 +68,11 @@
 
 <script>
 
+
+import Bet from "@/js/BetClass";
+import {deleteField} from "firebase/firestore";
+
+
 export default {
   data() {
     return {
@@ -70,24 +81,24 @@ export default {
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
+      temp: null,   // <----- Christoph, this is the variable name we talked about
+      coins: null, // later insert document.getElementById('txtFieldAmount').value
     }
   },
   methods: {
-    //request the weather on specific query and get response back
-    async fetchWeather(e) {
+    fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(res => {
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json(); //get response in form of .json
+            return res.json();
           }).then(this.setResults);
       }
     },
-    //set result from fetch to actual weather
-    setResults(response) {
-      this.weather = response;
+    setResults(results) {
+      this.weather = results;
     },
     dateBuilderModified() { /*modified to date we want to predict */
       let d = new Date();
@@ -99,79 +110,220 @@ export default {
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
     },
-    // action when clicking on a betting button
-    setBet() {
+    setBet(range) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin  &&
         document.getElementById('txtFieldAmount').value !== "") {
         console.log(this.weathercoin);
+        this.temp = this.weather.main.temp; // get actual temperature and write it into the variable
+        console.log(range);
+        console.log(this.temp);
+        console.log(this.coins);
+        //saveBet(range) --> determine which button was pressed (1.5 OR 2 OR 3) with 'range' var
         this.$noty.success("Bet placed!")
       } else {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
-    }
-  },
-  async created() { /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
+    },
+
+    //Testing out stuff from Timmy's dbTestFile
+
+    /*
+    What has to happen
+    1. Data is set -> finished (only variable from Christoph missing)
+    2. We save bet object -> finished
+    3. Used coins get deducted from account -> finished
+    4. Bet gets realized e.g. comperator does it's magic -> finished
+    5. Result of bet: Coins get added to account (if not won, amount is 0) -> finished
+    6. Profit$$$ -> hopefully soon
+
+
+
+     */
+
+    /*docData(){
+      return{
+        docData: {
+          bet: {
+            temp: 10,  // <----- Christoph, this is the variable name we talked about
+            coins: 5, // later insert document.getElementById('txtFieldAmount').value
+          }
+        }
+      }
+    },*/
+
+    compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+                    bettedCoins = document.getElementById('txtFieldAmount').value) {
+      //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
+
+      var value = bettedValue - actualValue;
+      if (value < 0) {
+        value *= -1;
+      }
+
+      if (value < 1.0) {
+        return bettedCoins * 3;
+      } else if (value < 1.5) {
+        return bettedCoins * 1.5;
+      } else {
+        return 0;
+      }
+    },
+
+    async mergeDataIntoDB(){
+      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      await document.set(this.bet, {merge:true})
+      console.log("Merge into document")
+    },
+
+    async deleteDataFields(){
+      const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      await document.update(
+        {
+          betType: deleteField()
+        }
+      )
+    },
+
+    betDoc(){
+      const betDoc = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      betDoc.set(this.bet)
+    },
+
+    deleteDoc(){
+      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      document.delete();
+    },
+
+    async saveBet(){
+      //method is not yet completely finished, right now maybe too many things happen in one method, bit unclean
+      const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
+      //still need to solve problem for continuous numbering of bets
+      //await document.set(this.docData, {merge: true});
+      await bet.set(this.docData);
+
+      ///deduct coins used for bet
+      //get current coin value
+      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      let coin = ref.get();
+      this.weathercoin = (await coin).get("weatherCoin");
+
+      // coins get deducted
+      await ref.update(
+        {
+          weatherCoin: this.weatherCoin - this.coins
+        })
+
+      ///bet gets realized
+      //more elegant way vor these variables, do I have to create them first?
+      let bettedValue;
+      let actualValue;
+      let bettedCoins;
+
+      let prize = compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
+        bettedCoins = document.getElementById('txtFieldAmount').value)
+
+      //update coins
+      //get current coin value
+      const refPrize = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      let prizeUpdate = refPrize.get();
+      this.weathercoin = (await prizeUpdate).get("weatherCoin");
+
+      // prize gets added
+      await refPrize.update(
+        {
+          weatherCoin: this.weatherCoin + prize
+        })
+    },
+
+    async deleteObject(){
+      console.log("Delete object we just merged")
+      const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      await document.update({
+        bet: deleteField()
+      })
+    },
+
+
+    },
+
+
+
+  async created() {
     // get user data from document
+    console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
-    this.weathercoin = (await document).get("weatherCoin"); // get's weathercoins from user
+    this.weathercoin = (await document).get("weatherCoin");
   }
+
+
 };
+
 </script>
 
 <style>
-body {
-  font-family: 'montserrat', sans-serif; /*font for noty alert mainly */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.betting {
+
+body {
+  font-family: 'montserrat', sans-serif;
+}
+
+.headline {
   margin-top: 100px; /* distance from top of div*/
   text-align: center;
 }
 
 .searchBox {
-  padding: 25px; /* inner distance top */
-  width: 50%; /* make search box half of width */
+  padding: 25px;
+  width: 50%;
   text-align: center;
-  transform: translate(50%, 10%); /* position the searchBox */
+  transform: translate(50%, 10%)
 }
 
 .searchBox .searchBar {
-  width: 100%;  /* search bar has full width*/
-  padding: 15px; /* top padding (inner distance) */
+  display: block;
+  width: 100%;
+  padding: 15px;
 
   color: #313131;
   font-size: 20px;
-  outline: none; /* border around none*/
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /*shadow around search bar*/
-  background: rgba(255, 255, 255, 0.5) none; /*white transparent color of search bar*/
-  border-radius: 0 16px 0 16px;
-  transition: 0.4s; /*time where it changes to other state*/
+  appearance: none;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.5) none;
+  border-radius: 0px 16px 0px 16px;
+  transition: 0.4s;
 }
 
 
 .searchBox .searchBar:focus {
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 16px 0 16px 0;
+  border-radius: 16px 0px 16px 0px;
 }
 
-/* headline effect from https://codepen.io/jstn/pen/mdoOZJ*/
+
 h1 {
   color: #fff;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 0.15em;
 
-  display: inline-block; /* display list items horizontally and set width and height */
-  padding: 15px 20px; /*inner distance*/
-  position: relative; /* places element relative to it's current*/
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
   font-size: 1.5rem;
 }
 
-/* after - selector inserts something after the content of each selected element */
 h1:after {
   bottom: 0;
-  width: 0;
   content: "";
   display: block;
   height: 2px;
@@ -179,6 +331,7 @@ h1:after {
   position: absolute;
   background: #fff;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
 }
 
 h1:hover:after {
@@ -192,6 +345,7 @@ h1:hover:after {
   transform: translate(12.5%, 0%); /* make it into the middle*/
 }
 
+
 .txtField {
   padding: 5px; /* inner distance around txtField*/
 }
@@ -202,7 +356,7 @@ h1:hover:after {
 }
 
 .mx-auto {
-  margin-top: 150px; /* overwrites it to 150 from weathercoin css*/
+  margin-top: 150px; /* overwrites it to 100 from weathercoin css*/
   margin-bottom: 100px; /* overwrites it to 100 from weathercoin css*/
 }
 

@@ -61,9 +61,8 @@
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
-        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp"
-                      label="temperature"></v-text-field> <!-- make , to . -->
-        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" label="weathercoins"></v-text-field>
+        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
+        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
       </v-card>
 
 
@@ -79,8 +78,7 @@ import {deleteField} from "firebase/firestore";
 
 
 export default {
-  data() {
-    return {
+  data: () => ({
       weathercoin: null,
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'https://api.openweathermap.org/data/2.5/',
@@ -90,8 +88,15 @@ export default {
       predictedTemp: null, //predictedTemp by the user input
       bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
       showData: false,
-    }
-  },
+
+    validateTemp: [
+      (v) => !!v || "required field",
+    ],
+    validateCoins: [
+      (v) => !!v || "required field",
+    ],
+  }),
+
   methods: {
     fetchWeather(e) {
       if (e.key === "Enter") {
@@ -188,7 +193,6 @@ export default {
         }
       }
     },
-
   }
 
   //Testing out stuff from Timmy's dbTestFile
@@ -414,6 +418,7 @@ h1:hover:after {
 .txtField {
   margin-right: 100px; /* inner distance around txtField*/
   margin-left: 100px; /* inner distance around txtField*/
+  margin-bottom: 16px;
 }
 
 .bettingButtons {

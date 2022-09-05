@@ -15,10 +15,10 @@
     </div>
 
     <div class="weatherData" v-if="typeof weather.main != 'undefined'">
-      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table">
+      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
         <thead>
         <tr>
-          <th style="text-align: center; font-size: 15px; color: white">?????{{ this.actualTemp }}!!!</th>
+          <th style="text-align: center; font-size: 15px; color: white">City</th>
           <th style="text-align: center; font-size: 15px; color: white">Degrees</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Bottom</th>
           <th style="text-align: center; font-size: 15px; color: green">1,5x Odds Top</th>
@@ -61,8 +61,9 @@
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
-        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" label="temperature"></v-text-field> <!-- make , to . -->
-        <v-text-field id="txtFieldAmount" class="txtField" v-model="coins" label="weathercoins"></v-text-field>
+        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp"
+                      label="temperature"></v-text-field> <!-- make , to . -->
+        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" label="weathercoins"></v-text-field>
       </v-card>
 
 
@@ -87,7 +88,8 @@ export default {
       weather: {},
       actualTemp: null,   // actualTemp fetched by the API
       predictedTemp: null, //predictedTemp by the user input
-      coins: null, // later insert document.getElementById('txtFieldAmount').value
+      bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
+      showData: false,
     }
   },
   methods: {
@@ -103,14 +105,15 @@ export default {
       }
     },
     setResults(results) {
-      this.weather = results;
+      this.weather = results; // write results into variable
+      this.showData = false; // if we fetch new data, data should not be visible
     },
     dateBuilderModified() { /*modified to date we want to predict */
       let d = new Date();
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       let day = days[d.getDay()];
-      let date = d.getDate() + 1; /* modified here the days */
+      let date = d.getDate(); /* modified here the days */
       let month = months[d.getMonth()];
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
@@ -122,45 +125,65 @@ export default {
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         console.log(odds);
         console.log("actual temp " + this.actualTemp);
-        console.log(this.coins);
+        console.log(this.bettedCoins);
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
         //this.$noty.success("Bet placed!");
+        this.showData = true;
+        // show message
+        this.delay(2000).then(() => {
+          this.$noty.info("Please be a fair player and select a new city to bet!")
+        });
       } else {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
-    sleep(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-},
+    delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
 
     async bet(odds) {
       if (odds === 1.5) {
+        let tmpWeatherCoins = 0;
         //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
         if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) {
           //get 1.5 from betting volume
-          this.$noty.success("You won " + "amount");
+          tmpWeatherCoins = this.bettedCoins * 1.5;
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.$noty.error("You lost " + "amount");
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          tmpWeatherCoins = this.bettedCoins;
+          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       } else if (odds === 2) {
         //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
+        let tmpWeatherCoins = 0;
         if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) {
           //get 2 from betting volume
-          this.$noty.success("You won " + "amount");
+          tmpWeatherCoins = this.bettedCoins * 2;
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.$noty.error("You lost " + "amount");
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          tmpWeatherCoins = this.bettedCoins;
+          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       } else if (odds === 3) {
+        let tmpWeatherCoins = 0;
         //BOTTOM = actualTemp - 0.5 || TOP = actualTemp + 0.5
         if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) {
           //get 3 from betting volume
-          this.$noty.success("You won " + "amount");
+          tmpWeatherCoins = this.bettedCoins * 3;
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.$noty.error("You lost " + "amount");
+          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          tmpWeatherCoins = this.bettedCoins;
+          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       }
     },

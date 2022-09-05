@@ -23,11 +23,13 @@
               <v-btn v-if="!showTextField" class="buttons" @click="changeName">
                 Change username
               </v-btn>
+              <v-btn @click="deleteBets">Delete my bets</v-btn>
             </v-card-actions>
 
             <br>
             <v-text-field @keyup.enter="saveToDatabase" style="margin: 10px" dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
                           append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
+
           </v-card>
 
 
@@ -59,12 +61,23 @@ export default {
       msg: "",
       dataLoaded: false,
       imageSrc: require("assets/img/normalUser.png"),
-      userLevel: "",
+      userLevel: ""
 
     }
   },
 
   methods: {
+
+    async deleteBets(){
+      await fetch("/api/delete/" + this.$fire.auth.currentUser.uid, {
+        method: 'DELETE'
+      }).then(res => {
+        if (res.ok){
+          this.$noty.success("Successfully deleted your bets!")
+        }
+      })
+
+    },
 
     async logoutUser() {
       await this.$fire.auth.signOut()
@@ -94,6 +107,8 @@ export default {
         this.userLevel = "Expert";
       }
     },
+
+
 
     //change username
     async saveToDatabase() {

@@ -126,7 +126,7 @@ export default {
     setBet(odds) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin &&
         document.getElementById('txtFieldAmount').value !== "") {
-        console.log(this.weathercoin);
+        this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         console.log(odds);
         console.log("actual temp " + this.actualTemp);

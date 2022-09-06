@@ -23,6 +23,8 @@
               <v-btn v-if="!showTextField" class="buttons" @click="changeName">
                 Change username
               </v-btn>
+            </v-card-actions>
+            <v-card-actions class="justify-center">
               <v-btn @click="deleteBets">Delete my bets</v-btn>
             </v-card-actions>
 

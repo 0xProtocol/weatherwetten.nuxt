@@ -179,6 +179,7 @@ export default {
         betObj: {
           bettedCoins: this.bettedCoins,
           predictedTemp: this.predictedTemp,
+          location: this.query,
           time: new Date()
         }
       }

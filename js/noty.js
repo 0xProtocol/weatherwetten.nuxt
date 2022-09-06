@@ -6,7 +6,7 @@ import VueNoty from 'vuejs-noty'
 /*https://github.com/needim/noty/blob/master/docs/themes.md */
 export default ({app}, inject) => {
   inject('noty', Vue.use(VueNoty, {
-    timeout: 2800,
+    timeout: 3500,
     progressBar: false,
     layout: 'bottomRight',
     closeWith: ['click', 'button'],

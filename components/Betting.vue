@@ -156,15 +156,16 @@ export default {
 
     async updateWeatherCoins(coinChange)
     {
-      let updatedCoins = this.weathercoin + coinChange;
+      let updatedWeatherCoins = 0;
+      updatedWeatherCoins = this.weathercoin + coinChange;
       //change weathercoins and save it to database
-      await fetch("/api/edit/"+this.$fire.auth.currentUser.uid, {
+      await fetch("/api/edit/"+this.$fire.auth.currentUser.uid+"/"+"weathercoins", {
         method: 'PATCH',
         headers:{
           'Content-Type':'application/json'
         },
         body:JSON.stringify({
-          updatedCoins: this.weathercoin
+          weatherCoins: updatedWeatherCoins
         })
       })
     },
@@ -180,7 +181,7 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
+          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
@@ -194,7 +195,7 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
+          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
@@ -208,7 +209,7 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
+          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }

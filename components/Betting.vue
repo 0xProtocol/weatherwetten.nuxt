@@ -183,11 +183,17 @@ export default {
           tmpWeatherCoins = this.bettedCoins * 1.5;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         } else {
           //lose betted amount volume
           tmpWeatherCoins = this.bettedCoins * -1;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
+          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         }
       } else if (odds === 2) {
         //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
@@ -197,11 +203,17 @@ export default {
           tmpWeatherCoins = this.bettedCoins * 2;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         } else {
           //lose betted amount volume
           tmpWeatherCoins = this.bettedCoins * -1;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
+          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         }
       } else if (odds === 3) {
         let tmpWeatherCoins = 0;
@@ -211,11 +223,17 @@ export default {
           tmpWeatherCoins = this.bettedCoins * 3;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         } else {
           //lose betted amount volume
           tmpWeatherCoins = this.bettedCoins * -1;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
+          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
+          this.delay(1000).then(() => {
+            this.$noty.info("New balance -> " + this.weathercoin)
+          });
         }
       }
     },

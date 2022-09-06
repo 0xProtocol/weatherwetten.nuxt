@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-app.use(express.json())
+app.use(express.json())  //loads the middleware function -> Middleware is code that gets run in between the request and the response.
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -18,6 +18,11 @@ const firebaseConfig = { // Have the firebase config here
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 
+/*
+GET: safe, idempotent (we do not change something on the server || same request gives same response back)
+we get username and weathercoin back from firebase
+status 200 -> OK
+ */
 app.get("/userdata/:id", async (req, res)=>{
   const fbDocument = db.collection("/users").doc(req.params.id)
   let document = fbDocument.get();
@@ -27,6 +32,11 @@ app.get("/userdata/:id", async (req, res)=>{
 })
 
 
+/*
+GET: safe, idempotent (we do not change something on the server || same request gives same response back)
+we get the whole users collection and then sort the usernames according to their weathercoins
+status 200 -> OK
+ */
 app.get("/leaderboard", async (req, res)=>{
   let userArray = [];
   const documents = db.collection('users');
@@ -41,9 +51,26 @@ app.get("/leaderboard", async (req, res)=>{
   {
     userArray.pop();
   }
-  res.send(userArray)
+  res.send(userArray);
+  res.status(200);
 })
 
+/*
+DELETE: NOT safe, idempotent (we change something on the server || same request gives same response back)
+we delete a bet of the user logged in
+status: 204 No Content
+ */
+app.delete("/delete/:id", (req, res)=>{
+  const document = db.collection("/bets").doc(req.params.id)
+  document.delete()
+    .then(()=>res.sendStatus(204));
+})
+
+/*
+POST: NOT safe, NOT idempotent (we change something on the server || if I create it twice I create a second resource)
+we create a new user with standard 10 weathercoins
+status 201 -> CREATED
+ */
 app.post("/create/:id", async (req, res)=>{
   const reference = db.collection('users').doc(req.params.id);
   console.log(req.body)
@@ -59,6 +86,22 @@ app.post("/create/:id", async (req, res)=>{
   res.status(201) // 201 means "created", post request successful and resource created
 })
 
+/*
+PUT: NOT safe, idempotent (we change something on the server || same request gives same response back)
+we fully UPDATE something -> the bet
+status: ???
+ */
+app.put("/", (req, res)=>{
+
+})
+
+
+/*
+PATCH: NOT safe, NOT idempotent (we change something on the server || same request gives NOT same response back for example change all 'a' to 'baa')
+So while most PATCH operations might be idempotent, there are some that aren't.
+we partly UPDATE something -> the username
+status 200 -> OK
+ */
 app.patch("/edit/:id", async (req, res)=>{
   let newUsername = req.body.newUsername;
   const reference = db.collection('users').doc(req.params.id);
@@ -66,6 +109,12 @@ app.patch("/edit/:id", async (req, res)=>{
   res.sendStatus(200)
 })
 
+/*
+PATCH: NOT safe, NOT idempotent (we change something on the server || same request gives NOT same response back)
+So while most PATCH operations might be idempotent, there are some that aren't.
+we partly UPDATE something -> the weathercoins
+status 200 -> OK
+ */
 app.patch("/edit/:id/:type", async (req, res)=>{
   let updatedCoins = req.body.weatherCoins;
   const reference = db.collection('users').doc(req.params.id);
@@ -73,17 +122,9 @@ app.patch("/edit/:id/:type", async (req, res)=>{
   res.sendStatus(200)
 })
 
-app.put("/", (req, res)=>{
-
-})
-
-app.delete("/delete/:id", (req, res)=>{
-  const document = db.collection("/bets").doc(req.params.id)
-  document.delete()
-    .then(()=>res.sendStatus(204));
-})
-
-
+/*
+compare the scores for leaderboards
+ */
 function compareScores(a, b) {
   let scoreA = a.weatherCoin;
   let scoreB = b.weatherCoin;
@@ -98,6 +139,9 @@ function compareScores(a, b) {
 }
 
 
+/*
+???
+ */
 module.exports = {
   path: '/api',
   handler: app

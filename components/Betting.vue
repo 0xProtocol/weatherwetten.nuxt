@@ -175,6 +175,16 @@ export default {
     },
 
     async bet(odds) {
+      let doc = {
+        betObj: {
+          bettedCoins: this.bettedCoins,
+          predictedTemp: this.predictedTemp,
+          time: new Date()
+        }
+      }
+      let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      await document.set(doc, {merge: true});
+
       if (odds === 1.5) {
         let tmpWeatherCoins = 0;
         //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
@@ -219,131 +229,8 @@ export default {
         }
       }
     },
-  }
+  },
 
-  //Testing out stuff from Timmy's dbTestFile
-
-  /*
-  What has to happen
-  1. Data is set -> finished (only variable from Christoph missing)
-  2. We save bet object -> finished
-  3. Used coins get deducted from account -> finished
-  4. Bet gets realized e.g. comperator does it's magic -> finished
-  5. Result of bet: Coins get added to account (if not won, amount is 0) -> finished
-  6. Profit$$$ -> hopefully soon
-
-
-
-   */
-
-  /*docData(){
-    return{
-      docData: {
-        bet: {
-          temp: 10,  // <----- Christoph, this is the variable name we talked about
-          coins: 5, // later insert document.getElementById('txtFieldAmount').value
-        }
-      }
-    }
-  },*/
-  /*
-      compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
-                      bettedCoins = document.getElementById('txtFieldAmount').value) {
-        //if bettedValue and bettedCoins are functioning as intended has yet to be tested out
-
-        var value = bettedValue - actualValue;
-        if (value < 0) {
-          value *= -1;
-        }
-
-        if (value < 1.0) {
-          return bettedCoins * 3;
-        } else if (value < 1.5) {
-          return bettedCoins * 1.5;
-        } else {
-          return 0;
-        }
-      },
-
-      async mergeDataIntoDB(){
-        const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-        await document.set(this.bet, {merge:true})
-        console.log("Merge into document")
-      },
-
-      async deleteDataFields(){
-        const document = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-        await document.update(
-          {
-            betType: deleteField()
-          }
-        )
-      },
-
-      betDoc(){
-        const betDoc = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-        betDoc.set(this.bet)
-      },
-
-      deleteDoc(){
-        const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-        document.delete();
-      },
-
-      async saveBet(){
-        //method is not yet completely finished, right now maybe too many things happen in one method, bit unclean
-        const bet = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-        // Programming intermediate step of always only saving current bet as in our demo the bet will get resolved immediately
-        //still need to solve problem for continuous numbering of bets
-        //await document.set(this.docData, {merge: true});
-        await bet.set(this.docData);
-
-        ///deduct coins used for bet
-        //get current coin value
-        const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-        let coin = ref.get();
-        this.weathercoin = (await coin).get("weatherCoin");
-
-        // coins get deducted
-        await ref.update(
-          {
-            weatherCoin: this.weatherCoin - this.coins
-          })
-
-        ///bet gets realized
-        //more elegant way vor these variables, do I have to create them first?
-        let bettedValue;
-        let actualValue;
-        let bettedCoins;
-
-        let prize = compareBetTemp (bettedValue = this.temp, actualValue = this.weather.main.temp,
-          bettedCoins = document.getElementById('txtFieldAmount').value)
-
-        //update coins
-        //get current coin value
-        const refPrize = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
-        let prizeUpdate = refPrize.get();
-        this.weathercoin = (await prizeUpdate).get("weatherCoin");
-
-        // prize gets added
-        await refPrize.update(
-          {
-            weatherCoin: this.weatherCoin + prize
-          })
-      },
-
-      async deleteObject(){
-        console.log("Delete object we just merged")
-        const document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-        await document.update({
-          bet: deleteField()
-        })
-      },
-
-
-      },
-
-  */,
 
   async created() {
     // get user data from document

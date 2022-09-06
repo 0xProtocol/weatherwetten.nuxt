@@ -148,6 +148,27 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
 
+    async getWeathercoin() {
+      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      let coin = ref.get();
+      this.weathercoin = (await coin).get("weatherCoin");
+    },
+
+    async updateWeatherCoins(coinChange)
+    {
+      let updatedCoins = this.weathercoin + coinChange;
+      //change weathercoins and save it to database
+      await fetch("/api/edit/"+this.$fire.auth.currentUser.uid, {
+        method: 'PATCH',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          updatedCoins: this.weathercoin
+        })
+      })
+    },
+
     async bet(odds) {
       if (odds === 1.5) {
         let tmpWeatherCoins = 0;
@@ -155,11 +176,11 @@ export default {
         if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) {
           //get 1.5 from betting volume
           tmpWeatherCoins = this.bettedCoins * 1.5;
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
@@ -169,11 +190,11 @@ export default {
         if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) {
           //get 2 from betting volume
           tmpWeatherCoins = this.bettedCoins * 2;
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
@@ -183,11 +204,11 @@ export default {
         if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) {
           //get 3 from betting volume
           tmpWeatherCoins = this.bettedCoins * 3;
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (+ this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          // FIREBASE CONNECTION ADD WEATHERCOINS!! (- this.bettedCoins)
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           tmpWeatherCoins = this.bettedCoins;
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }

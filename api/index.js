@@ -66,6 +66,13 @@ app.patch("/edit/:id", async (req, res)=>{
   res.sendStatus(200)
 })
 
+app.patch("/edit/:id", async (req, res)=>{
+  let newWeathercoins = req.body.updatedCoins;
+  const reference = db.collection('users').doc(req.params.id);
+  await reference.update({weatherCoin: 20})
+  res.sendStatus(200)
+})
+
 app.put("/", (req, res)=>{
 
 })

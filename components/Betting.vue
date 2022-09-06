@@ -79,7 +79,7 @@ import {deleteField} from "firebase/firestore";
 
 export default {
   data: () => ({
-      weathercoin: null,
+      weathercoin: 0,
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
@@ -156,8 +156,12 @@ export default {
 
     async updateWeatherCoins(coinChange)
     {
-      let updatedWeatherCoins = 0;
-      updatedWeatherCoins = this.weathercoin + coinChange;
+      const coinsBetted = coinChange;
+      const updatedWeatherCoins = +this.weathercoin + +coinsBetted;
+      //console.log("coinChange " + coinsBetted);
+      //console.log("weathercoins " + this.weathercoin);
+      //console.log("updatedWeatherCoins " + updatedWeatherCoins);
+
       //change weathercoins and save it to database
       await fetch("/api/edit/"+this.$fire.auth.currentUser.uid+"/"+"weathercoins", {
         method: 'PATCH',
@@ -181,8 +185,8 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          tmpWeatherCoins = this.bettedCoins;
+          tmpWeatherCoins = this.bettedCoins * -1;
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       } else if (odds === 2) {
@@ -195,8 +199,8 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          tmpWeatherCoins = this.bettedCoins;
+          tmpWeatherCoins = this.bettedCoins * -1;
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       } else if (odds === 3) {
@@ -209,8 +213,8 @@ export default {
           this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
         } else {
           //lose betted amount volume
-          this.updateWeatherCoins(-tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          tmpWeatherCoins = this.bettedCoins;
+          tmpWeatherCoins = this.bettedCoins * -1;
+          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
           this.$noty.error("You lost " + tmpWeatherCoins + " weathercoins");
         }
       }

@@ -177,8 +177,8 @@ export default {
     async bet(odds) {
       let doc = {
         betObj: {
-          bettedCoins: parseInt(this.bettedCoins),
-          predictedTemp: parseInt(this.predictedTemp),
+          bettedCoins: parseFloat(this.bettedCoins),
+          predictedTemp: parseFloat(this.predictedTemp),
           location: this.query,
           odds: odds,
           time: new Date()

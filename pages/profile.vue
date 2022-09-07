@@ -5,14 +5,14 @@
       <v-main>
 
 
-          <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined shaped max-height="500" max-width="600">
+          <v-card v-if="dataLoaded" id="card" class="mx-auto" outlined max-height="500" max-width="600">
             <v-card-title id="greetUser" class="justify-center">Hello {{ username }}!</v-card-title>
             <v-card-text>
               <h3 class="text">Your weatherCoin balance: {{ weathercoin }}</h3>
               <h3 class="text">Level: {{userLevel}}</h3>
             </v-card-text>
             <v-card-actions class="justify-center">
-              <v-img max-height="70" max-width="70" :src="imageSrc"></v-img>
+              <v-img v-if="dataLoaded" max-height="70" max-width="70" :src="imageSrc"></v-img>
             </v-card-actions>
             <v-text-field @keyup.enter="saveToDatabase" style="margin: 10px" dense outlined v-model="newUsername" v-if="showTextField" label="Enter new username"
                           append-icon="mdi-checkbox-marked-circle" @click:append="saveToDatabase"></v-text-field>
@@ -308,12 +308,14 @@ export default {
 
 #card{
   background-color: #2d2d2d;
+  border-radius: 10px;
 }
 
 /* responsiveness*/
 @media screen and (max-width: 600px) {
   #card{
     width: 90%;
+    margin-top: 60px;
   }
 }
 </style>

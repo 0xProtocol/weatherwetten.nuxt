@@ -13,7 +13,7 @@
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
-    <h1>Bet valid in 24 hours</h1>
+    <h1>Bet evaluated in 24 hours</h1>
 
     <div class="weatherData" v-if="typeof weather.main != 'undefined'">
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
@@ -177,8 +177,8 @@ export default {
       later.setDate(today.getDate() + 1)
       let doc = {
         betObj: {
-          bettedCoins: parseInt(this.bettedCoins),
-          predictedTemp: parseInt(this.predictedTemp),
+          bettedCoins: parseFloat(this.bettedCoins),
+          predictedTemp: parseFloat(this.predictedTemp),
           location: this.query,
           odds: odds,
           time: later

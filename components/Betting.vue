@@ -177,9 +177,10 @@ export default {
     async bet(odds) {
       let doc = {
         betObj: {
-          bettedCoins: this.bettedCoins,
-          predictedTemp: this.predictedTemp,
+          bettedCoins: parseInt(this.bettedCoins),
+          predictedTemp: parseInt(this.predictedTemp),
           location: this.query,
+          odds: odds,
           time: new Date()
         }
       }
@@ -253,7 +254,7 @@ export default {
 
   async created() {
     // get user data from document
-    console.log(this.$fire.auth.currentUser.uid);
+    // console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");

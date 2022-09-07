@@ -11,9 +11,10 @@
             <div class="content">
               <br><h2>HOW TO BET</h2><br><br><br>
               <p>1. Select the city you want to bet on and press Enter</p>
-              <p>2. Look on the table and decide on which odds you want to bet</p>
-              <p>3. Place your bet in weathercoins in the textfield beside the buttons</p>
-              <p>4. To complete the bet press the button with the right odd you want to bet on!</p>
+              <p>2. Place your bet by entering the temperature and the amount of weathercoin.</p>
+              <p>3. Click on the odds you want to bet on to complete the bet!</p>
+              <p>4. Evaluate your bets on the profile page!</p>
+
             </div>
             <img src="../assets/img/aboutus1.png" alt="1">
           </div>

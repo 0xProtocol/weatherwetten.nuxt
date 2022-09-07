@@ -13,6 +13,7 @@
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
+    <h1>Bet valid in 24 hours</h1>
 
     <div class="weatherData" v-if="typeof weather.main != 'undefined'">
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
@@ -54,15 +55,16 @@
         </tbody>
       </v-simple-table>
 
-      <v-card class="mx-auto" max-width="600" loading outlined shaped>
+      <v-card v-if="showBetCard" class="mx-auto" max-width="400" max-height="290" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
+        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
+        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
         <v-card-actions class="justify-center">
           <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
-        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
-        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
+
       </v-card>
 
 
@@ -88,6 +90,7 @@ export default {
       predictedTemp: null, //predictedTemp by the user input
       bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
       showData: false,
+      showBetCard: false,
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -112,6 +115,7 @@ export default {
     setResults(results) {
       this.weather = results; // write results into variable
       this.showData = false; // if we fetch new data, data should not be visible
+      this.showBetCard = true;
     },
     dateBuilderModified() { /*modified to date we want to predict */
       let d = new Date();
@@ -128,18 +132,15 @@ export default {
         document.getElementById('txtFieldAmount').value !== "") {
         this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
-        console.log(odds);
-        console.log("actual temp " + this.actualTemp);
-        console.log(this.bettedCoins);
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
         this.$noty.success("Bet placed!");
         this.showData = true;
+        this.showBetCard = false;
         // show message
         /*this.delay(2000).then(() => {
           this.$noty.info("Please be a fair player and select a new city to bet!")
         });*/
       } else {
-        console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
       }
     },
@@ -158,10 +159,6 @@ export default {
     {
       const coinsBetted = coinChange;
       const updatedWeatherCoins = +this.weathercoin + +coinsBetted;
-      //console.log("coinChange " + coinsBetted);
-      //console.log("weathercoins " + this.weathercoin);
-      //console.log("updatedWeatherCoins " + updatedWeatherCoins);
-
       //change weathercoins and save it to database
       await fetch("/api/edit/"+this.$fire.auth.currentUser.uid+"/"+"weathercoins", {
         method: 'PATCH',
@@ -195,7 +192,6 @@ export default {
 
   async created() {
     // get user data from document
-    // console.log(this.$fire.auth.currentUser.uid);
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
@@ -301,8 +297,8 @@ h1:hover:after {
 }
 
 .mx-auto {
-  margin-top: 150px; /* overwrites it to 100 from weathercoin css*/
-  margin-bottom: 100px; /* overwrites it to 100 from weathercoin css*/
+  margin-top: 10px; /* overwrites it to 100 from weathercoin css*/
+  margin-bottom: 150px; /* overwrites it to 100 from weathercoin css*/
 }
 
 .mx-auto:hover {

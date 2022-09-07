@@ -13,7 +13,6 @@
           @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
     </div>
-    <h1>Bet evaluated in 24 hours</h1>
 
     <div class="weatherData" v-if="typeof weather.main != 'undefined'">
       <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
@@ -195,6 +194,7 @@ export default {
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
+    this.$noty.info("Bet evaluated in 24 hours")
   }
 
 

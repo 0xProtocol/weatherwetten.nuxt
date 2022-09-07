@@ -69,7 +69,8 @@ export default {
       api_key: "67c4e15fa55514beb2e8755151915130",
       base_url_weather: "https://api.openweathermap.org/data/3.0/onecall/timemachine?",
       api_key_weather: "acc4bfe58334c1e0735f355d447f9df6",
-      actualTemp: 0
+      actualTemp: 0,
+      time: '',
 
     }
   },
@@ -263,6 +264,8 @@ export default {
     .then(data => jsonDoc = data)
     this.username = jsonDoc.username;
     this.weathercoin = jsonDoc.weathercoin;
+    //this.time = jsonDoc.time;
+    //this.time = new Date(this.time.seconds * 1000 + this.time.nanoseconds/1000000) get from firebase date to actual date readable
     this.setBadge();
     this.dataLoaded = true;
   }

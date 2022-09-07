@@ -3,7 +3,6 @@
     <v-app>
     <nav-bar/> <!-- NavBar component -->
     <betting/> <!-- Betting component -->
-    <footer/> <!-- Footer component -->
     </v-app>
   </div>
 </template>

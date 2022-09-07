@@ -187,7 +187,7 @@ export default {
           predictedTemp: parseFloat(this.predictedTemp),
           location: this.query,
           odds: odds,
-          time: later
+          time: this.timestamp
         }
       }
       let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
@@ -197,7 +197,12 @@ export default {
     async convertTimestampToFirebaseTimeStamp()
     {
       console.log(this.frontEndTimeStamp); //this timestamp is the one we get from frontend
-      this.timestamp = firebase.firestore.Timestamp.fromDate(new Date()); //this timestamp is to save into firebase database
+
+     // this.timestamp = firebase.firestore.Timestamp.fromDate(Date.parse(this.frontEndTimeStamp)); //this timestamp is to save into firebase database
+
+      let anotherDate = new Date(this.frontEndTimeStamp);
+      this.timestamp = firebase.firestore.Timestamp.fromDate(anotherDate); //this timestamp is to save into firebase database
+
       console.log(this.timestamp);
     },
   },

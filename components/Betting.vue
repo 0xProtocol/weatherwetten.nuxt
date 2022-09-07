@@ -190,7 +190,6 @@ export default {
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
-    this.$noty.info("Bet evaluated in 24 hours")
   }
 
 

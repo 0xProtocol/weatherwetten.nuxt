@@ -20,7 +20,7 @@
               <v-btn @click="getBetDocument">Evaluate my bets!</v-btn>
             </v-card-actions>
             <v-card-actions class="justify-center">
-              <v-btn @click="deleteBets">Delete my bets</v-btn>
+              <v-btn @click="deleteBets('Successfully deleted your bet from database!')">Delete my bets</v-btn>
             </v-card-actions>
             <v-card-actions class="justify-center">
               <v-btn v-if="!showTextField" class="buttons" @click="changeName">
@@ -77,12 +77,12 @@ export default {
 
   methods: {
 
-    async deleteBets(){
+    async deleteBets(notification){
       await fetch("/api/delete/" + this.$fire.auth.currentUser.uid, {
         method: 'DELETE'
       }).then(res => {
         if (res.ok){
-          this.$noty.success("Successfully deleted your bets!")
+          this.$noty.success(notification)
         }
       })
 
@@ -176,7 +176,7 @@ export default {
             this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
           }
         }
-        await this.deleteBets()
+        await this.deleteBets("You may now submit the next bet!")
       }
     },
 

@@ -107,15 +107,12 @@ export default {
     async evaluateBet(doc) {
       let betObj = (await doc).get('betObj');
       let bettedCoins = betObj.bettedCoins;
-      console.log(betObj)
       let location = betObj.location;
       let odds = betObj.odds;
       let predictedTemp = betObj.predictedTemp;
-      console.log("Predicted temp: " + predictedTemp)
       let time = betObj.time;
       time = time.seconds;
       if (time > Date.now()/1000){
-        console.log("Bet is in the future")
         this.showSnackBar = true;
         this.msg = "Bet date is in the future!"
       } else {
@@ -128,7 +125,6 @@ export default {
           .then(res => {
             this.actualTemp = res.data[0].temp;
           })
-        console.log(this.actualTemp)
 
         if (odds === 1.5){
           let tmpWeatherCoins = 0;
@@ -184,7 +180,6 @@ export default {
 
     async locationToGeocode(location) {
       let url = this.base_url + "q=" + location + "&appid=" + this.api_key;
-      console.log(url)
       let lat, lon
       await fetch(url)
         .then(res => res.json())

@@ -137,7 +137,7 @@ export default {
           this.$noty.info("Please be a fair player and select a new city to bet!")
         });*/
       } else {
-        this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
+        this.$noty.error("Please enter your bet data!") //more cases why error is happened -> when we have backend
       }
     },
     //sleep function

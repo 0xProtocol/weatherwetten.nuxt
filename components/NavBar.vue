@@ -68,7 +68,7 @@
               <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}" class="nuxt-link-active">{{
                   item.title
                 }}
-              </nuxt-link> <!-- ??? plan:'private' ???? -->
+              </nuxt-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  data() {
+  data() { //Data is the private memory of each component where you can store any variables you need
     // if logged in display this sort of navbar elements
     if (this.$fire.auth.currentUser != null) {
       return {

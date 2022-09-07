@@ -40,7 +40,7 @@
 <script>
 export default {
   name: 'app',
-  data() {
+  data() { //Data is the private memory of each component where you can store any variables you need
     return {
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'https://api.openweathermap.org/data/2.5/',
@@ -52,18 +52,17 @@ export default {
     //request the weather on specific query and get response back
    async fetchWeather(e) {
       if (e.key === "Enter") {
-        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-          .then(res => {
+        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`) //get from the API the weather data
+          .then(res => { //if the request was successful go further with then
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json(); //get response in form of .json
+            return res.json();  //get response in .json and deserialize to use it and then save it to this.weather
           }).then(this.setResults);
       }
     },
-    //set result from fetch to actual weather
     setResults(response) {
-      this.weather = response;
+      this.weather = response;  //set result from fetch to actual weather
     },
     //get date back for widget
     dateBuilder() {

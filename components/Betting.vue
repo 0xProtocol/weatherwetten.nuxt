@@ -2,7 +2,7 @@
   <!-- decide if widget pic should be warm or cold dependending on temperature-->
   <div class="headline"> <!-- weathercoin div -->
     <h1>BETTING</h1>
-    <div :class="typeof weather.main != 'undefined'">
+    <div :class="typeof weather.main != 'undefined'"> <!-- show if weather is NOT undefined -->
 
       <div class="searchBox">
         <input
@@ -14,8 +14,8 @@
       </div>
     </div>
 
-    <div class="weatherData" v-if="typeof weather.main != 'undefined'">
-      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
+    <div class="weatherData" v-if="typeof weather.main != 'undefined'">  <!-- show if weather is NOT undefined -->
+      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true"> <!-- just show data if you had betted already!-->
         <thead>
         <tr>
           <th style="text-align: center; font-size: 15px; color: white">City</th>
@@ -64,8 +64,6 @@
         <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
         <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
       </v-card>
-
-
     </div>
   </div>
 </template>
@@ -78,7 +76,7 @@ import {deleteField} from "firebase/firestore";
 
 
 export default {
-  data: () => ({
+  data: () => ({ //Data is the private memory of each component where you can store any variables you need
       weathercoin: 0,
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'https://api.openweathermap.org/data/2.5/',
@@ -100,12 +98,12 @@ export default {
   methods: {
     fetchWeather(e) {
       if (e.key === "Enter") {
-        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-          .then(res => {
+        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`) //fetch the weather if the key enter is pressed
+          .then(res => { //if the request was successful go further with then
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json();
+            return res.json(); //get response in .json and deserialize to use it and then save it to this.weather
           }).then(this.setResults);
       }
     },
@@ -252,6 +250,7 @@ export default {
   },
 
 
+  /* get's instantly called*/
   async created() {
     // get user data from document
     // console.log(this.$fire.auth.currentUser.uid);
@@ -259,8 +258,6 @@ export default {
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
   }
-
-
 };
 
 </script>

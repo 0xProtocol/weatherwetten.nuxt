@@ -58,14 +58,12 @@
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
         <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
+        <input id="timePicker" style="color: white; font-size: 18px; background-color: #364848; border-radius: 4px" type="datetime-local" max="2022-12-31T00:00" value="2022-09-01T00:00">
         <v-card-actions class="justify-center">
           <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
-        <v-row justify="center">
-          <v-date-picker v-model="frontEndTimeStamp"></v-date-picker>
-        </v-row>
       </v-card>
 
 
@@ -75,11 +73,6 @@
 </template>
 
 <script>
-
-
-import Bet from "@/js/BetClass";
-import {deleteField} from "firebase/firestore";
-import firebase from "firebase/compat/app";
 
 
 export default {
@@ -94,8 +87,6 @@ export default {
       bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
       showData: false,
       showBetCard: false,
-      frontEndTimeStamp: '',
-      timestamp : Date,
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -135,7 +126,6 @@ export default {
     setBet(odds) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin &&
         document.getElementById('txtFieldAmount').value !== "") {
-        this.convertTimestampToFirebaseTimeStamp();
         this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
@@ -178,33 +168,20 @@ export default {
     },
 
     async bet(odds) {
-      let today = new Date();
-      let later = new Date();
-      later.setDate(today.getDate() + 1)
+      let timestamp = new Date(document.getElementById("timePicker").value);
       let doc = {
         betObj: {
           bettedCoins: parseFloat(this.bettedCoins),
           predictedTemp: parseFloat(this.predictedTemp),
           location: this.query,
           odds: odds,
-          time: this.timestamp
+          time: timestamp
+
         }
       }
-      let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      await document.set(doc, {merge: true});
-    },
-
-    async convertTimestampToFirebaseTimeStamp()
-    {
-      console.log(this.frontEndTimeStamp); //this timestamp is the one we get from frontend
-
-     // this.timestamp = firebase.firestore.Timestamp.fromDate(Date.parse(this.frontEndTimeStamp)); //this timestamp is to save into firebase database
-
-      let anotherDate = new Date(this.frontEndTimeStamp);
-      this.timestamp = firebase.firestore.Timestamp.fromDate(anotherDate); //this timestamp is to save into firebase database
-
-      console.log(this.timestamp);
-    },
+      let docRef = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      await docRef.set(doc, {merge: true});
+    }
   },
 
 

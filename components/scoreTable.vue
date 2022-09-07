@@ -31,7 +31,7 @@ export default {
   async created() {
     fetch("/api/leaderboard", {
       method: 'GET',
-      cache: 'reload'
+      cache: 'default'
     }).then(res => {
       if (!res.ok) {
         console.log("HTTP request unsuccessful")

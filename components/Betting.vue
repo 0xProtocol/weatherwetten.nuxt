@@ -54,7 +54,7 @@
         </tbody>
       </v-simple-table>
 
-      <v-card v-if="showBetCard" class="mx-auto" max-width="400" max-height="290" loading outlined shaped>
+      <v-card v-if="showBetCard" class="mx-auto" max-width="400" max-height="1000" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
         <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
         <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
@@ -63,8 +63,11 @@
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
-
+        <v-row justify="center">
+          <v-date-picker v-model="timestamp"></v-date-picker>
+        </v-row>
       </v-card>
+
 
 
     </div>
@@ -91,6 +94,7 @@ export default {
       bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
       showData: false,
       showBetCard: false,
+    timestamp: '',
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -130,6 +134,7 @@ export default {
     setBet(odds) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin &&
         document.getElementById('txtFieldAmount').value !== "") {
+        this.convertTimestampToFirebaseTimeStamp();
         this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
@@ -190,8 +195,9 @@ export default {
 
     async convertTimestampToFirebaseTimeStamp()
     {
-      var myTimestamp = firebase.firestore.Timestamp.fromDate(new Date());
-      console.log(myTimestamp);
+      console.log(this.timestamp); //this timestamp is the one we get from frontend
+      this.timestamp = firebase.firestore.Timestamp.fromDate(new Date()); //this timestamp is to save into firebase database
+      console.log(this.timestamp);
     },
   },
 
@@ -202,7 +208,6 @@ export default {
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
     this.$noty.info("Bet evaluated in 24 hours")
-    await this.convertTimestampToFirebaseTimeStamp();
   }
 
 

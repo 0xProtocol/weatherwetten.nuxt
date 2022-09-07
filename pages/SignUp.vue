@@ -1,8 +1,8 @@
 <template>
 
-  <v-app>
+  <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
     <nav-bar/>
-    <v-main>
+    <v-main>  <!-- Sizes your content based upon application components (dynamically sized based on the structure of layout elements)-->
       <v-card outlined id="signUpCard"> <!-- card where everything is placed in -->
         <v-card-text>
           <!-- rules -> check if format is e-mail || v-model -> binding and sync the state of form input elements with corresponding state in JavaScript -->
@@ -25,6 +25,7 @@
           <button @click="signUp"> <!-- if clicked go to js method signUp -->
 
 
+            <!-- for the sign up effect -->
               <div class="svg-wrapper">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                   <path fill="none" d="M0 0h24v24H0z"></path>
@@ -43,7 +44,7 @@
 
       <v-snackbar timeout="10000" id="snackbar" v-model="showSnackbar" color="red darken-2"> <!-- notifcation box-->
         {{ userMsg }}
-        <template v-slot:action="{ attrs }">
+        <template v-slot:action="{ attrs }"> <!-- so that the button is at the same line as error message -->
           <v-btn dark text v-bind="attrs" @click="showSnackbar = false">
             Close
           </v-btn>
@@ -51,7 +52,7 @@
       </v-snackbar>
 
     </v-main>
-    <Footer/>
+    <Footer/> <!-- Footer display -->
   </v-app>
 
 
@@ -97,15 +98,15 @@ export default {
 
 
   methods: {
-    // ??
+    // signUp the user
     signUp() {
       let that = this;
-      if (this.auth.password !== this.auth.passwordRepeat) {
+      if (this.auth.password !== this.auth.passwordRepeat) { //if the two text fields are not the same -> error
         this.$noty.error("Passwords do not match!");
       } else {
-        this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password)
-          .then((user) => {
-            fetch("/api/create/" + this.$fire.auth.currentUser.uid, {
+        this.$fire.auth.createUserWithEmailAndPassword(this.auth.email, this.auth.password) //create new user on firebase with email and password (used for authentication)
+          .then((user) => { //the use this response and fetch
+            fetch("/api/create/" + this.$fire.auth.currentUser.uid, {  //create new user on firebase with username and weathercoins (used for database in 'users' collection)
               method: 'POST',           // here we make our post request to create a document storing user information
               headers:{
                 'Content-Type':'application/json'
@@ -114,8 +115,9 @@ export default {
                 username: this.username
               })
             })
-          }).then(() => {this.$router.push('Profile')
+          }).then(() => {this.$router.push('Profile') //go to profile page after logged in
           this.$noty.success("10 weathercoin added!")})
+          //error functions
           .catch(function (e) {
             switch (e.code) {
               case "auth/email-already-in-use":
@@ -145,20 +147,6 @@ export default {
     routeToLogin() {
       this.$router.push('Login')
     },
-    // ??
-   /* async initializeUserData() {
-      const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
-
-      const document = {
-        username: this.username,
-        weatherCoin: 0
-      }
-      try {
-        await ref.set(document)
-      } catch (error) {
-        console.log(error.message)
-      }
-    }*/
   }
 }
 
@@ -178,12 +166,12 @@ export default {
 
 /* From uiverse.io by @adamgiebl */
 button {
-  font-family: inherit;
+  font-family: inherit; /*the body's font family*/
   font-size: 17px;
   background: #383636;
   color: #dfdfe8;
   padding: 0.1em 1em 0.1em 0.9em; /*inner distance of object*/
-  display: flex;
+  display: flex; /*gives all flexboxes in a row the same height, and incidentally does the calculations for the space between the boxes for us*/
   align-items: center;
   border-radius: 8px;
   overflow: hidden; /* everything that flows over is hidden -> 'sign up' text */
@@ -191,7 +179,6 @@ button {
 }
 
 button span {
-  display: block;
   margin-left: 0.3em;
   transition: all 0.3s ease-in-out;
 }

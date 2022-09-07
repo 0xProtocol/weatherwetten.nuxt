@@ -64,7 +64,7 @@
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
         <v-row justify="center">
-          <v-date-picker v-model="timestamp"></v-date-picker>
+          <v-date-picker v-model="frontEndTimeStamp"></v-date-picker>
         </v-row>
       </v-card>
 
@@ -94,7 +94,8 @@ export default {
       bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
       showData: false,
       showBetCard: false,
-    timestamp: '',
+      frontEndTimeStamp: '',
+      timestamp: '',
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -195,8 +196,8 @@ export default {
 
     async convertTimestampToFirebaseTimeStamp()
     {
-      console.log(this.timestamp); //this timestamp is the one we get from frontend
-      this.timestamp = firebase.firestore.Timestamp.fromDate(new Date()); //this timestamp is to save into firebase database
+      console.log(this.frontEndTimeStamp); //this timestamp is the one we get from frontend
+      this.timestamp = firebase.firestore.Timestamp.fromDate(this.frontEndTimeStamp); //this timestamp is to save into firebase database
       console.log(this.timestamp);
     },
   },

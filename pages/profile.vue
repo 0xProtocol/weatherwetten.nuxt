@@ -53,7 +53,7 @@
 export default {
   name: "profile",
 
-  data() {
+  data() { //Data is the private memory of each component where you can store any variables you need
     return {
       username: "",
       weathercoin: 0,

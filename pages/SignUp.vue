@@ -65,7 +65,7 @@ export default {
   name: "SignUp",
 
 
-  data: () => ({
+  data: () => ({ //Data is the private memory of each component where you can store any variables you need
     showSnackbar: false,
     userMsg: "",
     showPassword: false,

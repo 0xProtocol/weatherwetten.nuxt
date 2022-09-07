@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
       <nav-bar/>    <!-- Navbar -->
 
       <div class="weathercoin"> <!-- weathercoin div -->
@@ -180,11 +180,10 @@ export default {
     NavBar2,
     Footer,
   },
-  data() {
-    let mintedWeatherCoins;
+  data() { //Data is the private memory of each component where you can store any variables you need
     return {
       userArray: [],
-      int: mintedWeatherCoins,
+      mintedWeatherCoins: 0,
       url_base: 'http://api.creativehandles.com/getRandomColor',
     }
   },
@@ -193,12 +192,12 @@ export default {
   async created() {
     var color;
     /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
-    if (this.$fire.auth.currentUser != null) {
-      const docRef = this.$fire.firestore.collection('users');
-      const snapshot = await docRef.get();
-      this.minedWeatherCoins = 0;
+    if (this.$fire.auth.currentUser != null) { //if user is logged in get mintedweathercoins
+      const docRef = this.$fire.firestore.collection('users'); //get the collection 'users' (user|weathercoin)
+      const snapshot = await docRef.get(); //wait until a promise is settled -> until it's getted and safe it into snapshot
+      this.minedWeatherCoins = 0; //set to 0
       let i = 0;
-      snapshot.forEach(doc => {
+      snapshot.forEach(doc => { //iterate through doc and calculate full weathercoins of all users (minted)
         this.userArray[i] = doc.data();
         this.minedWeatherCoins = this.minedWeatherCoins + this.userArray[i].weatherCoin;
         i++;
@@ -210,9 +209,9 @@ export default {
 
     // fetch random color and apply it to our weathercoin minted text
       fetch(`${this.url_base}`)
-        .then(function (response) {
+        .then(function (response) { //if the request was successful go further with then
 
-          response.json().then(function (data) {
+          response.json().then(function (data) { //get response in .json and deserialize to use it -> we want color
             color = data["color"]; // set color var with response random color
             //console.log(color);
             document.getElementById("randomColorHeading").style.color  = color; //set color to our element

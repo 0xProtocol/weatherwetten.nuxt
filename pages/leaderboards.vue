@@ -1,10 +1,10 @@
 <template>
 
-  <v-app>
+  <v-app><!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
     <nav-bar/>
     <div class="content">
     <h1>LEADERBOARDS</h1>
-    <score-table id="table"></score-table> <!-- the actual leaderboard -->
+    <score-table id="table"></score-table> <!-- the actual leaderboard get component-->
     </div>
     <Footer/>
   </v-app>

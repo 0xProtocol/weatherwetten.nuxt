@@ -1,8 +1,8 @@
 <template>
-  <v-app>
+  <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
 
     <nav-bar/>
-    <v-main>
+    <v-main> <!-- Sizes your content based upon application components (dynamically sized based on the structure of layout elements)-->
       <v-card id="cardArea" height="280">
         <v-card-title class="justify-center">
           Reset your password here!
@@ -28,8 +28,8 @@
 
       <v-snackbar timeout="10000" id="errorSnackBar" v-model="snackbarVisible" color="red darken-2">
         {{ msgToUser }}
-        <template v-slot:action="{ attrs }">
-          <v-btn dark text v-bind="attrs" @click="snackbarVisible = false"> <!-- v-bind ??? -->
+        <template v-slot:action="{ attrs }"> <!-- so that the button is at the same line as error message -->
+          <v-btn dark text v-bind="attrs" @click="snackbarVisible = false">
             Close
           </v-btn>
         </template>
@@ -37,7 +37,7 @@
 
       <v-snackbar timeout="10000" id="okSnackBar" v-model="OkSnackbarVisible" color="green">
         {{ msgToUser }}
-        <template v-slot:action="{ attrs }">
+        <template v-slot:action="{ attrs }"> <!-- so that the button is at the same line as error message -->
           <v-btn dark text v-bind="attrs" @click="OkSnackbarVisible = false">
             Close
           </v-btn>
@@ -72,12 +72,13 @@ export default {
 
     //reset password action
     sendEmailToUser: function () {
-      this.$fire.auth.sendPasswordResetEmail(this.userEmailAddress).then(
+      this.$fire.auth.sendPasswordResetEmail(this.userEmailAddress).then( //reset the password via email
         () => {
           this.OkSnackbarVisible = true;
           this.msgToUser = "Reset link sent to: " + this.userEmailAddress;
         }
       )
+        //error handling
         .catch((error) => {
           switch (error.code){
             case "auth/user-not-found":
@@ -97,7 +98,6 @@ export default {
               this.msgToUser = error.message;
           }
         })
-
     }
   }
 }

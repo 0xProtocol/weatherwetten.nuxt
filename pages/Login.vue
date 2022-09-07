@@ -1,8 +1,8 @@
 <template>
-<v-app>
+<v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
   <nav-bar/>
 
-  <v-main>
+  <v-main> <!-- Sizes your content based upon application components (dynamically sized based on the structure of layout elements)-->
     <v-card outlined id="loginCard">
       <v-card-title class="justify-center">Login to WeatherWetten!</v-card-title>
       <v-card-text>
@@ -73,9 +73,10 @@ export default {
     //login with email and password
     login(){
       let that = this
-      this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password)
+      this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password) //login into firebase account
         .then((user) => this.$router.push('Profile')) //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
-      .catch(function (error) {
+      //error functions
+        .catch(function (error) {
         switch (error.code) {
           case "auth/wrong-password":
             that.showSnackbar = true;
@@ -103,8 +104,6 @@ export default {
     routeToForgotPassword() {
       this.$router.push('forgotPassword') //pushes a new entry into the history stack, when the user clicks the browser back button they will be taken to the specific URL
     },
-
-
   }
 }
 </script>

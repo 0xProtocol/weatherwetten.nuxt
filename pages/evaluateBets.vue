@@ -110,6 +110,7 @@ export default {
             this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
           }
         }
+        await this.deleteBets()
       }
     },
 
@@ -126,6 +127,17 @@ export default {
         console.log(lon)
       })
       return "lat=" + lat + "&lon=" + lon;
+    },
+
+    async deleteBets(){
+      await fetch("/api/delete/" + this.$fire.auth.currentUser.uid, {
+        method: 'DELETE'
+      }).then(res => {
+        if (res.ok){
+          this.$noty.success("Bet deleted from database")
+        }
+      })
+
     },
 
     async getWeathercoin() {

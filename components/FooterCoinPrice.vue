@@ -19,7 +19,7 @@ export default {
   /* get's instantly called*/
   async created() {
     fetch(`${this.url_base}`) //get data from api
-      .then((res) => res.json()) //response in json
+      .then((res) => res.json()) //if the request was successful go further with then (deserialize .json)
       .then((data) => {
         this.sunToken = data["sun-token"]["usd"] //filter data and give out the usd of sun-token
           //console.log(data["sun-token"]["usd"]);

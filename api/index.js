@@ -91,8 +91,15 @@ PUT: NOT safe, idempotent (we change something on the server || same request giv
 we fully UPDATE something -> the bet
 status: ???
  */
-app.put("/", (req, res)=>{
-
+app.put("/replace/:id", async (req, res)=>{
+  const reference = db.collection('bets').doc(req.params.id);
+  console.log(req.body)
+  const document = req.body
+  await reference.set(document).then(
+    () =>{
+      res.sendStatus(200)
+    }
+  )
 })
 
 

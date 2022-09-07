@@ -183,7 +183,23 @@ export default {
         }
       }
       let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      await document.set(doc, {merge: true});
+      document.get().then(async (document) => {
+        if (document.exists){
+          console.log("put request")
+          await fetch("/api/replace/" + this.$fire.auth.currentUser.uid, {
+            method: 'PUT',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(doc)
+          })
+        } else {
+          console.log("Creating new document")
+          let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+          await document.set(doc, {merge:false})
+        }
+
+      });
 
       if (odds === 1.5) {
         let tmpWeatherCoins = 0;

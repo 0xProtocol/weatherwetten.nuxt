@@ -132,12 +132,12 @@ export default {
         console.log("actual temp " + this.actualTemp);
         console.log(this.bettedCoins);
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
-        //this.$noty.success("Bet placed!");
+        this.$noty.success("Bet placed!");
         this.showData = true;
         // show message
-        this.delay(2000).then(() => {
+        /*this.delay(2000).then(() => {
           this.$noty.info("Please be a fair player and select a new city to bet!")
-        });
+        });*/
       } else {
         console.log("error");
         this.$noty.error("Bet failed!") //more cases why error is happened -> when we have backend
@@ -175,79 +175,20 @@ export default {
     },
 
     async bet(odds) {
+      let today = new Date();
+      let later = new Date();
+      later.setDate(today.getDate() + 1)
       let doc = {
         betObj: {
           bettedCoins: parseInt(this.bettedCoins),
           predictedTemp: parseInt(this.predictedTemp),
           location: this.query,
           odds: odds,
-          time: new Date()
+          time: later
         }
       }
       let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       await document.set(doc, {merge: true});
-
-      if (odds === 1.5) {
-        let tmpWeatherCoins = 0;
-        //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
-        if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) {
-          //get 1.5 from betting volume
-          tmpWeatherCoins = this.bettedCoins * 1.5;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        } else {
-          //lose betted amount volume
-          tmpWeatherCoins = this.bettedCoins * -1;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        }
-      } else if (odds === 2) {
-        //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
-        let tmpWeatherCoins = 0;
-        if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) {
-          //get 2 from betting volume
-          tmpWeatherCoins = this.bettedCoins * 2;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        } else {
-          //lose betted amount volume
-          tmpWeatherCoins = this.bettedCoins * -1;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        }
-      } else if (odds === 3) {
-        let tmpWeatherCoins = 0;
-        //BOTTOM = actualTemp - 0.5 || TOP = actualTemp + 0.5
-        if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) {
-          //get 3 from betting volume
-          tmpWeatherCoins = this.bettedCoins * 3;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.success("You won " + tmpWeatherCoins + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        } else {
-          //lose betted amount volume
-          tmpWeatherCoins = this.bettedCoins * -1;
-          this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
-          this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
-          this.delay(1000).then(() => {
-            this.$noty.info("New balance -> " + this.weathercoin)
-          });
-        }
-      }
     },
   },
 

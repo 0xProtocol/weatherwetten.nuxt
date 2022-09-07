@@ -176,7 +176,9 @@ export default {
             this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
           }
         }
+        await this.updateData();
         await this.deleteBets("You may now submit the next bet!")
+
       }
     },
 
@@ -247,10 +249,25 @@ export default {
       .then(() => {
         this.msg = "Username changed successfully"
         this.showSnackBar = true;
-        location.reload(); // reload the current page
+        this.updateData();
       })
 
+    },
+
+    async updateData(){
+      let jsonDoc;
+      await fetch("/api/userdata/" + this.$fire.auth.currentUser.uid, {
+        method: 'GET',
+        cache: 'default'
+      })
+        .then(res => res.json())
+        .then(data => jsonDoc = data)
+      this.weathercoin = jsonDoc.weathercoin;
+      this.username = jsonDoc.username;
+      this.setBadge();
     }
+
+
   },
 
   async created() {
@@ -268,7 +285,9 @@ export default {
     //this.time = new Date(this.time.seconds * 1000 + this.time.nanoseconds/1000000) get from firebase date to actual date readable
     this.setBadge();
     this.dataLoaded = true;
-  }
+  },
+
+
 };
 </script>
 

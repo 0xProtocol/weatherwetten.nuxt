@@ -76,6 +76,7 @@
 
 import Bet from "@/js/BetClass";
 import {deleteField} from "firebase/firestore";
+import firebase from "firebase/compat/app";
 
 
 export default {
@@ -186,6 +187,12 @@ export default {
       let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       await document.set(doc, {merge: true});
     },
+
+    async convertTimestampToFirebaseTimeStamp()
+    {
+      var myTimestamp = firebase.firestore.Timestamp.fromDate(new Date());
+      console.log(myTimestamp);
+    },
   },
 
 
@@ -195,6 +202,7 @@ export default {
     let document = ref.get();
     this.weathercoin = (await document).get("weatherCoin");
     this.$noty.info("Bet evaluated in 24 hours")
+    await this.convertTimestampToFirebaseTimeStamp();
   }
 
 

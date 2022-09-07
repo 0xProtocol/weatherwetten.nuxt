@@ -95,7 +95,7 @@ export default {
       showData: false,
       showBetCard: false,
       frontEndTimeStamp: '',
-      timestamp: '',
+      timestamp : Date,
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -197,7 +197,7 @@ export default {
     async convertTimestampToFirebaseTimeStamp()
     {
       console.log(this.frontEndTimeStamp); //this timestamp is the one we get from frontend
-      this.timestamp = firebase.firestore.Timestamp.fromDate(this.frontEndTimeStamp); //this timestamp is to save into firebase database
+      this.timestamp = firebase.firestore.Timestamp.fromDate(new Date()); //this timestamp is to save into firebase database
       console.log(this.timestamp);
     },
   },

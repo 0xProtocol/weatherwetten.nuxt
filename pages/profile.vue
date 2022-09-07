@@ -175,7 +175,7 @@ export default {
             this.$noty.error("You lost " + tmpWeatherCoins*-1 + " weathercoins");
           }
         }
-        // await this.deleteBets()
+        await this.deleteBets()
       }
     },
 

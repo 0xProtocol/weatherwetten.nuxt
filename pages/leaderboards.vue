@@ -1,10 +1,10 @@
 <template>
 
-  <v-app>
+  <v-app><!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
     <nav-bar/>
     <div class="content">
-    <h1>LEADERBOARDS</h1>
-    <score-table id="table"></score-table> <!-- the actual leaderboard -->
+      <h1>LEADERBOARDS</h1>
+      <score-table id="table"></score-table> <!-- the actual leaderboard get component-->
     </div>
     <Footer/>
   </v-app>
@@ -21,7 +21,6 @@
   background-attachment: fixed;
   background-position: center;
 }
-
 #table {
   position: fixed; /*positioned relative to the viewport, it always stays in the same place even if the page is scrolled */
   top: 50%; /* mid of screen */
@@ -30,17 +29,14 @@
   border-radius: 5px;
   width: 30%;
 }
-
 .content{
   margin-top: 100px; /* distance from top for content*/
   text-align: center;
 }
-
 /* responsiveness */
 @media (max-width: 800px) {
   #table {
     width: 70%;
   }
 }
-
 </style>

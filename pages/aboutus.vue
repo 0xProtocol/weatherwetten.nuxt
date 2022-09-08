@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
       <nav-bar/>
       <div class="about">
         <h1>ABOUT US</h1>

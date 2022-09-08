@@ -26,7 +26,7 @@
           <th style="text-align: center; font-size: 15px; color: orange">2x Odds Top</th>
           <th style="text-align: center; font-size: 15px; color: red">3x Odds Bottom</th>
           <th style="text-align: center; font-size: 15px; color: red">3x Odds Top</th>
-          <th style="text-align: center; font-size: 15px; color: white">Deadline</th> <!-- date where it calculates -->
+          <!--  <th style="text-align: center; font-size: 15px; color: white">Deadline</th>  date where it calculates -->
         </tr>
         </thead>
         <tbody>
@@ -49,7 +49,7 @@
           <td class="td">{{ parseFloat(weather.main.temp + 0.5).toFixed(2) }}° C</td>
           <!-- predicted data +° (round to two decimals)-->
 
-          <td class="td">{{ dateBuilderModified() }}</td> <!-- deadline where we evaluate -->
+          <!--  <td class="td">{{ dateBuilderModified() }}</td> deadline where we evaluate -->
         </tr>
         </tbody>
       </v-simple-table>

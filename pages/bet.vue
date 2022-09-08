@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <v-app>
-    <nav-bar/> <!-- NavBar component -->
-    <betting/> <!-- Betting component -->
+    <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
+      <nav-bar/> <!-- NavBar component -->
+      <betting/> <!-- Betting component -->
+      <footer/> <!-- Footer component -->
     </v-app>
   </div>
 </template>

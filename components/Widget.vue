@@ -16,7 +16,7 @@
     <main>
       <div class="search-box">
         <input type="text" class="search-bar" placeholder="Search..." v-model="query"
-          @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
+               @keypress="fetchWeather"/>  <!-- if pressed then call fetchWeather-->
       </div>
 
       <div v-if="typeof weather.main != 'undefined'"> <!-- if weather is found then show details -->
@@ -40,7 +40,7 @@
 <script>
 export default {
   name: 'app',
-  data() {
+  data() { //Data is the private memory of each component where you can store any variables you need
     return {
       api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
       url_base: 'https://api.openweathermap.org/data/2.5/',
@@ -50,20 +50,19 @@ export default {
   },
   methods: {
     //request the weather on specific query and get response back
-   async fetchWeather(e) {
+    async fetchWeather(e) {
       if (e.key === "Enter") {
-        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-          .then(res => {
+        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`) //get from the API the weather data
+          .then(res => { //if the request was successful go further with then
             if (res.statusText === 'Not Found') {
               this.$noty.error("Please enter a valid city!")
             }
-            return res.json(); //get response in form of .json
+            return res.json();  //get response in .json and deserialize to use it and then save it to this.weather
           }).then(this.setResults);
       }
     },
-    //set result from fetch to actual weather
     setResults(response) {
-      this.weather = response;
+      this.weather = response;  //set result from fetch to actual weather
     },
     //get date back for widget
     dateBuilder() {
@@ -88,7 +87,6 @@ export default {
   height: 100%;
   background-position: center right; /* shrink from right to left (better design at less px screen*/
 }
-
 /* different background for each possibility */
 #app.warmSnow {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url('../assets/img/warmsnow.jpg');
@@ -96,100 +94,84 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 #app.warmClouds {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url('../assets/img/warmclouds.png');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.warmClear {
   background-image: url('../assets/img/warm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.warmRain {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.0)), url('../assets/img/warmrain.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.warmDrizzle {
   background-image: url('../assets/img/warmdrizzle.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.warmThunderstorm {
   background-image: url('../assets/img/warmthunderstorm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldSnow {
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.0)), url('../assets/img/coldsnow.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldClouds {
   background-image: url('../assets/img/coldcloud.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldClear {
   background-image: url('../assets/img/cold.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldRain {
   background-image: url('../assets/img/coldrain.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldDrizzle {
   background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../assets/img/colddrizzle.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
 #app.coldThunderstorm {
   background-image: url('../assets/img/coldthunderstorm.jpg');
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-
-
 main {
   min-height: 100%; /* main content 100% of screen*/
   padding: 25px; /* distance adjusted*/
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)); /*darker background image*/
 }
-
 .search-box {
   width: 100%; /* search box has full width*/
   margin-top: 60px; /* distance from top*/
 }
-
 .search-box .search-bar {
   width: 100%;  /* search bar has full width*/
   padding: 15px; /* top padding (inner distance) */
-
   color: #313131;
   font-size: 20px;
   outline: none; /* border around none*/
@@ -198,13 +180,11 @@ main {
   border-radius: 0 16px 0 16px;
   transition: 0.4s; /*time where it changes to other state*/
 }
-
 .search-box .search-bar:focus {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 16px 0 16px 0;
 }
-
 .location-box .location {
   color: #FFF;
   font-size: 32px;
@@ -213,7 +193,6 @@ main {
   text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
   margin-top: 50px; /* distance from top*/
 }
-
 .location-box .date {
   color: #FFF;
   font-size: 20px;
@@ -221,11 +200,9 @@ main {
   font-style: italic;
   text-align: center;
 }
-
 .weather-box {
   text-align: center;
 }
-
 .weather-box .temp {
   display: inline-block; /* display list items horizontally and set width and height */
   padding: 10px 25px; /* inner distance top and right - so that box is bigger */
@@ -238,7 +215,6 @@ main {
   margin: 30px;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 }
-
 .weather-box .weather {
   color: #FFF;
   font-size: 30px;

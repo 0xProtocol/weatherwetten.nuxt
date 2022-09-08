@@ -68,7 +68,7 @@
               <nuxt-link :to="{ path: item.link, query: { plan: 'private' }}" class="nuxt-link-active">{{
                   item.title
                 }}
-              </nuxt-link> <!-- ??? plan:'private' ???? -->
+              </nuxt-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  data() {
+  data() { //Data is the private memory of each component where you can store any variables you need
     // if logged in display this sort of navbar elements
     if (this.$fire.auth.currentUser != null) {
       return {
@@ -97,7 +97,6 @@ export default {
     // if not logged in display this sort of navbar elements
     else {
       return {
-
         drawer: null,
         items: [
           {title: 'WEATHERCOIN', icon: 'mdi-currency-btc', link: 'weathercoin'},
@@ -116,13 +115,11 @@ export default {
   font-weight: bold;
   text-decoration: none;
 }
-
 /* nuxt link for standard navbar at top*/
 .nuxt-link-active-underline {
   font-weight: bold;
   text-decoration: none;
 }
-
 /* nuxt link for standard navbar at top hovering*/
 .nuxt-link-active-underline:after {
   bottom: -5px;
@@ -135,13 +132,11 @@ export default {
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
-
 /* nuxt link for standard navbar at top hovering*/
 .nuxt-link-active-underline:hover:after {
   width: 100%; /* fill width */
   left: 0; /* start left */
 }
-
 /* nuxt link for headline of navbar hovering*/
 .nuxt-link-active-underline-headline:after {
   bottom: -5px;
@@ -153,26 +148,22 @@ export default {
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
-
 /* nuxt link for headline of navbar hovering*/
 .nuxt-link-active-underline-headline:hover:after {
   width: 115%; /* fill whole width */
   left: -15px; /* start more left */
 }
-
 /* nuxt link for headline of navbarDrawer*/
 .nuxt-link-active-underline-headline-navbarDrawer{
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.15em;
-
   display: inline-block;
   padding: 15px 5px;
   position: relative;
   font-size: 1rem;
 }
-
 /* nuxt link for headline of navbarDrawer hovering*/
 .nuxt-link-active-underline-headline-navbarDrawer:after {
   bottom: 0;
@@ -185,12 +176,9 @@ export default {
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
-
 /* nuxt link for headline of navbarDrawer hovering*/
 .nuxt-link-active-underline-headline-navbarDrawer:hover:after {
   width: 100%; /* fill width */
   left: 0; /* start left*/
 }
-
-
 </style>

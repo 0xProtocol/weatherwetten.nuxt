@@ -2,7 +2,7 @@
   <!-- decide if widget pic should be warm or cold dependending on temperature-->
   <div class="headline"> <!-- weathercoin div -->
     <h1>BETTING</h1>
-    <div :class="typeof weather.main != 'undefined'">
+    <div :class="typeof weather.main != 'undefined'">  <!-- show if weather is NOT undefined -->
 
       <div class="searchBox">
         <input
@@ -14,8 +14,8 @@
       </div>
     </div>
 
-    <div class="weatherData" v-if="typeof weather.main != 'undefined'">
-      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true">
+    <div class="weatherData" v-if="typeof weather.main != 'undefined'"> <!-- show if weather is NOT undefined -->
+      <v-simple-table style="background-color: #1e1e1e; border-radius: 10px" class="table" v-if="showData===true"> <!-- just show data if you had betted already!-->
         <thead>
         <tr>
           <th style="text-align: center; font-size: 15px; color: white">City</th>
@@ -101,9 +101,9 @@ export default {
   methods: {
     fetchWeather(e) {
       if (e.key === "Enter") {
-        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-          .then(res => {
-            if (res.statusText === 'Not Found') {
+        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`) //fetch the weather if the key enter is pressed
+          .then(res => { //if the request was successful go further with then
+            if (res.statusText === 'Not Found') { //get response in .json and deserialize to use it and then save it to this.weather
               this.$noty.error("Please enter a valid city!")
             }
             return res.json();
@@ -137,7 +137,7 @@ export default {
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
         this.$noty.success("Bet placed!");
-        this.showData = true;
+        this.showData = true; //show the results in the table
         this.showBetCard = false;
         // show message
         /*this.delay(2000).then(() => {
@@ -158,6 +158,7 @@ export default {
       this.weathercoin = (await coin).get("weatherCoin");
     },
 
+    // update just the weathercoins
     async updateWeatherCoins(coinChange) {
       const coinsBetted = coinChange;
       const updatedWeatherCoins = +this.weathercoin + +coinsBetted;
@@ -173,6 +174,7 @@ export default {
       })
     },
 
+    // the betting logic
     async bet(odds) {
       let timestamp = new Date(document.getElementById("timePicker").value);
       let doc = {
@@ -207,11 +209,12 @@ export default {
   },
 
 
+  /* get's instantly called*/
   async created() {
     // get user data from document
-    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
+    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid); //get the collection from database
     let document = ref.get();
-    this.weathercoin = (await document).get("weatherCoin");
+    this.weathercoin = (await document).get("weatherCoin");  //get the weathercoins
   }
 
 

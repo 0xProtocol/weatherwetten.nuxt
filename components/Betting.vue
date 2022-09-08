@@ -131,7 +131,7 @@ export default {
         console.log(this.bettedCoins);
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
         //this.$noty.success("Bet placed!");
-        this.showData = true;
+        this.showData = true; //show the results in the table
         // show message
         this.delay(2000).then(() => {
           this.$noty.info("Please be a fair player and select a new city to bet!")
@@ -143,15 +143,16 @@ export default {
     },
     //sleep function
     delay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms)); //a delay at showing a notification
     },
 
     async getWeathercoin() {
-      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid)
+      const ref = this.$fire.firestore.collection("/users").doc(this.$fire.auth.currentUser.uid) //get the collection from database
       let coin = ref.get();
-      this.weathercoin = (await coin).get("weatherCoin");
+      this.weathercoin = (await coin).get("weatherCoin"); //get the weathercoin we want
     },
 
+    // update just the weathercoins
     async updateWeatherCoins(coinChange)
     {
       const coinsBetted = coinChange;
@@ -172,6 +173,7 @@ export default {
       })
     },
 
+    // the betting logic
     async bet(odds) {
       let doc = {
         betObj: {
@@ -182,11 +184,11 @@ export default {
           time: new Date()
         }
       }
-      let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
+      let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid) //get collection bets from database
       document.get().then(async (document) => {
         if (document.exists){
           console.log("put request")
-          await fetch("/api/replace/" + this.$fire.auth.currentUser.uid, {
+          await fetch("/api/replace/" + this.$fire.auth.currentUser.uid, { //fully update a bet (overwrite)
             method: 'PUT',
             headers:{
               'Content-Type':'application/json'
@@ -204,7 +206,7 @@ export default {
       if (odds === 1.5) {
         let tmpWeatherCoins = 0;
         //BOTTOM = actualTemp - 1.5 || TOP = actualTemp + 1.5
-        if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) {
+        if (this.actualTemp - 1.5 <= this.predictedTemp && this.actualTemp + 1.5 >= this.predictedTemp) { //if the bet lies between the win
           //get 1.5 from betting volume
           tmpWeatherCoins = this.bettedCoins * 1.5;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
@@ -224,7 +226,7 @@ export default {
       } else if (odds === 2) {
         //BOTTOM = actualTemp - 1 || TOP = actualTemp + 1
         let tmpWeatherCoins = 0;
-        if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) {
+        if (this.actualTemp - 1 <= this.predictedTemp && this.actualTemp + 1 >= this.predictedTemp) { //if the bet lies between the win
           //get 2 from betting volume
           tmpWeatherCoins = this.bettedCoins * 2;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
@@ -244,7 +246,7 @@ export default {
       } else if (odds === 3) {
         let tmpWeatherCoins = 0;
         //BOTTOM = actualTemp - 0.5 || TOP = actualTemp + 0.5
-        if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) {
+        if (this.actualTemp - 0.5 <= this.predictedTemp && this.actualTemp + 0.5 >= this.predictedTemp) { //if the bet lies between the win
           //get 3 from betting volume
           tmpWeatherCoins = this.bettedCoins * 3;
           this.updateWeatherCoins(tmpWeatherCoins).then(() => {this.getWeathercoin();}) //update coins
@@ -270,9 +272,9 @@ export default {
   async created() {
     // get user data from document
     // console.log(this.$fire.auth.currentUser.uid);
-    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid);
+    const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid); //get the collection from database
     let document = ref.get();
-    this.weathercoin = (await document).get("weatherCoin");
+    this.weathercoin = (await document).get("weatherCoin"); //get the weathercoins
   }
 };
 

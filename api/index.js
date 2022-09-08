@@ -20,7 +20,7 @@ const db = firebaseApp.firestore();
 
 /*
 GET: safe, idempotent (we do not change something on the server || same request gives same response back)
-we get username and weathercoin back from firebase
+we get username and weathercoin back from firebase (used at profile when we get everything)
 status 200 -> OK
  */
 app.get("/userdata/:id", async (req, res)=>{
@@ -88,8 +88,8 @@ app.post("/create/:id", async (req, res)=>{
 
 /*
 PUT: NOT safe, idempotent (we change something on the server || same request gives same response back)
-we fully UPDATE something -> the bet
-status: ???
+we fully UPDATE something -> the bet will be replaced by the NEW bet
+status: 200 -> OK
  */
 app.put("/replace/:id", async (req, res)=>{
   const reference = db.collection('bets').doc(req.params.id);

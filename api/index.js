@@ -91,11 +91,10 @@ PUT: NOT safe, idempotent (we change something on the server || same request giv
 we fully UPDATE something -> the bet which is pending
 status: 200 - OK
  */
-app.put("/replace/:id", async (req, res)=>{
-  const reference = db.collection('bets').doc(req.params.id);
-  console.log(req.body)
+app.put("/lose/:id", async (req, res)=>{
+  const docRef = db.collection("users").doc(req.params.id)
   const document = req.body
-  await reference.set(document).then(
+  await docRef.set(document).then(
     () =>{
       res.sendStatus(200)
     }

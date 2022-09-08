@@ -181,7 +181,7 @@ export default {
     },
 
     //get location - location is query from database and get lat and lon from this
-    async   locationToGeocode(location) {
+    async locationToGeocode(location) {
       let url = this.base_url + "q=" + location + "&appid=" + this.api_key;
       let lat, lon
       await fetch(url)
@@ -193,6 +193,20 @@ export default {
           console.log(lon)
         })
       return "lat=" + lat + "&lon=" + lon;
+    },
+
+    async loser(){
+      console.log("put request")
+      await fetch("/api/lose/" + this.$fire.auth.currentUser.uid, {
+        method: 'PUT',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+          username: "loser",
+          weatherCoin: 10
+        })
+      })
     },
 
     /*logout the user*/
@@ -223,6 +237,11 @@ export default {
       } else if (coins >= 1000){
         this.imageSrc = require("assets/img/expert.png")
         this.userLevel = "Expert";
+      }
+      if (coins === 0){
+        this.loser();
+        this.$noty.success("Here, have some weathercoins!")
+        this.updateData();
       }
     },
 

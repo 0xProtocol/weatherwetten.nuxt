@@ -181,25 +181,7 @@ export default {
         }
       }
       let docRef = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      let documentReference = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      documentReference.get().then(async (document) => {
-        if (document.exists) {
-          //if document exists then just update the full document
-          console.log("put request")
-          await fetch("/api/replace/" + this.$fire.auth.currentUser.uid, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(doc)
-          })
-        } else {
-          //create new document
-          console.log("Creating new document")
-          let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-          await document.set(doc, {merge: false})
-        }
-      });
+      await docRef.set(doc, {merge: false})
     }
   },
 

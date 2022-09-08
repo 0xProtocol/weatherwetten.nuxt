@@ -181,7 +181,7 @@ export default {
         }
       }
       let docRef = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-      await docRef.set(doc, {merge: false})
+      await docRef.set(doc, {merge: false})//update values in firebase trought firebase, when we do new bet
     }
   },
 

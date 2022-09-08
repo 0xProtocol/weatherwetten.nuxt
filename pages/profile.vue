@@ -46,7 +46,7 @@
         </v-snackbar>
       </v-main>
     </div>
-    <FooterCoinPrice/>
+    <footer-coin-price/>
   </v-app>
 </template>
 
@@ -181,7 +181,7 @@ export default {
     },
 
     //get location - location is query from database and get lat and lon from this
-    async locationToGeocode(location) {
+    async   locationToGeocode(location) {
       let url = this.base_url + "q=" + location + "&appid=" + this.api_key;
       let lat, lon
       await fetch(url)

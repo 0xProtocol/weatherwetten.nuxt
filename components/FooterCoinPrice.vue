@@ -1,6 +1,6 @@
 <template>
   <v-footer app color="transparent"> <!-- transparent footer -->
-    <v-col className="text-center" cols="12"> <!-- coloum is in the mid -->
+    <v-col class="text-center" cols="12"> <!-- coloum is in the mid -->
       <strong>Sun Token Price: {{ this.sunToken }}$</strong>
     </v-col>
   </v-footer>

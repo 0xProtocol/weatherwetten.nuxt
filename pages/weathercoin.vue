@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app> <!-- The Vuetify v-app component is an essential component and required in all applications made with the framework -->
       <nav-bar/>    <!-- Navbar -->
 
       <div class="weathercoin"> <!-- weathercoin div -->
@@ -173,52 +173,46 @@
 /* import all necessary components*/
 import NavBar2 from "@/components/NavBar";
 import Footer from "@/components/Footer";
-
 export default {
   name: "weathercoin",
   components: {
     NavBar2,
     Footer,
   },
-  data() {
-    let mintedWeatherCoins;
+  data() { //Data is the private memory of each component where you can store any variables you need
     return {
       userArray: [],
-      int: mintedWeatherCoins,
+      mintedWeatherCoins: 0,
       url_base: 'http://api.creativehandles.com/getRandomColor',
     }
   },
-
   /* get's instantly called*/
   async created() {
     var color;
     /* async -> script is downloaded in parallel to parsing the page, and executed as soon as it is available */
-    if (this.$fire.auth.currentUser != null) {
-      const docRef = this.$fire.firestore.collection('users');
-      const snapshot = await docRef.get();
-      this.minedWeatherCoins = 0;
+    if (this.$fire.auth.currentUser != null) { //if user is logged in get mintedweathercoins
+      const docRef = this.$fire.firestore.collection('users'); //get the collection 'users' (user|weathercoin)
+      const snapshot = await docRef.get(); //wait until a promise is settled -> until it's getted and safe it into snapshot
+      this.minedWeatherCoins = 0; //set to 0
       let i = 0;
-      snapshot.forEach(doc => {
+      snapshot.forEach(doc => { //iterate through doc and calculate full weathercoins of all users (minted)
         this.userArray[i] = doc.data();
         this.minedWeatherCoins = this.minedWeatherCoins + this.userArray[i].weatherCoin;
         i++;
       });
-
       this.userArray.sort(this.compareScores); //first sort then calculating
       this.userArray[0] = this.minedWeatherCoins; /* overwrite first entry of array with our minted weathercoins*/
     }
-
     // fetch random color and apply it to our weathercoin minted text
-      fetch(`${this.url_base}`)
-        .then(function (response) {
-
-          response.json().then(function (data) {
-            color = data["color"]; // set color var with response random color
-            //console.log(color);
-            document.getElementById("randomColorHeading").style.color  = color; //set color to our element
-          })
+    fetch(`${this.url_base}`)
+      .then(function (response) { //if the request was successful go further with then
+        response.json().then(function (data) { //get response in .json and deserialize to use it -> we want color
+          color = data["color"]; // set color var with response random color
+          //console.log(color);
+          document.getElementById("randomColorHeading").style.color  = color; //set color to our element
         })
-    }
+      })
+  }
 };
 </script>
 
@@ -230,61 +224,47 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-
 }
-
 .weathercoin {
   margin-top: 100px; /* distance from top of div*/
   text-align: center;
 }
-
 .mx-auto {
   margin-top: 15px; /*spaces between cards */
   margin-bottom: 0px; /* overwrite margin-bottom */
-
 }
-
 .mx-auto:hover {
   box-shadow: 0 0 15px #ffffff; /*shadow around v-card*/
 }
-
 h1 {
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.15em; /* distance between letters*/
-
   padding: 15px 20px; /* inner distance top | right */
   font-size: 1.5rem; /* root em -> 1rem = equal of the font size of html element */
 }
-
 h1:after {
   height: 2px; /* high of effect*/
   left: 50%; /* start at mid*/
   background: #fff;
   transition: width 0.3s ease 0s, left 0.3s ease 0s; /* effect of underline */
 }
-
 h1:hover:after {
   width: 100%; /* hovering over headline get underline effect full width*/
   left: 0; /* start at left*/
 }
-
 h2 {
   color: white; /* color of heading */
   font-size: 1.5rem; /* root em -> 1rem = equal of the font size of html element */
   font-weight: 500; /* normal font weight */
   letter-spacing: .025em; /* distance between each letter*/
   text-transform: uppercase;
-
   margin-top: 75px; /* distance to top */
   animation: glitch 525ms infinite; /* play animation */
 }
-
 h2:hover:after {
   width: 0%; /* reset the h2 defintion -> so no effect is visible*/
 }
-
-
 /* glitch effect from -> https://codepen.io/dpletiko/pen/ExoKOxN */
 @keyframes glitch {
   0% {
@@ -323,5 +303,4 @@ h2:hover:after {
     -.025em -.05em 0 rgba(0, 0, 255, .75);
   }
 }
-
 </style>

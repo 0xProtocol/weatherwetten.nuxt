@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.use(express.json())  //loads the middleware function -> Middleware is code that gets run in between the request and the response.
 
-import firebase from 'firebase/compat/app';
+import  firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
@@ -57,7 +57,7 @@ app.get("/leaderboard", async (req, res)=>{
 
 /*
 DELETE: NOT safe, idempotent (we change something on the server || same request gives same response back)
-we delete a bet of the user logged in
+we delete a bet of the user logged in - which is pending
 status: 204 No Content
  */
 app.delete("/delete/:id", (req, res)=>{
@@ -88,8 +88,8 @@ app.post("/create/:id", async (req, res)=>{
 
 /*
 PUT: NOT safe, idempotent (we change something on the server || same request gives same response back)
-we fully UPDATE something -> the bet
-status: ???
+we fully UPDATE something -> the bet which is pending
+status: 200 - OK
  */
 app.put("/replace/:id", async (req, res)=>{
   const reference = db.collection('bets').doc(req.params.id);

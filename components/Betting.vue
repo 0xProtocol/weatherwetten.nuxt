@@ -56,16 +56,18 @@
 
       <v-card v-if="showBetCard" class="mx-auto" max-width="400" max-height="1000" loading outlined shaped>
         <v-card-title primary-title class="justify-center">PLACE YOUR BET</v-card-title>
-        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp" label="temperature"></v-text-field>
-        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins" label="weathercoins"></v-text-field>
-        <input id="timePicker" style="color: white; font-size: 18px; background-color: #364848; border-radius: 4px" type="datetime-local" max="2022-12-31T00:00" value="2022-09-01T00:00">
+        <v-text-field id="txtFieldTemperature" class="txtField" v-model="predictedTemp" :rules="validateTemp"
+                      label="temperature"></v-text-field>
+        <v-text-field id="txtFieldAmount" class="txtField" v-model="bettedCoins" :rules="validateCoins"
+                      label="weathercoins"></v-text-field>
+        <input id="timePicker" style="color: white; font-size: 18px; background-color: #364848; border-radius: 4px"
+               type="datetime-local" max="2022-12-31T00:00" value="2022-09-01T00:00">
         <v-card-actions class="justify-center">
           <v-btn class="bettingButtons" dark text color="success" @click="setBet(1.5)">1,5x</v-btn>
           <v-btn class="bettingButtons" dark text color="warning" @click="setBet(2)">2x</v-btn>
           <v-btn class="bettingButtons" dark text color="error" @click="setBet(3)">3x</v-btn>
         </v-card-actions>
       </v-card>
-
 
 
     </div>
@@ -77,16 +79,16 @@
 
 export default {
   data: () => ({
-      weathercoin: 0,
-      api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
-      url_base: 'https://api.openweathermap.org/data/2.5/',
-      query: '',
-      weather: {},
-      actualTemp: null,   // actualTemp fetched by the API
-      predictedTemp: null, //predictedTemp by the user input
-      bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
-      showData: false,
-      showBetCard: false,
+    weathercoin: 0,
+    api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
+    url_base: 'https://api.openweathermap.org/data/2.5/',
+    query: '',
+    weather: {},
+    actualTemp: null,   // actualTemp fetched by the API
+    predictedTemp: null, //predictedTemp by the user input
+    bettedCoins: null, // later insert document.getElementById('txtFieldAmount').value
+    showData: false,
+    showBetCard: false,
 
     validateTemp: [
       (v) => !!v || "required field",
@@ -126,7 +128,12 @@ export default {
     setBet(odds) {
       if (document.getElementById('txtFieldAmount').value >= 1 && document.getElementById('txtFieldAmount').value <= this.weathercoin &&
         document.getElementById('txtFieldAmount').value !== "") {
-        this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
+        if (this.predictedTemp == null) {
+          this.predictedTemp = 0; //if no temp is entered then set it to zero
+        }
+        else {
+          this.predictedTemp = this.predictedTemp.replace(',', '.'); //replace , to .
+        }
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
         this.$noty.success("Bet placed!");
@@ -137,7 +144,7 @@ export default {
           this.$noty.info("Please be a fair player and select a new city to bet!")
         });*/
       } else {
-        this.$noty.error("Please enter your bet data!") //more cases why error is happened -> when we have backend
+        this.$noty.error("You have to less weathercoins!") //more cases why error is happened -> when we have backend
       }
     },
     //sleep function
@@ -151,17 +158,16 @@ export default {
       this.weathercoin = (await coin).get("weatherCoin");
     },
 
-    async updateWeatherCoins(coinChange)
-    {
+    async updateWeatherCoins(coinChange) {
       const coinsBetted = coinChange;
       const updatedWeatherCoins = +this.weathercoin + +coinsBetted;
       //change weathercoins and save it to database
-      await fetch("/api/edit/"+this.$fire.auth.currentUser.uid+"/"+"weathercoins", {
+      await fetch("/api/edit/" + this.$fire.auth.currentUser.uid + "/" + "weathercoins", {
         method: 'PATCH',
-        headers:{
-          'Content-Type':'application/json'
+        headers: {
+          'Content-Type': 'application/json'
         },
-        body:JSON.stringify({
+        body: JSON.stringify({
           weatherCoins: updatedWeatherCoins
         })
       })
@@ -182,19 +188,19 @@ export default {
       let docRef = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       let documentReference = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       documentReference.get().then(async (document) => {
-        if (document.exists){
+        if (document.exists) {
           console.log("put request")
           await fetch("/api/replace/" + this.$fire.auth.currentUser.uid, {
             method: 'PUT',
-            headers:{
-              'Content-Type':'application/json'
+            headers: {
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(doc)
           })
         } else {
           console.log("Creating new document")
           let document = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
-          await document.set(doc, {merge:false})
+          await document.set(doc, {merge: false})
         }
       });
     }

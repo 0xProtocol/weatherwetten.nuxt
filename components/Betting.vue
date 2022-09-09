@@ -136,9 +136,7 @@ export default {
         }
         this.actualTemp = this.weather.main.temp; // get actual temperature and write it into the variable
         this.bet(odds); //--> determine which button was pressed (1.5 OR 2 OR 3) with 'odds' var
-        this.$noty.success("Bet placed!");
-        this.showData = true; //show the results in the table
-        this.showBetCard = false;
+
         // show message
         /*this.delay(2000).then(() => {
           this.$noty.info("Please be a fair player and select a new city to bet!")
@@ -152,25 +150,13 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
 
-    // update just the weathercoins
-    async updateWeatherCoins(coinChange) {
-      const coinsBetted = coinChange;
-      const updatedWeatherCoins = +this.weathercoin + +coinsBetted;
-      //change weathercoins and save it to database
-      await fetch("/api/edit/" + this.$fire.auth.currentUser.uid + "/" + "weathercoins", {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          weatherCoins: updatedWeatherCoins
-        })
-      })
-    },
-
     // the betting logic
     async bet(odds) {
       let timestamp = new Date(document.getElementById("timePicker").value);
+      if (timestamp <= Date.now()){
+        this.$noty.error("Please select a date in the future!");
+        return 0
+      }
       let doc = {
         betObj: {
           bettedCoins: parseFloat(this.bettedCoins),
@@ -182,6 +168,9 @@ export default {
       }
       let docRef = this.$fire.firestore.collection("/bets").doc(this.$fire.auth.currentUser.uid)
       await docRef.set(doc, {merge: false})//update values in firebase trought firebase, when we do new bet
+      this.$noty.success("Bet placed!");
+      this.showData = true; //show the results in the table
+      this.showBetCard = false;
     }
   },
 

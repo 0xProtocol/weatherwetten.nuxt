@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr v-for="user in userArray">
-      <!-- get's username and according weathercoins from array -->
+      <!-- get's username and according weathercoin from array -->
       <td class="td">{{ user.username }}</td>
       <td class="td">{{ user.weatherCoin }}</td>
     </tr>

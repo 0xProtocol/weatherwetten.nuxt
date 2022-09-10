@@ -51,7 +51,10 @@
 </template>
 
 <script>
+import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (locally saved)
+//console.log(api);
 export default {
+
   name: "profile",
 
   data() {  //Data is the private memory of each component where you can store any variables you need
@@ -66,9 +69,9 @@ export default {
       imageSrc: require("assets/img/normalUser.png"),
       userLevel: "",
       base_url: "https://api.openweathermap.org/geo/1.0/direct?",
-      api_key: "67c4e15fa55514beb2e8755151915130",
+      api_key: "", //gets setted from .txt file [0]
       base_url_weather: "https://api.openweathermap.org/data/3.0/onecall/timemachine?",
-      api_key_weather: "acc4bfe58334c1e0735f355d447f9df6",
+      api_key_weather: "", //gets setted from .txt file [1]
       actualTemp: 0,
       time: '',
 
@@ -86,6 +89,14 @@ export default {
         }
       })
 
+    },
+
+    async setApiKey() {
+      const apiArray = api.split(/\r?\n|\r|\n/g);
+      let apiKey1 = apiArray[0];
+      let apiKey2 = apiArray[1];
+      this.api_key=apiKey1; //set API key from txt document
+      this.api_key_weather=apiKey2;
     },
 
     getBetDocument() {
@@ -292,6 +303,7 @@ export default {
 
   /* get's instantly called*/
   async created() {
+    this.setApiKey();
     // get the user data from our backend
     let jsonDoc;
     await fetch("/api/userdata/" + this.$fire.auth.currentUser.uid, { //get data from our database collection 'users'

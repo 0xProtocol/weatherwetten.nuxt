@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nuxtjs/html-validator": "^0.7.0",
-    "@nuxtjs/vuetify": "^1.12.3"
+    "@nuxtjs/vuetify": "^1.12.3",
+    "raw-loader": "^4.0.2"
   }
 }

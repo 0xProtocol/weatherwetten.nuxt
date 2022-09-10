@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (locally saved)
+import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (server saved)
 //console.log(api);
 export default {
 
@@ -69,9 +69,9 @@ export default {
       imageSrc: require("assets/img/normalUser.png"),
       userLevel: "",
       base_url: "https://api.openweathermap.org/geo/1.0/direct?",
-      api_key: "", //gets setted from .txt file [0]
+      api_key: '', //gets setted from .txt file [0]
       base_url_weather: "https://api.openweathermap.org/data/3.0/onecall/timemachine?",
-      api_key_weather: "", //gets setted from .txt file [1]
+      api_key_weather: '', //gets setted from .txt file [1]
       actualTemp: 0,
       time: '',
 
@@ -303,7 +303,7 @@ export default {
 
   /* get's instantly called*/
   async created() {
-    this.setApiKey();
+    await this.setApiKey();
     // get the user data from our backend
     let jsonDoc;
     await fetch("/api/userdata/" + this.$fire.auth.currentUser.uid, { //get data from our database collection 'users'

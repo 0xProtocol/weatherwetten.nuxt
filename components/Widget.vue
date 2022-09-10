@@ -38,17 +38,22 @@
 </template>
 
 <script>
+import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (server saved)
 export default {
   name: 'app',
   data() { //Data is the private memory of each component where you can store any variables you need
     return {
-      api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
+      api_key: '',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {}
     }
   },
   methods: {
+    async setApiKey() {
+      const apiArray = api.split(/\r?\n|\r|\n/g);
+      this.api_key=apiArray[0]; //set API key from txt document
+    },
     //request the weather on specific query and get response back
     async fetchWeather(e) {
       if (e.key === "Enter") {
@@ -74,8 +79,11 @@ export default {
       let month = months[d.getMonth()];
       let year = d.getFullYear();
       return `${day} ${date} ${month} ${year}`;
-    }
-  }
+    }},
+    async created()
+    {
+      await this.setApiKey();
+    },
 }
 </script>
 

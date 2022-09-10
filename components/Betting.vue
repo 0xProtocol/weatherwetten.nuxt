@@ -75,12 +75,12 @@
 </template>
 
 <script>
-
+import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (server saved)
 
 export default {
   data: () => ({
     weathercoin: 0,
-    api_key: 'd835f55799cc15a3b1bede5fd8adeb2e',
+    api_key: '',
     url_base: 'https://api.openweathermap.org/data/2.5/',
     query: '',
     weather: {},
@@ -99,6 +99,12 @@ export default {
   }),
 
   methods: {
+
+    async setApiKey() {
+      const apiArray = api.split(/\r?\n|\r|\n/g);
+      this.api_key=apiArray[0]; //set API key from txt document
+    },
+
     fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`) //fetch the weather if the key enter is pressed
@@ -177,6 +183,7 @@ export default {
 
   /* get's instantly called*/
   async created() {
+    await this.setApiKey();
     // get user data from document
     const ref = this.$fire.firestore.collection('users').doc(this.$fire.auth.currentUser.uid); //get the collection from database
     let document = ref.get();

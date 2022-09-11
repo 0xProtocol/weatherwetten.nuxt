@@ -52,6 +52,7 @@
 
 <script>
 import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (server saved)
+const Crypto = require('crypto');
 //console.log(api);
 export default {
 
@@ -74,6 +75,10 @@ export default {
       api_key_weather: '', //gets setted from .txt file [1]
       actualTemp: 0,
       time: '',
+      //encryption/decyption
+      encryptionMethod: 'AES-256-CBC', //symmetrical method of encrypting data, which is one of the most widely used and at the same time most secure methods of encryption today
+      key: Crypto.createHash('sha512').update('fd85b494-aaaa', 'utf8').digest('hex').substr(0,32), //key file must only on the corresponding data file
+      iv:  Crypto.createHash('sha512').update('smslt', 'utf8').digest('hex').substr(0,16), // initialization vector (IV)
 
     }
   },
@@ -91,12 +96,22 @@ export default {
 
     },
 
+    decryptAPIKey(encryptedMessage, encryptionMethod, secret, iv)
+    {
+      const buff = Buffer.from(encryptedMessage, 'base64');
+      encryptedMessage = buff.toString('utf8');
+      var decryptor = Crypto.createDecipheriv(encryptionMethod, secret,iv);
+      return decryptor.update(encryptedMessage, 'base64','utf8') + decryptor.final('utf8');
+    },
+
     async setApiKey() {
       const apiArray = api.split(/\r?\n|\r|\n/g);
       let apiKey1 = apiArray[0];
       let apiKey2 = apiArray[1];
       this.api_key=apiKey1; //set API key from txt document
       this.api_key_weather=apiKey2;
+      this.api_key = this.decryptAPIKey(this.api_key, this.encryptionMethod, this.key, this.iv); //overwrite encrypted API key via decryption method
+      this.api_key_weather = this.decryptAPIKey(this.api_key_weather, this.encryptionMethod, this.key, this.iv);
     },
 
     getBetDocument() {

@@ -39,6 +39,8 @@
 
 <script>
 import api from 'raw-loader!@/apiKeys.txt'; //gather the text from the textfile (server saved)
+const Crypto = require('crypto');
+
 export default {
   name: 'app',
   data() { //Data is the private memory of each component where you can store any variables you need
@@ -46,13 +48,27 @@ export default {
       api_key: '',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {}
+      weather: {},
+      //encryption/decyption
+      encryptionMethod: 'AES-256-CBC', //symmetrical method of encrypting data, which is one of the most widely used and at the same time most secure methods of encryption today
+      key: Crypto.createHash('sha512').update('fd85b494-aaaa', 'utf8').digest('hex').substr(0,32), //key file must only on the corresponding data file
+      iv:  Crypto.createHash('sha512').update('smslt', 'utf8').digest('hex').substr(0,16), // initialization vector (IV)
     }
   },
   methods: {
+
+    decryptAPIKey(encryptedMessage, encryptionMethod, secret, iv)
+    {
+      const buff = Buffer.from(encryptedMessage, 'base64');
+      encryptedMessage = buff.toString('utf8');
+      var decryptor = Crypto.createDecipheriv(encryptionMethod, secret,iv);
+      return decryptor.update(encryptedMessage, 'base64','utf8') + decryptor.final('utf8');
+    },
+
     async setApiKey() {
       const apiArray = api.split(/\r?\n|\r|\n/g);
       this.api_key=apiArray[0]; //set API key from txt document
+      this.api_key = this.decryptAPIKey(this.api_key, this.encryptionMethod, this.key, this.iv); //overwrite encrypted API key via decryption method
     },
     //request the weather on specific query and get response back
     async fetchWeather(e) {
